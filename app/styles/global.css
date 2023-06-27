@@ -1,0 +1,92 @@
+*{
+    font-family: 'Montserrat', SansSerif, serif;
+    font-weight: lighter;
+    color: white;
+}
+
+body {
+    background-image: linear-gradient(to right, rgb(0, 0, 0, .7), rgb(0, 0, 0, 0.6)), url("/img/background.jpg");
+    background-size: cover;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 60%;
+    backdrop-filter: blur(15px);
+}
+
+
+.logo, .link{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.link{
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.container{
+    margin: 8rem auto 0 auto;
+    width: 70%;
+}
+
+.title{
+    margin: .3rem 0;
+    font-size: 3.4rem;
+    font-weight: 600;
+}
+
+.subtitle{
+    margin: .3rem 0;
+    font-size: 1.55rem;
+    font-weight: 600;
+}
+
+.panels{
+    display: flex;
+    margin-top: 4.5rem;
+    gap: 3rem;
+}
+
+.panel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    width: 180px;
+    padding: 1.2rem;
+}
+
+.panel img{
+    width: 4rem;
+}
+
+.panel h4{
+    margin: 1.1rem auto;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.panel p{
+    margin: 0;
+    font-size: 1.3rem;
+    font-style: italic;
+}
+
+.panel:nth-child(1){
+    background-color: orange;
+}
+.panel:nth-child(2){
+    background-color: green;
+}
+.panel:nth-child(3){
+    background-color: purple;
+}
+.panel:nth-child(4){
+    background-color: dodgerblue;
+}

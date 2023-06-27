@@ -1,39 +1,43 @@
+import { Link } from "@remix-run/react";
+
 export const meta = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Inicio" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+      <div className="container">
+        <p className="title">Grupo Sosa Morales</p>
+        <p className="subtitle">Notaria - Abogacia - Asesoria - Bienes raices</p>
+
+          <div className="panels">
+            <Link to="/clientes" className="panel">
+              <img src="/img/users-group.svg" alt="image-user-group"/>
+              <h4>Clientes</h4>
+              <p>Gestiona tus clientes desde aqui.</p>
+            </Link>
+
+            <Link to="/categorias" className="panel">
+              <img src="/img/category.svg" alt="image-user-group"/>
+              <h4>Categorias</h4>
+              <p>Gestiona tus categorias de documentos desde aqui.</p>
+            </Link>
+
+            <Link to="/subcategorias" className="panel">
+              <img src="/img/category-2.svg" alt="image-user-group"/>
+              <h4>Subcategorias</h4>
+              <p>Gestiona tus subcategorias desde aqui.</p>
+            </Link>
+
+            <Link to="/nosotros" className="panel">
+              <img src="/img/info-octagon.svg" alt="image-user-group"/>
+              <h4>A cerca de</h4>
+              <p>Gestiona tus subcategorias desde aqui.</p>
+            </Link>
+          </div>
+      </div>
   );
 }
