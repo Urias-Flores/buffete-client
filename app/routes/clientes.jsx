@@ -1,11 +1,11 @@
 import {useState} from "react";
-import {useLoaderData} from "@remix-run/react";
+import {useActionData, useLoaderData} from "@remix-run/react";
 
 import FormClient from "~/components/formClient.jsx"
 import Message from "../components/message";
 import styles from '~/styles/clientes.css'
 import Cliente from "~/components/cliente";
-import { getClients } from "~/models/client.server";
+import { getClients, addClient } from "~/models/client.server";
 
 export function links(){
   return [
@@ -20,6 +20,9 @@ export async function loader(){
   return await getClients()
 }
 
+export async function action(){
+  return await addClient()
+}
 export default function Clientes (){
   const [isVisibleFormCliente, setVisibleFormClient] = useState(false);
   const [isVisibleFormClienteForEditing, setVisibleFormClientForEditing] = useState(false);
@@ -29,7 +32,9 @@ export default function Clientes (){
   const [isOkCancel, setIsOkCancel] = useState(false);
 
   const [clientSelected, setClientSelected] = useState({});
+
   const clients = useLoaderData()
+  const addClient = useActionData()
 
   const showFormCliente = ( isEditign ) => {
     if(isEditign){
