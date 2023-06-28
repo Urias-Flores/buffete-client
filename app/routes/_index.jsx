@@ -9,7 +9,7 @@ export const meta = () => {
 
 export default function Index() {
   return (
-      <div className="container">
+      <div className="container home">
         <p className="title">Grupo Sosa Morales</p>
         <p className="subtitle">Notaria - Abogacia - Asesoria - Bienes raices</p>
 

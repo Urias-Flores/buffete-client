@@ -1,0 +1,92 @@
+.clients{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 24rem;
+    overflow-y: scroll;
+}
+
+.client{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.4rem;
+    border: 1px solid white;
+    padding: .6rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.client-main{
+    display: flex;
+    justify-content: start;
+    gap: 1.3rem;
+}
+
+.client .check{
+    width: 2rem;
+}
+
+.client-information h4{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.client-information p{
+    font-size: 1rem;
+    margin: .3rem 0;
+}
+
+
+/* Styles for form */
+.form{
+    position: absolute;
+    inset: 2rem 0;
+    overflow: hidden;
+    z-index: 101;
+    width: 40%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255, 0.2);
+    padding: 3rem;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.input label{
+    font-size: 1.2rem;
+}
+
+.input input{
+    font-size: 1.1rem;
+    font-weight: normal;
+    padding: .4rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, .1);
+    border: 1px solid white;
+    outline: none;
+}
+
+.button-close{
+    position: absolute;
+    inset: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 400;
+    cursor: pointer;
+}

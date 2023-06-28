@@ -10,14 +10,80 @@ body {
 }
 
 header{
+
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, .2);
+}
+
+.bar{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    width: 60%;
-    backdrop-filter: blur(15px);
+    width: 70%;
 }
 
+.heading{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.subheading{
+    font-size: 1.1rem;
+    margin: .3rem 0;
+}
+
+.search{
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: .5rem;
+    border: 1px solid white;
+    width: 18rem;
+    margin-top: 1.8rem;
+    padding: .2rem;
+}
+
+.search img{
+    width: 1.8rem;
+    margin: 0;
+}
+
+.search input{
+    background: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    border: none;
+    margin: 0;
+    width: 16rem;
+    outline: none;
+}
+
+.actions{
+    display: flex;
+    gap: 1rem;
+}
+
+.button{
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    padding: .6rem;
+    margin: 1.5rem 0;
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+    width: 9rem;
+    transition: backdrop-filter 200ms;
+    font-weight: normal;
+}
+
+.button:hover{
+    backdrop-filter: blur(10px) brightness(75%);
+}
 
 .logo, .link{
     font-size: 1.2rem;
@@ -30,8 +96,12 @@ header{
 }
 
 .container{
-    margin: 8rem auto 0 auto;
+    margin: 2rem auto 0 auto;
     width: 70%;
+}
+
+.home{
+    margin: 8rem auto 0 auto;
 }
 
 .title{
@@ -76,6 +146,40 @@ header{
     margin: 0;
     font-size: 1.3rem;
     font-style: italic;
+}
+
+.modal{
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    background-color: rgb(0, 0, 0, .1);
+    z-index: 100;
+}
+
+.message{
+    position: absolute;
+    inset: 11rem 0;
+    margin: 0 auto;
+    width: 40%;
+    height: 270px;
+    background-color: rgb(255, 255, 255, .2);
+}
+
+.message-information{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+
+.message-information p{
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+.message-information img{
+    width: 6rem;
 }
 
 .panel:nth-child(1){
