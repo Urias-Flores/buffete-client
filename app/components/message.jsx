@@ -1,4 +1,8 @@
-export default function Message ({ isOkCancel, text, setVisibleMessage, indexIcon }){
+import {Form} from "@remix-run/react";
+
+export default function Message ({ features, setVisibleMessage }){
+
+  const { text, indexIcon, isOkCancel, data } = features
 
   const icon = {
     0 : "alert-triangle.svg",
@@ -21,22 +25,42 @@ export default function Message ({ isOkCancel, text, setVisibleMessage, indexIco
         />
 
         <div className="message-information">
-          <img src={`/img/${icon[indexIcon]}`} alt="image-reference"/>
+          <img src={`/img/${icon[indexIcon]}`} alt="reference"/>
           <p>{text}</p>
           <div className="actions">
-            <button
-              className="button"
-              onClick={ () => { setVisibleMessage(false) }}
-            >
-              Aceptar
-            </button>
-            { isOkCancel &&
-              <button
+            { isOkCancel ?
+              <>
+                <Form method="DELETE">
+                  <input name="id" type="hidden" value={ data }/>
+
+                  <input
+                    className="button"
+                    type="submit"
+                    value="Aceptar"
+                  />
+                </Form>
+
+                <input
+                  className="button"
+                  type="button"
+                  onClick={ () => {
+                      setVisibleMessage(false)
+                    }
+                  }
+                  value="Cancelar"
+                />
+              </>
+              :
+              <input
                 className="button"
-                onClick={ () => { setVisibleMessage(false) }}
-              >
-                Cancelar
-              </button> }
+                type="button"
+                onClick={ () => {
+                  setVisibleMessage(false)
+                }
+                }
+                value="Aceptar"
+              />
+            }
           </div>
         </div>
       </div>

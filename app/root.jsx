@@ -7,8 +7,10 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError
 } from "@remix-run/react";
+import { deleteClient } from "./models/client.server";
 
 export function meta(){
     return (
@@ -53,9 +55,20 @@ export const links = () => [
 ];
 
 export default function App() {
+
+  async function clientDelete( ClienteID ){
+    await deleteClient( ClienteID )
+  }
+
   return (
     <Document>
-        <Outlet/>
+        <Outlet
+          context={
+            {
+              clientDelete
+            }
+          }
+        />
     </Document>
   );
 }
@@ -77,3 +90,35 @@ function Document({children}){
         </html>
     )
 }
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <Document>
+        <div className="container">
+          <h1 className="heading">Error</h1>
+          <p className="subheading">Error: 404 pagina no encontrado</p>
+        </div>
+      </Document>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <Document>
+        <div className="container">
+          <h1 className="heading">Error</h1>
+          <p className="subheading">
+            { error.name.toString() === 'FetchError'
+              ? 'No se ha podido establecer coneccion con el servior'
+              : 'Ha sucedido un error inesperado'
+            }
+          </p>
+        </div>
+      </Document>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
+}
+

@@ -22,7 +22,7 @@ export default function Index() {
 
             <Link to="/categorias" className="panel">
               <img src="/img/category.svg" alt="image-user-group"/>
-              <h4>Categorias</h4>
+              <h4>Materias</h4>
               <p>Gestiona tus categorias de documentos desde aqui.</p>
             </Link>
 
