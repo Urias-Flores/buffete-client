@@ -18,6 +18,11 @@ header{
     background-color: rgb(255, 255, 255, .2);
 }
 
+.nav{
+    display: flex;
+    gap: 2rem;
+}
+
 .bar{
     display: flex;
     justify-content: space-between;
@@ -71,6 +76,9 @@ header{
 }
 
 .button{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
     padding: .6rem;
@@ -78,9 +86,20 @@ header{
     border: 1px solid white;
     outline: none;
     cursor: pointer;
-    width: 9rem;
+    width: 12rem;
     transition: backdrop-filter 200ms;
     font-weight: normal;
+}
+
+.button img{
+    width: 1.4rem;
+}
+
+.button p{
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    text-align: center;
 }
 
 .form .button{
@@ -143,8 +162,8 @@ header{
 }
 
 .panel h4{
-    margin: 1.1rem auto;
-    font-size: 1.6rem;
+    margin: .8rem 0;
+    font-size: 1.3rem;
     font-weight: 300;
 }
 

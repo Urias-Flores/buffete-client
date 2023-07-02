@@ -23,13 +23,13 @@ export default function Index() {
             <Link to="/categorias" className="panel">
               <img src="/img/category.svg" alt="image-user-group"/>
               <h4>Materias</h4>
-              <p>Gestiona tus categorias de documentos desde aqui.</p>
+              <p>Busca documentos de clientes según las materias disponibles</p>
             </Link>
 
             <Link to="/subcategorias" className="panel">
               <img src="/img/category-2.svg" alt="image-user-group"/>
-              <h4>Subcategorias</h4>
-              <p>Gestiona tus subcategorias desde aqui.</p>
+              <h4>Documentación interna</h4>
+              <p>Gestiona tu documentación interna</p>
             </Link>
 
             <Link to="/nosotros" className="panel">

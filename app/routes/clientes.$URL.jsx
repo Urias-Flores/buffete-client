@@ -18,7 +18,7 @@ export async function loader({params}){
   return await getClientByURL(URL);
 }
 
-export default function ClientesClientID ({}){
+export default function ClientesClientID (){
 
   const { Name, Identity, Phone, Email, Address  } = useLoaderData()
   const [showCategory, setShowCategory] = useState(0);

@@ -215,26 +215,32 @@ export default function Clientes (){
         </div>
 
         <div className="actions">
-          <input
+          <button
             className="button"
             onClick={()=>{ showFormCliente(false) }}
             type="button"
-            value="Agregar nuevo"
-          />
+          >
+            <img src="/img/add.svg" alt="add"/>
+            <p>Agregar nuevo</p>
+          </button>
 
-          <input
+          <button
             className="button"
             onClick={()=>{ showFormCliente(true) }}
-            type="button"
-            value="Editar"
-          />
+          >
+            <img src="/img/edit.svg" alt="add"/>
+            <p>Editar</p>
+          </button>
 
-          <input
+          <button
             className="button"
             onClick={() => { showEliminatedClient() }}
             type="button"
             value="Eliminar"
-          />
+          >
+            <img src="/img/x.svg" alt="add"/>
+            <p>Eliminar</p>
+          </button>
         </div>
 
         <div className="clients">
