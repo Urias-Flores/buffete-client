@@ -1,20 +1,22 @@
 import { useState } from "react";
-import { Form } from "@remix-run/react";
+import {Form} from "@remix-run/react";
 
-export default function FormClient ({ method, setVisibleFormClient, client = {}, errors }){
+export default function FormClient ({ method, errors, client = {}, setVisibleFormClient }){
 
   const ClientID = client?.ClientID
-  const [name, setName] = useState(client?.Name);
-  const [identity, setIdentity] = useState(client?.Identity);
-  const [phone, setPhone] = useState(client?.Phone);
-  const [email, setEmail] = useState(client?.Email);
-  const [address, setAddress] = useState(client?.Address);
-
-  console.log(errors)
+  const [name, setName] = useState(client?.Name || '');
+  const [identity, setIdentity] = useState(client?.Identity || '');
+  const [phone, setPhone] = useState(client?.Phone || '');
+  const [email, setEmail] = useState(client?.Email || '');
+  const [address, setAddress] = useState(client?.Address || '');
 
   return (
     <div className="modal">
-      <Form className="form" method={method}>
+      <Form
+        action={'/clientes'}
+        className="form"
+        method={method}
+      >
         <img
           src="/img/x.svg"
           className="button-close"
@@ -54,7 +56,7 @@ export default function FormClient ({ method, setVisibleFormClient, client = {},
               name="identity"
               id="identity"
               type="number"
-              placeholder="Nombre del cliente"
+              placeholder="Identidad del cliente"
               onChange={(e) => { setIdentity(e.target.value) }}
               value={identity}
             />
@@ -68,7 +70,7 @@ export default function FormClient ({ method, setVisibleFormClient, client = {},
               id="phone"
               type="number"
               maxLength={15}
-              placeholder="Nombre del cliente"
+              placeholder="Número telefónico del cliente"
               onChange={(e) => { setPhone(e.target.value) }}
               value={phone}
             />
@@ -81,7 +83,7 @@ export default function FormClient ({ method, setVisibleFormClient, client = {},
               name="email"
               id="email"
               type="email"
-              placeholder="Nombre del cliente"
+              placeholder="Correo electrónico del cliente"
               onChange={(e) => { setEmail(e.target.value) }}
               value={ email }
             />
@@ -94,7 +96,7 @@ export default function FormClient ({ method, setVisibleFormClient, client = {},
               name="address"
               id="address"
               type="text"
-              placeholder="Nombre del cliente"
+              placeholder="Dirección del cliente"
               onChange={(e) => { setAddress(e.target.value) }}
               value={ address }
             />

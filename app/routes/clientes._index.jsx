@@ -1,12 +1,11 @@
-import {useState} from "react";
-import {useActionData, useLoaderData} from "@remix-run/react";
+import {useEffect, useState} from "react";
+import {useActionData, useLoaderData, useNavigate} from "@remix-run/react";
 
 import FormClient from "~/components/formClient.jsx"
 import Message from "../components/message";
 import styles from '~/styles/clientes.css'
 import Cliente from "~/components/cliente";
-import { addClient, getClients, deleteClient } from "../models/client.server";
-import {json, redirect} from "@remix-run/node";
+import {getClients, addClient, updateClient, deleteClient} from "../models/client.server";
 
 export function links(){
   return [
@@ -33,95 +32,139 @@ export async function action({ request }){
   const address = form.get('address')
 
   //Validation
-  const errors = {}
-  //Name validation
-  if(name.length === 0){
-    errors.name =  'El nombre del cliente es obligatorio'
-  }
-  if(name.length > 80){
-    errors.name = 'El nombre debe contener menos de 80 caracteres'
-  }
-  if(typeof name !== 'string'){
-    errors.name = 'El nombre debe ser un texto'
+  let errors = {}
+  if (request.method === 'POST' || request.method === 'PUT'){
+    if(name.length === 0){
+      errors.name =  'El nombre del cliente es obligatorio'
+    }
+    if(name.length > 80){
+      errors.name = 'El nombre debe contener menos de 80 caracteres'
+    }
+    if(typeof name !== 'string'){
+      errors.name = 'El nombre debe ser un texto'
+    }
+
+    //Identity validation
+    if(identity.length === 0){
+      errors.identity = 'La identidad es obligatorio'
+    }
+    if(identity.length > 13 || identity.length < 13){
+      errors.identity = 'La identidad debe contener 13 caracteres'
+    }
+
+    //Phone number validation
+    if(phone.length !== 8 && phone.length !== 11){
+      errors.phone = 'El numero telefónico debe contener 8 o 11 caracteres'
+    }
+    if(phone.length === 0){
+      errors.phone = 'El numero telefónico es obligatorio'
+    }
+
+    //Email validation
+    const regex = /^[^s@]+@[^s@]+.[^s@]+$/;
+    if(regex.test(email)){
+      errors.email = 'El correo electrónico ingresado no es valido'
+    }
+    if(email.length === 0){
+      errors.email = 'El correo electrónico es obligatorio'
+    }
+
+    //Address validation
+    if(address.length === 0){
+      errors.address = 'La dirección del cliente es obligatoria'
+    }
   }
 
-  //Identity validation
-  if(identity.length === 0){
-    errors.identity = 'La identidad es obligatorio'
-  }
-  if(identity.length > 13 || identity.length < 13){
-    errors.identity = 'La identidad debe contener 13 caracteres'
-  }
-
-  //Phone number validation
-  if(phone.length !== 8 && phone.length !== 11){
-    errors.phone = 'El numero telefónico debe contener 8 o 11 caracteres'
-  }
-  if(phone.length === 0){
-    errors.phone = 'El numero telefónico es obligatorio'
-  }
-
-  //Email validation
-  const regex = /^[^s@]+@[^s@]+.[^s@]+$/;
-  if(regex.test(email)){
-    errors.email = 'El correo electrónico ingresado no es valido'
-  }
-  if(email.length === 0){
-    errors.email = 'El correo electrónico es obligatorio'
-  }
-
-  //Address validation
-  if(address.length === 0){
-    errors.address = 'La dirección del cliente es obligatoria'
-  }
-
-  if(Object.keys(errors).length){
-    return errors
+  if(Object.keys(errors).length > 0){
+    console.log('Se encontraron errores')
+    return {
+      state: 'ERROR',
+      data: {},
+      errors: errors
+    };
   }
 
   const client = {
     User: 2,
     Name: name,
     Identity: identity,
-    Email: phone,
-    Phone: email,
+    Phone: phone,
+    Email: email,
     Address: address
   }
 
-  if( request.method === 'POST' ){
-    console.log(client)
-    console.log('Guardando')
+  switch ( request.method ){
+    case 'POST': {
+      const returnedClient = await addClient(client);
+      return {
+        state: 'INSERTED',
+        data: returnedClient,
+        errors: {}
+      }
+    }
+    case 'PUT': {
+      client.ClientID = parseInt(clientID)
+      const returnedState = await updateClient(clientID, client);
+      return {
+        state: 'UPDATED',
+        data: returnedState,
+        errors: {}
+      }
+    }
+    case 'DELETE': {
+      const returnedState = await deleteClient( id )
+      return {
+        state: 'DELETED',
+        data: returnedState,
+        errors: {}
+      }
+    }
+    default: {
+      throw new Error("Unexpected action");
+    }
   }
-
-  if( request.method === 'PUT' ){
-    client.ClientID = parseInt(clientID)
-    console.log(client)
-    console.log('Modificando')
-  }
-
-  if( request.method === 'DELETE' ){
-    console.log(id)
-    console.log('Eliminando')
-  }
-
-  return redirect('/clientes');
 }
 
 export default function Clientes (){
-  //States for modals
+  //States for forms modals
   const [isVisibleFormCliente, setVisibleFormClient] = useState(false);
   const [isVisibleFormClienteForEditing, setVisibleFormClientForEditing] = useState(false);
   const [isVisibleDeleteClient, setVisibleDeleteClient] = useState(false);
+
+  //State for message modals
+  const [insertedMessage, showInsertedMessage] = useState(false);
+  const [updatedMessage, showUpdatedMessage] = useState(false);
+  const [deleteMessage, showDeleteMessage] = useState(false);
   const [errorSelectedMessage, showErrorSelectedMessage] = useState(false);
 
-  //State for client selectioned
+  //State for client selection
   const [clientSelected, setClientSelected] = useState({});
 
   const loader = useLoaderData();
-  const errors = useActionData();
+  const actionResult = useActionData();
+  const navigate = useNavigate();
 
   const [clients, setClients] = useState(loader);
-  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    switch (actionResult?.state){
+      case 'INSERTED':
+        setVisibleFormClient(false)
+        showInsertedMessage(true)
+        navigate('.', { replace: true })
+        break;
+      case 'UPDATED':
+        setVisibleFormClientForEditing(false)
+        showUpdatedMessage(true)
+        break;
+      case 'DELETED':
+        setVisibleDeleteClient(false)
+        showDeleteMessage(true)
+        break;
+      default:
+        break;
+    }
+  }, [actionResult, clients, navigate])
 
   const showFormCliente = ( isEditign ) => {
     if(isEditign){
@@ -144,28 +187,28 @@ export default function Clientes (){
   }
 
   const searchClient = ( event ) => {
-    setSearch(event.target.value)
-    const actualizedClients = loader.filter( client => client.Name.toLowerCase().includes(event.target.value) );
+    const value = event.target.value.toString().toLowerCase()
+    const actualizedClients = loader.filter( client => client.Name.toLowerCase().includes(value) );
     setClients( actualizedClients );
   }
 
   return (
       <div className="container">
 
-        { isVisibleFormCliente &&
+        { isVisibleFormCliente  &&
           <FormClient
+            method={'POST'}
+            errors={ actionResult?.errors }
             setVisibleFormClient = { setVisibleFormClient }
-            method={"POST"}
-            errors={ errors }
           />
         }
 
-        { isVisibleFormClienteForEditing &&
+        { isVisibleFormClienteForEditing  &&
           <FormClient
-            setVisibleFormClient = { setVisibleFormClientForEditing }
+            method={'PUT'}
+            errors={ actionResult?.errors }
             client = { clientSelected }
-            method={"PUT"}
-            errors={ errors }
+            setVisibleFormClient = { setVisibleFormClientForEditing }
           />
         }
 
@@ -173,7 +216,7 @@ export default function Clientes (){
           <Message
             features={
               {
-                text: "¿Esat seguro de la eliminación del cliente?",
+                text: "¿Esta seguro de la eliminación del cliente?",
                 isOkCancel: true,
                 indexIcon: 1,
                 data: clientSelected.ClientID
@@ -197,50 +240,91 @@ export default function Clientes (){
           />
         }
 
+        { insertedMessage &&
+          <Message
+            features={
+              {
+                text: "El cliente ha sido ingresado exitosamente",
+                isOkCancel: false,
+                indexIcon: 2,
+                data: null
+              }
+            }
+            setVisibleMessage={ showInsertedMessage }
+          />
+        }
+
+        { updatedMessage &&
+          <Message
+            features={
+              {
+                text: "El cliente ha sido actualizado exitosamente",
+                isOkCancel: false,
+                indexIcon: 2,
+                data: null
+              }
+            }
+            setVisibleMessage={ showUpdatedMessage }
+          />
+        }
+
+        { deleteMessage &&
+          <Message
+            features={
+              {
+                text: "El cliente ha sido eliminado exitosamente",
+                isOkCancel: false,
+                indexIcon: 2,
+                data: null
+              }
+            }
+            setVisibleMessage={ showDeleteMessage }
+          />
+        }
+
         <h1 className="heading">Gestiona tus clientes</h1>
         <p className="subheading">
           Lista completa de los clientes registrados por ti, puedes escribir y filtrar para una busqueda mas rapida.
         </p>
 
-        <div className="search">
-          <img src="/img/search.svg" alt="image-search"/>
-          <input
-            type="text"
-            placeholder="Buscar"
-            value={search}
-            onChange={ (event) => {
-                searchClient( event)
-              }
-            }/>
-        </div>
+        <div className='top-options'>
+          <div className="search">
+            <img src="/img/search.svg" alt="search"/>
+            <input
+              type="text"
+              placeholder="Buscar"
+              onChange={ (event) => { searchClient( event) } }
+            />
+          </div>
 
-        <div className="actions">
-          <button
-            className="button"
-            onClick={()=>{ showFormCliente(false) }}
-            type="button"
-          >
-            <img src="/img/add.svg" alt="add"/>
-            <p>Agregar nuevo</p>
-          </button>
+          <div className="actions">
+            <button
+              className="button"
+              onClick={ ()=>{ showFormCliente(false) } }
+              type="button"
+            >
+              <img src="/img/add.svg" alt="add"/>
+              <p>Agregar</p>
+            </button>
 
-          <button
-            className="button"
-            onClick={()=>{ showFormCliente(true) }}
-          >
-            <img src="/img/edit.svg" alt="add"/>
-            <p>Editar</p>
-          </button>
+            <button
+              className="button"
+              onClick={ ()=>{ showFormCliente(true) } }
+            >
+              <img src="/img/edit.svg" alt="add"/>
+              <p>Editar</p>
+            </button>
 
-          <button
-            className="button"
-            onClick={() => { showEliminatedClient() }}
-            type="button"
-            value="Eliminar"
-          >
-            <img src="/img/x.svg" alt="add"/>
-            <p>Eliminar</p>
-          </button>
+            <button
+              className="button"
+              onClick={() => { showEliminatedClient() }}
+              type="button"
+              value="Eliminar"
+            >
+              <img src="/img/x.svg" alt="add"/>
+              <p>Eliminar</p>
+            </button>
+          </div>
         </div>
 
         <div className="clients">

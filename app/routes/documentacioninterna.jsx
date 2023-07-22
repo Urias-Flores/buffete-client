@@ -13,8 +13,6 @@ export default function Documentacioninterna (){
           placeholder="Buscar"
         />
       </div>
-
-
     </div>
   )
 }

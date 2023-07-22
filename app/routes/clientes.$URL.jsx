@@ -3,6 +3,7 @@ import {getClientByURL} from "../models/client.server";
 import styles from "../styles/clientes.css"
 import CategoriaExpediente from "../components/categoria-expediente";
 import {useState} from "react";
+import FormDocument from "../components/formDocument";
 
 export function links(){
   return [
@@ -23,29 +24,59 @@ export default function ClientesClientID (){
   const { Name, Identity, Phone, Email, Address  } = useLoaderData()
   const [showCategory, setShowCategory] = useState(0);
   const [showSubcategory, setShowSubcategory] = useState(0);
+  const [showModalDocument, setShowModalDocument] = useState(false);
 
   return (
     <div className="container">
-        <h1 className="heading">Información del cliente</h1>
-        <h2 className="subheading">Información general y expediente completo del cliente</h2>
+      { showModalDocument &&
+        <FormDocument
+          setShowModalDocument={setShowModalDocument}
+        />
+      }
 
+      <h1 className="heading">Información del cliente</h1>
+      <h2 className="subheading">Información general y expediente completo del cliente</h2>
+
+      <main className="main">
         <section className="general-information">
-            <h3>Información general</h3>
-            <div className="grid">
-              <div>
-                <p className="data">Nombre: <b>{ Name }</b></p>
-                <p className="data">Identidad: <b>{ Identity }</b></p>
-                <p className="data">Correo Electrónico: <b>{ Email }</b></p>
+          <h3>Información general</h3>
+          <div className="data">
+              <div className="item">
+                <p>Nombre:</p>
+                <b>{ Name }</b>
               </div>
-              <div>
-                <p className="data">Telefóno: <b>{ Phone }</b></p>
-                <p className="data">Dirección: <b>{ Address }</b></p>
+              <div className="item">
+                <p>Identidad:</p>
+                <b>{ Identity }</b>
               </div>
-            </div>
+              <div className="item">
+                <p>Correo Electrónico:</p>
+                <b>{ Email }</b>
+              </div>
+              <div className="item">
+                <p>Telefóno:</p>
+                <b>{ Phone }</b>
+              </div>
+              <div className="item">
+                <p>Dirección:</p>
+                <b>{ Address }</b>
+              </div>
+          </div>
         </section>
 
         <section className="record">
           <h3 className="record-title">Expediente</h3>
+
+          <div className="actions">
+            <button
+              className="button"
+              onClick={()=>{ setShowModalDocument(true) }}
+              type="button"
+            >
+              <img src="/img/add.svg" alt="add"/>
+              <p>Agregar documento</p>
+            </button>
+          </div>
 
           <div className="record-categories">
             <CategoriaExpediente
@@ -65,6 +96,7 @@ export default function ClientesClientID (){
             />
           </div>
         </section>
+      </main>
     </div>
   )
 }

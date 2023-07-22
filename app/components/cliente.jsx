@@ -6,7 +6,7 @@ export default function Cliente ({ client, clientSelected, setClientSelected }){
   return (
       <div className="client">
         <Link to={`/clientes/${URL}`} className="client-main">
-          <img src="/img/user-circle.svg" alt="image-user"/>
+          <img src="/img/user-circle.svg" alt="user"/>
           <div className="client-information">
             <h4>{Name}</h4>
             <p>{Identity}</p>
@@ -19,7 +19,7 @@ export default function Cliente ({ client, clientSelected, setClientSelected }){
           <img
             className="check"
             src={`/img/${ clientSelected.ClientID === ClientID ? 'square-check.svg' : 'square.svg'}`}
-            alt="image-square"
+            alt="square"
           />
         </div>
       </div>

@@ -1,9 +1,20 @@
 .clients{
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: 24rem;
     overflow-y: scroll;
+    height: 27rem;
+}
+
+.clients::-webkit-scrollbar {
+    width: 10px;
+}
+
+.clients::-webkit-scrollbar-thumb, .clients::-webkit-scrollbar-track {
+    border-radius: .3rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
 }
 
 .client{
@@ -11,12 +22,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 1.4rem;
-    border: 1px solid white;
-    padding: .6rem;
+    border: none;
+    border-radius: .7rem;
+    padding: .6rem .8rem;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
     margin-right: 1rem;
-
 }
 
 .client-main{
@@ -48,6 +59,8 @@
     background-color: rgb(255, 255, 255, 0.2);
     padding: 1rem;
     margin-top: 2rem;
+    height: fit-content;
+    border-radius: .7rem;
 }
 
 .general-information h3{
@@ -55,9 +68,20 @@
     font-weight: bold;
 }
 
-.grid{
+.general-information .data{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.general-information .item p{
+    margin-bottom: .3rem;
+}
+
+.main{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 2.5fr;
+    gap: 1rem;
 }
 
 .data{
@@ -70,7 +94,7 @@
 }
 
 .record-title{
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 0 0 0;
     font-weight: bold;
 }
 
@@ -78,11 +102,24 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    overflow-y: scroll;
+    height: 27rem;
+}
+
+.record-categories::-webkit-scrollbar {
+    width: 10px;
+}
+
+.record-categories::-webkit-scrollbar-thumb, .record-categories::-webkit-scrollbar-track {
+    border-radius: .3rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
 }
 
 .record-category{
     display: flex;
     flex-direction: column;
+    margin-right: 1rem;
 }
 
 .record-category-up{
@@ -90,10 +127,19 @@
     justify-content: space-between;
     align-items: center;
     gap: 1.4rem;
-    border: 1px solid white;
+    border-radius: .7rem;
     padding: .6rem;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.record-subcategory-up{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.4rem;
+    padding: .6rem;
     cursor: pointer;
 }
 
@@ -118,15 +164,20 @@
     overflow: auto;
 }
 
-.subcategory{
-    display: flex;
-    margin: 0;
-    justify-content: space-between;
-    align-items: center;
-    padding: .3rem;
+.record-subcategory-up{
     border-bottom: 1px solid white;
 }
 
 .subcategory p{
     margin: 0;
+}
+
+.documents{
+    height: 0;
+    overflow: hidden;
+}
+
+.documents.active{
+    height: auto;
+    overflow: auto;
 }

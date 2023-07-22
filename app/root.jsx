@@ -1,6 +1,9 @@
-import Navegacion from "./components/navegacion";
-import stylesNormalize from "./styles/normalize.css"
-import stylesGlobal from "./styles/global.css"
+import Navegacion from "~/components/navegacion";
+import stylesNormalize from "~/styles/normalize.css"
+import stylesGlobal from "~/styles/global.css"
+import textLayer from 'react-pdf/dist/esm/Page/TextLayer.css';
+import annotationLayer from'react-pdf/dist/esm/Page/AnnotationLayer.css';
+
 import {
   Links,
   LiveReload,
@@ -10,7 +13,6 @@ import {
   isRouteErrorResponse,
   useRouteError
 } from "@remix-run/react";
-import { deleteClient } from "./models/client.server";
 
 export function meta(){
     return (
@@ -40,6 +42,14 @@ export const links = () => [
         href: stylesGlobal
     },
     {
+      rel: 'stylesheet',
+      href: textLayer
+    },
+    {
+      rel: 'stylesheet',
+      href: annotationLayer
+    },
+    {
         rel: 'preconnect',
         href: 'https://fonts.googleapis.com'
     },
@@ -55,20 +65,9 @@ export const links = () => [
 ];
 
 export default function App() {
-
-  async function clientDelete( ClienteID ){
-    await deleteClient( ClienteID )
-  }
-
   return (
     <Document>
-        <Outlet
-          context={
-            {
-              clientDelete
-            }
-          }
-        />
+        <Outlet/>
     </Document>
   );
 }
@@ -79,6 +78,7 @@ function Document({children}){
             <head>
                 <Meta/>
                 <Links/>
+                <title></title>
             </head>
 
             <body>

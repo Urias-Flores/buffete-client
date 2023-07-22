@@ -18,8 +18,8 @@ export default function FormCategory ({ category, setShowModalCategory }){
           }
         />
 
-        <h1 className="heading">Agregar nuevo cliente</h1>
-        <h2 className="subheading">Agrega toda la información del cliente para agregarlos a tu lista</h2><br/>
+        <h1 className="heading">Agregar nueva materia</h1>
+        <h2 className="subheading">Agregue el nombre de la materia para guardar en la lista</h2><br/>
 
         <div className="inputs">
           <div className="input">

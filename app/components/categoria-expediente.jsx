@@ -2,7 +2,9 @@ import SubcategoriaExpediente from "./subcategoria-expediente";
 
 export default function CategoriaExpediente ({ category, showCategory, setShowCategory, showSubcategory, setShowSubcategory }){
 
-  const { CategoryID, Name } = category
+  const { CategoryID, Name, Subcategories } = category
+
+  console.log(category)
 
   return (
     <div className="record-category">
@@ -14,12 +16,16 @@ export default function CategoriaExpediente ({ category, showCategory, setShowCa
         <img src="/img/chevron-down.svg" alt="arrow"/>
       </div>
       <div className={`record-subcategories ${ showCategory === CategoryID ? 'active' : '' }`}>
-        <SubcategoriaExpediente
-          subcategory={ { Name:'Subcategoria 1', SubcategoryID:1 } }
-        />
-        <SubcategoriaExpediente
-          subcategory={ { Name:'Subcategoria 2', SubcategoryID:2 } }
-        />
+        {
+          Subcategories.map( subcategory =>
+            <SubcategoriaExpediente
+              key={subcategory.SubcategoryID}
+              subcategory={subcategory}
+              showSubcategory={showSubcategory}
+              setShowSubcategory={setShowSubcategory}
+            />
+          )
+        }
       </div>
     </div>
   )

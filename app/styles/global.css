@@ -4,18 +4,25 @@
     color: white;
 }
 
+h1, h2, h3, h4, p{
+    margin: 0;
+}
+
 body {
-    background-image: linear-gradient(to right, rgb(0, 0, 0, .7), rgb(0, 0, 0, 0.6)), url("/img/background.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/img/background.jpg");
     background-size: cover;
 }
 
 header{
-    position: fixed;
-    inset: 0;
     height: fit-content;
     width: 100%;
     backdrop-filter: blur(10px);
-    background-color: rgb(255, 255, 255, .2);
+    background-color: rgb(255, 255, 255, .1);
+}
+
+.container{
+    margin: .5rem auto 0 auto;
+    width: 85%;
 }
 
 .nav{
@@ -49,10 +56,11 @@ header{
     align-items: center;
     justify-content: start;
     gap: .5rem;
-    border: 1px solid white;
+    border: none;
+    border-radius: .7rem;
     width: 18rem;
     margin-top: 1.8rem;
-    padding: .2rem;
+    padding: .3rem;
 }
 
 .search img{
@@ -73,20 +81,21 @@ header{
 .actions{
     display: flex;
     gap: 1rem;
+    margin: 1rem 0;
 }
 
 .button{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: .5rem;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
     padding: .6rem;
-    margin: 1.5rem 0;
-    border: 1px solid white;
     outline: none;
     cursor: pointer;
-    width: 12rem;
+    border: none;
+    border-radius: .7rem;
     transition: backdrop-filter 200ms;
     font-weight: normal;
 }
@@ -106,23 +115,19 @@ header{
     margin: 1.5rem 0 0 0;
 }
 
-.button:hover{
-    backdrop-filter: blur(10px) brightness(75%);
-}
-
 .logo, .link{
     font-size: 1.2rem;
     font-weight: 600;
 }
 
 .link{
+    padding: .8rem 0;
     text-decoration: none;
     text-transform: uppercase;
 }
 
-.container{
-    margin: 5rem auto 0 auto;
-    width: 70%;
+.link.active{
+    border-bottom: 4px solid white;
 }
 
 .home{
@@ -178,17 +183,18 @@ header{
     inset: 0;
     backdrop-filter: blur(10px);
     background-color: rgb(0, 0, 0, .1);
-    z-index: 100;
+    z-index: 101;
 }
 
 .form{
-    position: absolute;
+    position: relative;
     inset: 0;
-    z-index: 101;
+    z-index: 102;
     width: 40%;
     margin: 2rem auto;
     height: fit-content;
     background-color: rgb(255, 255, 255, 0.2);
+    border-radius: .7rem;
     padding: 2rem;
 }
 
@@ -211,10 +217,26 @@ header{
 .input input{
     font-size: 1.1rem;
     font-weight: normal;
-    padding: .4rem;
+    padding: .6rem;
+    border: none;
+    border-radius: .7rem;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, .1);
+    outline: none;
+}
+
+.input select{
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, .1);
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: .4rem;
     border: 1px solid white;
+    outline: none;
+}
+
+.input option{
+    color: black;
     outline: none;
 }
 
@@ -242,7 +264,7 @@ header{
     inset: 11rem 0;
     margin: 0 auto;
     width: 40%;
-    height: 270px;
+    height: fit-content;
     background-color: rgb(255, 255, 255, .2);
 }
 
@@ -251,27 +273,21 @@ header{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding: 2rem;
+    padding: 1.4rem;
 }
 
 .message-information p{
     font-size: 1.1rem;
     font-weight: normal;
+    margin-bottom: .5rem;
 }
 
 .message-information img{
     width: 6rem;
 }
 
-.panel:nth-child(1){
-    background-color: orange;
-}
-.panel:nth-child(2){
-    background-color: green;
-}
-.panel:nth-child(3){
-    background-color: purple;
-}
-.panel:nth-child(4){
-    background-color: dodgerblue;
+.panel{
+    border-radius: .7rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, .1);
 }

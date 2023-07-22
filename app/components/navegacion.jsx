@@ -11,33 +11,25 @@ export default function Navegacion ({}){
         <h2 className="logo">Logo</h2>
         <nav className="nav">
           <Link
-            className="link"
+            className={`link ${pathname === '/' ? 'active' : ''}`}
             to="/" >
             Inicio
           </Link>
-          { pathname !== '/'
-            ?
-            (
-              <>
-                <Link
-                  className="link"
-                  to="/clientes" >
-                  Clientes
-                </Link>
-                <Link
-                  className="link"
-                  to="/materias" >
-                  Materias
-                </Link>
-                <Link
-                  className="link"
-                  to="/documentacioninterna" >
-                  Documentación interna
-                </Link>
-              </>
-            )
-            : null
-          }
+          <Link
+            className={`link ${pathname.includes('/clientes') ? 'active' : ''}`}
+            to="/clientes" >
+            Clientes
+          </Link>
+          <Link
+            className={`link ${pathname === '/materias' ? 'active' : ''}`}
+            to="/materias" >
+            Materias
+          </Link>
+          <Link
+            className={`link ${pathname === '/documentacioninterna' ? 'active' : ''}`}
+            to="/documentacioninterna" >
+            Documentación interna
+          </Link>
         </nav>
       </div>
     </header>

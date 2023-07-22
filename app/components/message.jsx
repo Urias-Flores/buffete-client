@@ -15,7 +15,7 @@ export default function Message ({ features, setVisibleMessage }){
       <div className="message">
         <img
           src="/img/x.svg"
-          alt="image-x"
+          alt="x"
           className="button-close"
           onClick={
             () => {
@@ -30,9 +30,8 @@ export default function Message ({ features, setVisibleMessage }){
           <div className="actions">
             { isOkCancel ?
               <>
-                <Form method="DELETE">
+                <Form method="DELETE" onSubmit={ () => { setVisibleMessage(false) } }>
                   <input name="id" type="hidden" value={ data }/>
-
                   <input
                     className="button"
                     type="submit"
@@ -43,10 +42,7 @@ export default function Message ({ features, setVisibleMessage }){
                 <input
                   className="button"
                   type="button"
-                  onClick={ () => {
-                      setVisibleMessage(false)
-                    }
-                  }
+                  onClick={ () => { setVisibleMessage(false) } }
                   value="Cancelar"
                 />
               </>
@@ -54,10 +50,7 @@ export default function Message ({ features, setVisibleMessage }){
               <input
                 className="button"
                 type="button"
-                onClick={ () => {
-                  setVisibleMessage(false)
-                }
-                }
+                onClick={ () => { setVisibleMessage(false) } }
                 value="Aceptar"
               />
             }
