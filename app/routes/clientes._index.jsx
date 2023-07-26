@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useActionData, useLoaderData, useNavigate} from "@remix-run/react";
 
 import FormClient from "~/components/formClient.jsx"
-import Message from "../components/message";
+import ModalMessage from "../components/modalMessage";
 import styles from '~/styles/clientes.css'
 import Cliente from "~/components/cliente";
 import {getClients, addClient, updateClient, deleteClient} from "../models/client.server";
@@ -213,7 +213,7 @@ export default function Clientes (){
         }
 
         { isVisibleDeleteClient &&
-          <Message
+          <ModalMessage
             features={
               {
                 text: "¿Esta seguro de la eliminación del cliente?",
@@ -227,7 +227,7 @@ export default function Clientes (){
         }
 
         { errorSelectedMessage &&
-          <Message
+          <ModalMessage
             features={
               {
                 text: "Seleccione un cliente de la lista",
@@ -241,7 +241,7 @@ export default function Clientes (){
         }
 
         { insertedMessage &&
-          <Message
+          <ModalMessage
             features={
               {
                 text: "El cliente ha sido ingresado exitosamente",
@@ -255,7 +255,7 @@ export default function Clientes (){
         }
 
         { updatedMessage &&
-          <Message
+          <ModalMessage
             features={
               {
                 text: "El cliente ha sido actualizado exitosamente",
@@ -269,7 +269,7 @@ export default function Clientes (){
         }
 
         { deleteMessage &&
-          <Message
+          <ModalMessage
             features={
               {
                 text: "El cliente ha sido eliminado exitosamente",

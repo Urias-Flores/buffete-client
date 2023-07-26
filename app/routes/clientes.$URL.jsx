@@ -1,9 +1,10 @@
-import {useLoaderData} from "@remix-run/react";
-import {getClientByURL} from "../models/client.server";
+import { useState } from "react";
+import { useLoaderData } from "@remix-run/react";
 import styles from "../styles/clientes.css"
-import CategoriaExpediente from "../components/categoria-expediente";
-import {useState} from "react";
+import SelectSubject from "../components/selectSubject";
 import FormDocument from "../components/formDocument";
+import { getSubjects } from "../models/subject.server";
+import { getClientByURL } from "../models/client.server";
 
 export function links(){
   return [
@@ -14,23 +15,55 @@ export function links(){
   ]
 }
 
+
 export async function loader({params}){
   const { URL } = params
-  return await getClientByURL(URL);
+  const client = await getClientByURL(URL);
+  const subjects = await getSubjects();
+  return {
+    client,
+    subjects
+  }
 }
 
 export default function ClientesClientID (){
 
-  const { Name, Identity, Phone, Email, Address  } = useLoaderData()
-  const [showCategory, setShowCategory] = useState(0);
-  const [showSubcategory, setShowSubcategory] = useState(0);
-  const [showModalDocument, setShowModalDocument] = useState(false);
+  const { client, subjects } = useLoaderData()
+  const { Name, Identity, Email, Phone, Address, Documents } = client[0]
+
+  const [ showSubject, setShowSubject ] = useState(false);
+  const [ showModalDocument, setShowModalDocument ] = useState(false);
+  const [ showFormDocument, setShowFormDocument] = useState(false);
+  const [documentURL, setDocumentURL] = useState('');
+
+  const subjectsNamed = {}
+  subjects.forEach(subject => {
+    subjectsNamed[subject.SubjectID] = subject.Name
+  })
+
+  let record = []
+  Documents.forEach( document => {
+    let subjectExist = false
+    record.forEach( item => {
+      if(document.Subject === item.SubjectID){
+        item.Documents = [...item.Documents, document]
+        subjectExist = true
+      }
+    })
+    if(!subjectExist){
+      record.push({
+        SubjectID: document.Subject,
+        Name: subjectsNamed[document.Subject],
+        Documents: [document]
+      })
+    }
+  })
 
   return (
     <div className="container">
-      { showModalDocument &&
+      { showFormDocument &&
         <FormDocument
-          setShowModalDocument={setShowModalDocument}
+          setShowModalDocument={setShowFormDocument}
         />
       }
 
@@ -70,7 +103,7 @@ export default function ClientesClientID (){
           <div className="actions">
             <button
               className="button"
-              onClick={()=>{ setShowModalDocument(true) }}
+              onClick={()=>{ setShowFormDocument(true) }}
               type="button"
             >
               <img src="/img/add.svg" alt="add"/>
@@ -79,21 +112,21 @@ export default function ClientesClientID (){
           </div>
 
           <div className="record-categories">
-            <CategoriaExpediente
-              category={{ Name:'Materia 1', CategoryID: 1}}
-              showCategory={showCategory}
-              setShowCategory={setShowCategory}
-              showSubcategory={showSubcategory}
-              setShowSubcategory={setShowSubcategory}
-            />
-
-            <CategoriaExpediente
-              category={{ Name:'Materia 2', CategoryID: 2}}
-              showCategory={showCategory}
-              setShowCategory={setShowCategory}
-              showSubcategory={showSubcategory}
-              setShowSubcategory={setShowSubcategory}
-            />
+            { Object.keys(record).length === 0
+              ?
+              <p className="record-category">
+                Aun no hay documentos disponibles...
+              </p>
+              :
+              record.map( subject =>
+                <SelectSubject
+                  key={subject.SubjectID}
+                  subject={subject}
+                  showSubject={showSubject}
+                  setShowSubject={setShowSubject}
+                />
+              )
+            }
           </div>
         </section>
       </main>

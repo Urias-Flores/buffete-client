@@ -1,6 +1,6 @@
 import {Form} from "@remix-run/react";
 
-export default function Message ({ features, setVisibleMessage }){
+export default function ModalMessage ({ features, setVisibleMessage }){
 
   const { text, indexIcon, isOkCancel, data } = features
 

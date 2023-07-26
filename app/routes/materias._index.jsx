@@ -1,5 +1,5 @@
-import CategoriaExpediente from "../components/categoria-expediente";
-import { getCategories } from "~/models/category.server";
+import SelectSubject from "../components/selectSubject";
+import { getSubjects } from "~/models/subject.server";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import clientStyle from '~/styles/clientes.css'
@@ -15,7 +15,7 @@ export function links(){
 }
 
 export async function loader(){
-  return await getCategories()
+  return await getSubjects()
 }
 
 export default function Categorias (){
@@ -26,7 +26,7 @@ export default function Categorias (){
   const [showModalCategory, setShowModalCategory] = useState(false);
   const [category, setCategory] = useState({});
 
-  const categories = useLoaderData()
+  const subjects = useLoaderData()
 
   return (
     <div className="container">
@@ -60,8 +60,8 @@ export default function Categorias (){
       </div>
 
       <div className="record-categories">
-        { categories.map( category =>
-            <CategoriaExpediente
+        { subjects.map( category =>
+            <SelectSubject
               key = {category.CategoryID}
               category={category}
               showCategory={showCategory}
