@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useActionData, useLoaderData, useNavigate} from "@remix-run/react";
+import {useActionData, useLoaderData} from "@remix-run/react";
 
 import FormClient from "~/components/formClient.jsx"
 import ModalMessage from "../components/modalMessage";
@@ -76,7 +76,6 @@ export async function action({ request }){
   }
 
   if(Object.keys(errors).length > 0){
-    console.log('Se encontraron errores')
     return {
       state: 'ERROR',
       data: {},
@@ -141,8 +140,8 @@ export default function Clientes (){
   const [clientSelected, setClientSelected] = useState({});
 
   const loader = useLoaderData();
+  console.log(loader)
   const actionResult = useActionData();
-  const navigate = useNavigate();
 
   const [clients, setClients] = useState(loader);
 
@@ -151,7 +150,6 @@ export default function Clientes (){
       case 'INSERTED':
         setVisibleFormClient(false)
         showInsertedMessage(true)
-        navigate('.', { replace: true })
         break;
       case 'UPDATED':
         setVisibleFormClientForEditing(false)
@@ -164,7 +162,11 @@ export default function Clientes (){
       default:
         break;
     }
-  }, [actionResult, clients, navigate])
+  }, [actionResult])
+
+  useEffect(() => {
+    setClients(loader)
+  }, [loader]);
 
   const showFormCliente = ( isEditign ) => {
     if(isEditign){
@@ -328,12 +330,18 @@ export default function Clientes (){
         </div>
 
         <div className="clients">
-          { clients.map( client => <Cliente
-            key = {client.ClientID}
-            client={client}
-            clientSelected={clientSelected}
-            setClientSelected={setClientSelected}
-          /> ) }
+          { clients !== undefined ? clients.map( client =>
+              <Cliente
+                key = {client.ClientID}
+                client={client}
+                clientSelected={clientSelected}
+                setClientSelected={setClientSelected}
+              />
+            )
+
+            :
+            'Cargando...'
+          }
         </div>
       </div>
     )

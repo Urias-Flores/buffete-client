@@ -10,6 +10,18 @@ export default function ModalDocument ({ URL, setShowModalDocument }){
         setNumPages(numPages);
     };
 
+    const reduce = () => {
+      if(pageNumber !== 1){
+        setPageNumber(pageNumber - 1)
+      }
+    }
+
+    const add = () => {
+      if(pageNumber !== numPages){
+        setPageNumber(pageNumber + 1)
+      }
+    }
+
     return (
       <div className='modal'>
         <div className='document'>
@@ -31,9 +43,11 @@ export default function ModalDocument ({ URL, setShowModalDocument }){
           >
             <Page pageNumber={pageNumber}/>
           </Document>
-          <p>
-            Page {pageNumber} of {numPages}
-          </p>
+          <div className='changerpage'>
+            <img src="/img/arror-left.svg" alt="left" onClick={ reduce }/>
+            <p>{pageNumber} / {numPages}</p>
+            <img src="/img/arrow-right.svg" alt="right" onClick={ add }/>
+          </div>
         </div>
       </div>
     )

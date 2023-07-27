@@ -1,7 +1,9 @@
 import { useState } from "react";
-import {Form} from "@remix-run/react";
+import {Form, useNavigation} from "@remix-run/react";
 
 export default function FormClient ({ method, errors, client = {}, setVisibleFormClient }){
+
+  const navigation = useNavigation();
 
   const ClientID = client?.ClientID
   const [name, setName] = useState(client?.Name || '');
@@ -13,7 +15,6 @@ export default function FormClient ({ method, errors, client = {}, setVisibleFor
   return (
     <div className="modal">
       <Form
-        action={'/clientes'}
         className="form"
         method={method}
       >
@@ -104,12 +105,16 @@ export default function FormClient ({ method, errors, client = {}, setVisibleFor
           </div>
         </div>
 
-        <button
-          className="button"
-          type="submit"
-        >
-          {Object.keys(client).length === 0 ? 'Guardar' : 'Modificar'}
-        </button>
+        <div className='loading'>
+          <input className="button" type="submit" value='Guardar'/>
+          { navigation?.state !== 'idle' &&
+            <div className="spinner">
+              <div className="bounce1"></div>
+              <div className="bounce2"></div>
+              <div className="bounce3"></div>
+            </div>
+          }
+        </div>
       </Form>
     </div>
   )

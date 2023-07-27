@@ -1,7 +1,11 @@
-export default function FormDocument ({ document, setShowModalDocument }){
+import {Form, useNavigation} from "@remix-run/react";
+
+
+export default function FormDocument ({ method, errors, subjects, ClientID, setShowModalDocument }){
+  const navigation = useNavigation()
   return (
     <div className="modal">
-      <div className="form">
+      <Form className="form" method={method} encType="multipart/form-data">
         <img
           src="/img/x.svg"
           className="button-close"
@@ -18,29 +22,61 @@ export default function FormDocument ({ document, setShowModalDocument }){
 
         <div className="inputs">
           <div className="input">
-            <label htmlFor="subject">Materia</label>
-            <select name="subject" id="subject">
-              <option value="1">Penal</option>
-              <option value="2">Civil</option>
-            </select>
+            <input name="Client" type="hidden" value={ClientID}/>
+
+            <label htmlFor="title">Titulo</label>
+            <input
+              name='Name'
+              id='title'
+              type="text"
+              placeholder='Escriba el titulo del documento...'
+            />
+            { errors?.name ? <p className="error">{errors.name}</p> : null }
           </div>
 
           <div className="input">
-            <label htmlFor="category">Categoria</label>
-            <select name="category" id="">
-              <option value="1">Servicios presidiarios</option>
-              <option value="2">Trabajo</option>
+            <label htmlFor="subject">Materia</label>
+            <select
+              name="Subject"
+              id="subject"
+            >
+              { subjects.length > 0
+                ?
+                <>
+                <option value={-1}>-- Seleccione una materia --</option>
+                {subjects.map(item =>
+                  <option key={item.SubjectID} value={item.SubjectID}>{item.Name}</option>
+                )}
+                </>
+                :
+                ''
+              }
             </select>
+            { errors?.subject ? <p className="error">{errors.subject}</p> : null }
           </div>
 
           <div className="input">
             <label htmlFor="file">Archivo</label>
-            <input type="file" name="file" id="file"/>
+            <input
+              type="file"
+              name="File"
+              id="file"
+            />
+            { errors?.file ? <p className="error">{errors.file}</p> : null }
           </div>
         </div>
 
-        <input className="button" type="submit" value={document ? 'Modificar' : 'Guardar'}/>
-      </div>
+        <div className='loading'>
+          <input className="button" type="submit" value='Guardar'/>
+          { navigation?.state !== 'idle' &&
+            <div className="spinner">
+              <div className="bounce1"></div>
+              <div className="bounce2"></div>
+              <div className="bounce3"></div>
+            </div>
+          }
+        </div>
+      </Form>
     </div>
   )
 }

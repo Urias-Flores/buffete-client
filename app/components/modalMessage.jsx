@@ -30,7 +30,7 @@ export default function ModalMessage ({ features, setVisibleMessage }){
           <div className="actions">
             { isOkCancel ?
               <>
-                <Form method="DELETE" onSubmit={ () => { setVisibleMessage(false) } }>
+                <Form method="DELETE">
                   <input name="id" type="hidden" value={ data }/>
                   <input
                     className="button"

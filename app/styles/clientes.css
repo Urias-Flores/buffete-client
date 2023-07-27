@@ -106,6 +106,18 @@
     height: 27rem;
 }
 
+.no-documents{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .7rem;
+    padding: .6rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
 .record-categories::-webkit-scrollbar {
     width: 10px;
 }
@@ -177,11 +189,11 @@
     inset: 0;
     z-index: 102;
     width: 31%;
-    margin: 1rem auto 0 auto;
+    margin: 0.8rem auto 0 auto;
     height: fit-content;
     background-color: rgb(255, 255, 255, 0.2);
     border-radius: .7rem;
-    padding: 2rem;
+    padding: 2rem 2rem .1rem 2rem;
 }
 
 .react-pdf__Page,
@@ -191,4 +203,20 @@
 {
     max-width: 29rem;
     max-height: 38rem;
+}
+
+.changerpage{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: .6rem 0;
+}
+
+.changerpage p{
+    font-weight: normal;
+}
+
+.changerpage img{
+    cursor: pointer;
 }

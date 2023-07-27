@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useLoaderData } from "@remix-run/react";
+import {useEffect, useState} from "react";
+import {useActionData, useLoaderData, useNavigate, useNavigation} from "@remix-run/react";
 import styles from "../styles/clientes.css"
 import SelectSubject from "../components/selectSubject";
 import FormDocument from "../components/formDocument";
+import { addDocument } from "../models/document.server";
 import { getSubjects } from "../models/subject.server";
-import { getClientByURL } from "../models/client.server";
+import {addClient, deleteClient, getClientByURL, updateClient} from "../models/client.server";
+import ModalMessage from "../components/modalMessage";
 
 export function links(){
   return [
@@ -26,15 +28,73 @@ export async function loader({params}){
   }
 }
 
+export async function action({request}){
+  const documentFormData = await request.formData();
+  const name = documentFormData.get('Name');
+  const subject = documentFormData.get('Subject');
+  const file = documentFormData.get('File');
+
+  const id = 0;
+
+  const errors = {}
+  if(request.method === 'POST'){
+    if(name.length === 0){
+      errors.name = 'El titulo del documento es obligatorio';
+    }
+    if(name.length > 30){
+      errors.name = 'El titulo del documento no debe exceder las 30 letras'
+    }
+    if(parseInt(subject) === -1){
+      errors.subject = 'La seleccion de una materia es obligatoria'
+    }
+    if(!file){
+      errors.file = 'debe seleccionar un documento'
+    }
+  }
+
+  if(Object.keys(errors).length > 0){
+    return {
+      state: 'ERROR',
+      data: null,
+      errors: errors
+    }
+  }
+
+  switch ( request.method ){
+    case 'POST': {
+      const returnedDocument = await addDocument(documentFormData);
+      return {
+        state: 'INSERTED',
+        data: returnedDocument,
+        errors: {}
+      }
+    }
+    case 'DELETE': {
+      const returnedState = await deleteClient( id )
+      return {
+        state: 'DELETED',
+        data: returnedState,
+        errors: {}
+      }
+    }
+    default: {
+      throw new Error("Unexpected action");
+    }
+  }
+}
+
 export default function ClientesClientID (){
 
-  const { client, subjects } = useLoaderData()
-  const { Name, Identity, Email, Phone, Address, Documents } = client[0]
+  const { client, subjects } = useLoaderData();
+  const actionResult = useActionData();
+  const { ClientID, Name, Identity, Email, Phone, Address, Documents } = client[0]
 
   const [ showSubject, setShowSubject ] = useState(false);
-  const [ showModalDocument, setShowModalDocument ] = useState(false);
-  const [ showFormDocument, setShowFormDocument] = useState(false);
-  const [documentURL, setDocumentURL] = useState('');
+
+  const [ showInsertedMessage, setShowInsertedMessage ] = useState(false);
+  const [ showDeletedMessage, setShowDeletedMessage ] = useState(false);
+  const [ showFormDeletedMessage, setShowFormDeletedMessage ] = useState(false);
+  const [ showFormDocument, setShowFormDocument ] = useState(false);
 
   const subjectsNamed = {}
   subjects.forEach(subject => {
@@ -59,11 +119,58 @@ export default function ClientesClientID (){
     }
   })
 
+  useEffect(() => {
+    switch (actionResult?.state){
+      case 'INSERTED':
+        setShowFormDocument(false)
+        setShowInsertedMessage(true)
+        break;
+      case 'DELETED':
+        setShowFormDeletedMessage(false)
+        setShowDeletedMessage(true)
+        break;
+      default:
+        break;
+    }
+  }, [actionResult])
+
   return (
     <div className="container">
       { showFormDocument &&
         <FormDocument
-          setShowModalDocument={setShowFormDocument}
+          method={'POST'}
+          errors={actionResult?.errors}
+          subjects={subjects}
+          ClientID={ClientID}
+          setShowModalDocument={ setShowFormDocument }
+        />
+      }
+
+      { showInsertedMessage &&
+        <ModalMessage
+          features={
+            {
+              text: "El documento has sido agregado exitosamente",
+              isOkCancel: false,
+              indexIcon: 2,
+              data: null
+            }
+          }
+          setVisibleMessage={ setShowInsertedMessage }
+        />
+      }
+
+      { showDeletedMessage &&
+        <ModalMessage
+          features={
+            {
+              text: "El documento has sido eliminado exitosamente",
+              isOkCancel: false,
+              indexIcon: 2,
+              data: null
+            }
+          }
+          setVisibleMessage={ showDeletedMessage }
         />
       }
 
@@ -114,7 +221,7 @@ export default function ClientesClientID (){
           <div className="record-categories">
             { Object.keys(record).length === 0
               ?
-              <p className="record-category">
+              <p className="no-documents">
                 Aun no hay documentos disponibles...
               </p>
               :
