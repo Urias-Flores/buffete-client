@@ -1,4 +1,4 @@
-import {Link, useLocation} from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 
 // eslint-disable-next-line no-empty-pattern
 export default function Navegacion ({}){
@@ -21,7 +21,7 @@ export default function Navegacion ({}){
             Clientes
           </Link>
           <Link
-            className={`link ${pathname === '/materias' ? 'active' : ''}`}
+            className={`link ${pathname.includes('/materias') ? 'active' : ''}`}
             to="/materias" >
             Materias
           </Link>

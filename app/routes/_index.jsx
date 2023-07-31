@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+import styles from '../styles/inicio.css'
 
 export const meta = () => {
   return [
@@ -6,6 +7,15 @@ export const meta = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
+
+export function links(){
+  return [
+    {
+      rel: 'stylesheet',
+      href: styles
+    }
+  ]
+}
 
 export default function Index() {
   return (

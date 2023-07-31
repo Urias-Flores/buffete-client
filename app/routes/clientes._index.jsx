@@ -1,11 +1,18 @@
 import {useEffect, useState} from "react";
 import {useActionData, useLoaderData} from "@remix-run/react";
 
-import FormClient from "~/components/formClient.jsx"
+//Components
+import FormClient from "../components/formClient.jsx"
 import ModalMessage from "../components/modalMessage";
+import Cliente from "../components/client";
+import Spinner from "../components/spinner";
+
+//Server actions
+import { getClients, addClient, updateClient, deleteClient } from "../models/client.server";
+import { deleteDocument } from "../models/document.server";
+
+//Styles
 import styles from '~/styles/clientes.css'
-import Cliente from "~/components/cliente";
-import {getClients, addClient, updateClient, deleteClient} from "../models/client.server";
 
 export function links(){
   return [
@@ -23,8 +30,8 @@ export async function loader(){
 export async function action({ request }){
   const form = await request.formData();
 
-  const id = form.get('id')
   const clientID = form.get('ClientID')
+  const documentID = form.get('DocumentID')
   const name = form.get('name')
   const identity = form.get('identity')
   const phone = form.get('phone')
@@ -111,11 +118,28 @@ export async function action({ request }){
       }
     }
     case 'DELETE': {
-      const returnedState = await deleteClient( id )
+      let returnedState;
+      if(clientID){
+        returnedState = await deleteClient( clientID )
+        return {
+          state: 'CLIENT DELETED',
+          data: returnedState,
+          errors: {}
+        }
+      } else if (documentID) {
+        returnedState = await deleteDocument(documentID)
+        return {
+          state: 'DOCUMENT DELETED',
+          data: returnedState,
+          errors: {}
+        }
+      }
       return {
-        state: 'DELETED',
-        data: returnedState,
-        errors: {}
+        state: 'UNKNOWN',
+        data: null,
+        errors: {
+          unknown: 'Ha sucedido un error inesperado'
+        }
       }
     }
     default: {
@@ -133,17 +157,16 @@ export default function Clientes (){
   //State for message modals
   const [insertedMessage, showInsertedMessage] = useState(false);
   const [updatedMessage, showUpdatedMessage] = useState(false);
-  const [deleteMessage, showDeleteMessage] = useState(false);
+  const [deleteClientMessage, showDeleteClientMessage] = useState(false);
   const [errorSelectedMessage, showErrorSelectedMessage] = useState(false);
 
-  //State for client selection
+  //State for client and document selection
   const [clientSelected, setClientSelected] = useState({});
 
   const loader = useLoaderData();
-  console.log(loader)
   const actionResult = useActionData();
 
-  const [clients, setClients] = useState(loader);
+  const [clients, setClients] = useState({});
 
   useEffect(() => {
     switch (actionResult?.state){
@@ -155,9 +178,9 @@ export default function Clientes (){
         setVisibleFormClientForEditing(false)
         showUpdatedMessage(true)
         break;
-      case 'DELETED':
+      case 'CLIENT DELETED':
         setVisibleDeleteClient(false)
-        showDeleteMessage(true)
+        showDeleteClientMessage(true)
         break;
       default:
         break;
@@ -221,7 +244,10 @@ export default function Clientes (){
                 text: "¿Esta seguro de la eliminación del cliente?",
                 isOkCancel: true,
                 indexIcon: 1,
-                data: clientSelected.ClientID
+                data: {
+                  name: 'ClientID',
+                  value: clientSelected.ClientID
+                }
               }
             }
             setVisibleMessage={ setVisibleDeleteClient }
@@ -270,7 +296,7 @@ export default function Clientes (){
           />
         }
 
-        { deleteMessage &&
+        { deleteClientMessage &&
           <ModalMessage
             features={
               {
@@ -280,7 +306,7 @@ export default function Clientes (){
                 data: null
               }
             }
-            setVisibleMessage={ showDeleteMessage }
+            setVisibleMessage={ showDeleteClientMessage }
           />
         }
 
@@ -329,18 +355,21 @@ export default function Clientes (){
           </div>
         </div>
 
-        <div className="clients">
-          { clients !== undefined ? clients.map( client =>
-              <Cliente
-                key = {client.ClientID}
-                client={client}
-                clientSelected={clientSelected}
-                setClientSelected={setClientSelected}
-              />
-            )
-
+        <div className="list-scroll">
+          { Object.keys(clients).length > 0
+            ?
+              clients.map( client =>
+                <Cliente
+                  key = {client.ClientID}
+                  client={client}
+                  clientSelected={clientSelected}
+                  setClientSelected={setClientSelected}
+                />
+              )
             :
-            'Cargando...'
+              <div className='center'>
+                <Spinner/>
+              </div>
           }
         </div>
       </div>

@@ -1,12 +1,18 @@
 import {useEffect, useState} from "react";
-import {useActionData, useLoaderData, useNavigate, useNavigation} from "@remix-run/react";
-import styles from "../styles/clientes.css"
+import {useActionData, useLoaderData } from "@remix-run/react";
+
+//Components
 import SelectSubject from "../components/selectSubject";
 import FormDocument from "../components/formDocument";
-import { addDocument } from "../models/document.server";
-import { getSubjects } from "../models/subject.server";
-import {addClient, deleteClient, getClientByURL, updateClient} from "../models/client.server";
 import ModalMessage from "../components/modalMessage";
+
+//Server actions
+import { addDocument, deleteDocument } from "../models/document.server";
+import { getSubjects } from "../models/subject.server";
+import { getClientByURL } from "../models/client.server";
+
+//Styles
+import styles from "../styles/clientes.css"
 
 export function links(){
   return [
@@ -30,11 +36,10 @@ export async function loader({params}){
 
 export async function action({request}){
   const documentFormData = await request.formData();
+  const documentID = documentFormData.get('DocumentID')
   const name = documentFormData.get('Name');
   const subject = documentFormData.get('Subject');
   const file = documentFormData.get('File');
-
-  const id = 0;
 
   const errors = {}
   if(request.method === 'POST'){
@@ -70,7 +75,7 @@ export async function action({request}){
       }
     }
     case 'DELETE': {
-      const returnedState = await deleteClient( id )
+      const returnedState = await deleteDocument( documentID )
       return {
         state: 'DELETED',
         data: returnedState,
@@ -93,8 +98,10 @@ export default function ClientesClientID (){
 
   const [ showInsertedMessage, setShowInsertedMessage ] = useState(false);
   const [ showDeletedMessage, setShowDeletedMessage ] = useState(false);
-  const [ showFormDeletedMessage, setShowFormDeletedMessage ] = useState(false);
   const [ showFormDocument, setShowFormDocument ] = useState(false);
+  const [ showFormDeletedMessage, setShowFormDeletedMessage ] = useState(false);
+
+  const [selectedDocument, setSelectedDocument] = useState({});
 
   const subjectsNamed = {}
   subjects.forEach(subject => {
@@ -146,11 +153,28 @@ export default function ClientesClientID (){
         />
       }
 
+      { showFormDeletedMessage &&
+        <ModalMessage
+          features={
+            {
+              text: "¿Esta seguro de la eliminación del documento?",
+              isOkCancel: true,
+              indexIcon: 1,
+              data: {
+                name: 'DocumentID',
+                value: selectedDocument?.DocumentID
+              }
+            }
+          }
+          setVisibleMessage={ setShowFormDeletedMessage }
+        />
+      }
+
       { showInsertedMessage &&
         <ModalMessage
           features={
             {
-              text: "El documento has sido agregado exitosamente",
+              text: "El documento ha sido agregado exitosamente",
               isOkCancel: false,
               indexIcon: 2,
               data: null
@@ -164,21 +188,21 @@ export default function ClientesClientID (){
         <ModalMessage
           features={
             {
-              text: "El documento has sido eliminado exitosamente",
+              text: "El documento ha sido eliminado exitosamente",
               isOkCancel: false,
               indexIcon: 2,
               data: null
             }
           }
-          setVisibleMessage={ showDeletedMessage }
+          setVisibleMessage={ setShowDeletedMessage }
         />
       }
 
       <h1 className="heading">Información del cliente</h1>
       <h2 className="subheading">Información general y expediente completo del cliente</h2>
 
-      <main className="main">
-        <section className="general-information">
+      <main className="grid-1-2">
+        <section className="content">
           <h3>Información general</h3>
           <div className="data">
               <div className="item">
@@ -218,21 +242,23 @@ export default function ClientesClientID (){
             </button>
           </div>
 
-          <div className="record-categories">
+          <div className="list-scroll">
             { Object.keys(record).length === 0
               ?
-              <p className="no-documents">
-                Aun no hay documentos disponibles...
-              </p>
+                <p className="no-found">
+                  Aun no hay documentos disponibles...
+                </p>
               :
-              record.map( subject =>
-                <SelectSubject
-                  key={subject.SubjectID}
-                  subject={subject}
-                  showSubject={showSubject}
-                  setShowSubject={setShowSubject}
-                />
-              )
+                record.map( subject =>
+                  <SelectSubject
+                    key={subject.SubjectID}
+                    subject={subject}
+                    showSubject={showSubject}
+                    setShowSubject={setShowSubject}
+                    setShowFormDeletedMessage={setShowFormDeletedMessage}
+                    setSelectedDocument={setSelectedDocument}
+                  />
+                )
             }
           </div>
         </section>

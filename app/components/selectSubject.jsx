@@ -1,25 +1,43 @@
 import SelectDocument from "./selectDocument";
 
-export default function SelectSubject ({ subject, showSubject, setShowSubject }){
+export default function SelectSubject ({ subject, showSubject, setShowSubject, setShowFormDeletedMessage, setSelectedDocument }){
   const {SubjectID, Name, Documents } = subject
 
   return (
-    <div className="record-category">
+    <div className="record-subject">
       <div
-        className="record-category-up"
+        className="subject-information"
         onClick={ () => { setShowSubject( showSubject === SubjectID ? 0 : SubjectID ) } }
       >
-        <p>{ Name }</p>
-        <img src="/img/chevron-down.svg" alt="arrow"/>
+        <p>
+          { Name }
+        </p>
+
+        <div>
+          <img
+            className={showSubject === SubjectID ? 'active' : ''}
+            src={`/img/chevron-down.svg`}
+            alt="arrow"
+          />
+        </div>
       </div>
-      <div className={`record-subcategories ${ showSubject === SubjectID ? 'active' : '' }`}>
-        { Documents &&
+
+      <div className={`subject-documents ${ showSubject === SubjectID ? 'active' : '' }`}>
+        { Documents?.length > 0 ?
           Documents.map( document =>
             <SelectDocument
               key={document.DocumentID}
               document={document}
+              setSelectedDocument={setSelectedDocument}
+              setShowFormDeletedMessage={setShowFormDeletedMessage}
             />
           )
+          :
+          <div className='subject-document'>
+            <div className="record-document">
+              <p>Aun no hay documentos disponibles</p>
+            </div>
+          </div>
         }
       </div>
     </div>

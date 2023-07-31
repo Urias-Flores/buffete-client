@@ -27,11 +27,11 @@ export default function ModalMessage ({ features, setVisibleMessage }){
         <div className="message-information">
           <img src={`/img/${icon[indexIcon]}`} alt="reference"/>
           <p>{text}</p>
-          <div className="actions">
+          <div className="buttons">
             { isOkCancel ?
               <>
                 <Form method="DELETE">
-                  <input name="id" type="hidden" value={ data }/>
+                  <input name={ data?.name } type="hidden" value={ data?.value }/>
                   <input
                     className="button"
                     type="submit"

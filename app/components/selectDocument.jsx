@@ -1,27 +1,42 @@
 import { useState } from 'react'
 import ModalDocument from "./modalDocument";
+import { Link } from "@remix-run/react";
 
-export default function SelectDocument  ({ document }){
+export default function SelectDocument  ({ document, setShowFormDeletedMessage, setSelectedDocument }){
 
-  const { DocumentID, Name, URL } = document
+  const { Name, URL } = document
+
   const [showModalDocument, setShowModalDocument] = useState(false);
 
+
   return (
-    <div className={`subcategory`}>
+    <div className='subject-document'>
       { showModalDocument &&
         <ModalDocument
           URL={URL}
-          setShowModalDocument={setShowModalDocument}
+          setShowModalDocument={ setShowModalDocument }
         />
       }
 
       <div
-        className="record-subcategory-up"
-        onClick={ () => { setShowModalDocument(true) } }
+        className="record-document"
       >
-        <p>{ Name }</p>
+        <p onClick={ () => { setShowModalDocument(true) } }>{ Name }</p>
         <p className='actions'>
-          <img src="/img/trash.svg" alt="trash"/>
+          <Link to={`http://localhost:3001/api/document/download/${URL}`}>
+            <img
+              src='/img/download.svg'
+              alt="trash"
+            />
+          </Link>
+          <img
+            onClick={ () => {
+                setSelectedDocument(document)
+                setShowFormDeletedMessage(true)
+              }
+            }
+            src="/img/trash.svg" alt="trash"
+          />
         </p>
       </div>
     </div>

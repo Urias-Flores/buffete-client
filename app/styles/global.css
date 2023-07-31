@@ -1,3 +1,4 @@
+/* ====================== General ======================== */
 *{
     font-family: 'Montserrat', SansSerif, serif;
     font-weight: lighter;
@@ -25,6 +26,37 @@ header{
     width: 85%;
 }
 
+.heading{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.subheading{
+    font-size: 1.1rem;
+    margin: .3rem 0;
+}
+
+@media(max-width: 768px) {
+    .container{
+        width: 95%;
+    }
+
+    .heading{
+        font-size: 2.8rem;
+    }
+
+    .subheading{
+        font-size: 1.8rem;
+    }
+
+    .heading, .subheading{
+        text-align: center;
+    }
+}
+/* ====================== General ======================== */
+
+/* ================== Navigation Bar ===================== */
 .nav{
     display: flex;
     gap: 2rem;
@@ -38,17 +70,39 @@ header{
     width: 70%;
 }
 
-.heading{
-    font-size: 2rem;
+.logo, .link{
+    font-size: 1.2rem;
     font-weight: 600;
-    margin: 0;
 }
 
-.subheading{
-    font-size: 1.1rem;
-    margin: .3rem 0;
+.link{
+    padding: .8rem 0;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
+.link.active{
+    border-bottom: 4px solid white;
+}
+
+@media (max-width: 768px){
+    body{
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .nav, .bar{
+        flex-direction: column;
+    }
+
+    .logo, .link{
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+}
+/* ================== Navigation Bar ===================== */
+
+/* =================== Search Field ====================== */
 .search{
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
@@ -70,7 +124,7 @@ header{
 
 .search input{
     background: none;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 400;
     border: none;
     margin: 0;
@@ -78,6 +132,24 @@ header{
     outline: none;
 }
 
+@media (max-width: 768px) {
+    .search{
+        width: calc(100% - 1.2rem) ;
+        padding: .8rem .6rem;
+    }
+
+    .search img{
+        width: 2.7rem;
+    }
+
+    .search input{
+        font-size: 1.9rem;
+    }
+}
+/* =================== Search Field ====================== */
+
+
+/* ===================== Buttons ========================= */
 .actions{
     display: flex;
     gap: 1rem;
@@ -115,72 +187,34 @@ header{
     margin: 1.5rem 0 0 0;
 }
 
-.logo, .link{
-    font-size: 1.2rem;
-    font-weight: 600;
-}
+@media (max-width: 768px) {
+    .actions{
+        margin: 2rem 0;
+    }
 
-.link{
-    padding: .8rem 0;
-    text-decoration: none;
-    text-transform: uppercase;
-}
+    .button{
+        padding: 1rem;
+        width: 100%;
+    }
 
-.link.active{
-    border-bottom: 4px solid white;
-}
+    .button p{
+        width: 100%;
+        font-size: 1.8rem;
+        text-align: center;
+    }
 
-.home{
-    margin: 8rem auto 0 auto;
+    .button img{
+        width: 2.2rem;
+    }
 }
+/* ===================== Buttons ========================= */
 
-.title{
-    margin: .3rem 0;
-    font-size: 3.4rem;
-    font-weight: 600;
-}
 
-.subtitle{
-    margin: .3rem 0;
-    font-size: 1.55rem;
-    font-weight: 600;
-}
-
-.panels{
-    display: flex;
-    margin-top: 4.5rem;
-    gap: 3rem;
-}
-
-.panel{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    width: 180px;
-    padding: 1.2rem;
-}
-
-.panel img{
-    width: 4rem;
-}
-
-.panel h4{
-    margin: .8rem 0;
-    font-size: 1.3rem;
-    font-weight: 300;
-}
-
-.panel p{
-    margin: 0;
-    font-size: 1.3rem;
-    font-style: italic;
-}
-
+/* ====================== Modals ========================= */
 .modal{
     position: absolute;
     inset: 0;
+    width: 100%;
     backdrop-filter: blur(10px);
     background-color: rgb(0, 0, 0, .1);
     z-index: 101;
@@ -190,7 +224,7 @@ header{
     position: relative;
     inset: 0;
     z-index: 102;
-    width: 40%;
+    width: 45%;
     margin: 2rem auto;
     height: fit-content;
     background-color: rgb(255, 255, 255, 0.2);
@@ -198,6 +232,31 @@ header{
     padding: 2rem;
 }
 
+.message{
+    position: relative;
+    inset: 11rem 0;
+    margin: 0 auto;
+    width: 35%;
+    height: fit-content;
+    border-radius: .7rem;
+    background-color: rgb(255, 255, 255, .2);
+}
+
+.button-close{
+    position: absolute;
+    inset: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+/* ====================== Modals ========================= */
+
+
+/* ====================== Inputs ========================= */
 .inputs{
     display: flex;
     flex-direction: column;
@@ -245,7 +304,10 @@ input[type='file']{
     border: none;
     cursor: pointer;
 }
+/* ====================== Inputs ========================= */
 
+
+/* ====================== Forms ========================= */
 .error{
     color: darkred;
     font-size: 1.1rem;
@@ -253,34 +315,26 @@ input[type='file']{
     margin: 0;
 }
 
-.button-close{
-    position: absolute;
-    inset: 0;
-    width: 2.1rem;
-    height: 2.1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    font-weight: 400;
-    cursor: pointer;
+.loading{
+    display: flex;
+    gap: .7rem;
 }
+/* ====================== Forms ========================= */
 
-.message{
-    position: absolute;
-    inset: 11rem 0;
-    margin: 0 auto;
-    width: 40%;
-    height: fit-content;
-    border-radius: .7rem;
-    background-color: rgb(255, 255, 255, .2);
-}
 
+/* ===================== Messages ========================= */
 .message-information{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding: 1.4rem;
+    padding: 1.2rem;
+}
+
+.message-information .buttons{
+    margin: .5rem 0;
+    display: flex;
+    gap: 1rem;
 }
 
 .message-information p{
@@ -289,19 +343,17 @@ input[type='file']{
     margin-bottom: .5rem;
 }
 
-.message-information img{
+.message .message-information img{
     width: 6rem;
 }
+/* ===================== Messages ========================= */
 
-.panel{
-    border-radius: .7rem;
-    backdrop-filter: blur(10px);
-    background-color: rgb(255, 255, 255, .1);
-}
 
-.loading{
+/* ====================== Spinner ======================== */
+.center{
     display: flex;
-    gap: .7rem;
+    justify-content: center;
+    width: 100%;
 }
 
 .spinner {
@@ -347,3 +399,167 @@ input[type='file']{
           transform: scale(1.0);
       }
 }
+/* ====================== Spinner ======================== */
+
+
+/* ====================== Layout ========================= */
+.grid-1-2{
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: 1rem;
+}
+/* ====================== Layout ========================= */
+
+
+/* ======= Panel design for client and subjects ========== */
+.content{
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    padding: 1rem;
+    margin-top: 2rem;
+    height: fit-content;
+    border-radius: .7rem;
+}
+
+.content h3{
+    margin: 0;
+    font-weight: bold;
+}
+
+.content .data{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0.4rem 0;
+}
+
+.content .item p{
+    margin-bottom: .3rem;
+}
+/* ======================= Panel ========================== */
+
+
+/* =================== Document Modal ===================== */
+.document{
+    position: relative;
+    inset: 0;
+    z-index: 102;
+    width: 31%;
+    margin: 0.8rem auto 0 auto;
+    height: fit-content;
+    background-color: rgb(255, 255, 255, 0.2);
+    border-radius: .7rem;
+    padding: 2rem 2rem .1rem 2rem;
+}
+
+.react-pdf__Page,
+.react-pdf__Page__canvas,
+.react-pdf__Page__textContent,
+.react-pdf__Page__annotations
+{
+    max-width: 29rem;
+    max-height: 38rem;
+}
+
+.changerpage{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: .3rem 0;
+}
+
+.changerpage p{
+    font-weight: normal;
+}
+
+.changerpage img{
+    width: 2rem;
+    cursor: pointer;
+}
+/* =================== Document Modal ===================== */
+
+
+/* ========================= List ========================= */
+.list-scroll{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: scroll;
+    height: 60vh;
+}
+
+.list-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.list-scroll::-webkit-scrollbar-thumb, .clients::-webkit-scrollbar-track {
+    border-radius: .3rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+}
+
+.item-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.4rem;
+    border: none;
+    border-radius: .7rem;
+    padding: .6rem .8rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    margin-right: 1rem;
+}
+
+.item-list .check{
+    width: 2rem;
+    cursor: pointer;
+}
+
+.item-list .actions{
+    margin: 0;
+}
+
+.item-list .actions img{
+    width: 2rem;
+    cursor: pointer;
+}
+
+.item-main{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1.3rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.item-main img{
+    width: 3rem;
+    cursor: pointer;
+}
+
+.item-information h4{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.item-information p{
+    font-size: 1rem;
+    margin: .3rem 0;
+}
+
+.item-information img{
+    width: 2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .list-scroll{
+        height: 70rem;
+    }
+}
+/* ========================= List ========================= */
+
