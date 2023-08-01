@@ -243,7 +243,7 @@ export default function ClientesClientID (){
           </div>
 
           <div className="list-scroll">
-            { Object.keys(record).length === 0
+            { record.length === 0
               ?
                 <p className="no-found">
                   Aun no hay documentos disponibles...

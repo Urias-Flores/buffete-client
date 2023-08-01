@@ -95,7 +95,7 @@ export default function Materias (){
   const loader = useLoaderData()
   const actionResult = useActionData();
 
-  const [subjects, setSubjects] = useState({})
+  const [subjects, setSubjects] = useState([])
 
   useEffect(() => {
     setSubjects(loader);
@@ -231,7 +231,7 @@ export default function Materias (){
       </div>
 
       <div className="list-scroll">
-        { Object.keys(subjects).length > 0
+        { subjects.length > 0
           ?
             subjects.map( subject =>
               <Subject

@@ -60,7 +60,7 @@ export default function MateriasName (){
   const [ selectedDocument, setSelectedDocument ] = useState({});
 
   const { Name, Documents, CreatedDate, UpdatedDate } = loader
-  const [documents, setDocuments] = useState({});
+  const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     switch ( actionResult?.status ){
@@ -168,7 +168,7 @@ export default function MateriasName (){
                   <Spinner/>
                 </div>
               :
-                Object.keys(documents).length === 0
+                documents.length === 0
                 ?
                   <p className="no-found">
                     Aun no hay documentos disponibles...

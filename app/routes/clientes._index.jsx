@@ -166,7 +166,8 @@ export default function Clientes (){
   const loader = useLoaderData();
   const actionResult = useActionData();
 
-  const [clients, setClients] = useState({});
+  const [clients, setClients] = useState([]);
+
 
   useEffect(() => {
     switch (actionResult?.state){
@@ -356,7 +357,7 @@ export default function Clientes (){
         </div>
 
         <div className="list-scroll">
-          { Object.keys(clients).length > 0
+          { clients.length > 0
             ?
               clients.map( client =>
                 <Cliente
