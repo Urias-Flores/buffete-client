@@ -187,6 +187,10 @@ export default function Clientes (){
     }
   }, [actionResult])
 
+  useEffect(() => {
+    setClients(loader)
+  }, [loader]);
+
   const showFormCliente = ( isEditign ) => {
     if(isEditign){
       if(Object.keys(clientSelected).length > 0){
@@ -352,9 +356,9 @@ export default function Clientes (){
         </div>
 
         <div className="list-scroll">
-          { loader.length > 0
+          { clients.length > 0
             ?
-              loader.map( client =>
+              clients.map( client =>
                 <Cliente
                   key = {client.ClientID}
                   client={client}
