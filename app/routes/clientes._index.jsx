@@ -161,12 +161,11 @@ export default function Clientes (){
   const [errorSelectedMessage, showErrorSelectedMessage] = useState(false);
 
   //State for client and document selection
+  const [clients, setClients] = useState([]);
   const [clientSelected, setClientSelected] = useState({});
 
   const loader = useLoaderData();
   const actionResult = useActionData();
-
-  const [clients, setClients] = useState([]);
 
 
   useEffect(() => {
@@ -187,10 +186,6 @@ export default function Clientes (){
         break;
     }
   }, [actionResult])
-
-  useEffect(() => {
-    setClients(loader)
-  }, [loader]);
 
   const showFormCliente = ( isEditign ) => {
     if(isEditign){
@@ -357,9 +352,9 @@ export default function Clientes (){
         </div>
 
         <div className="list-scroll">
-          { clients.length > 0
+          { loader.length > 0
             ?
-              clients.map( client =>
+              loader.map( client =>
                 <Cliente
                   key = {client.ClientID}
                   client={client}
