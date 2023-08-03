@@ -24,7 +24,7 @@ export function links(){
 }
 
 export async function loader(){
-  return await getClients()
+  return await getClients();
 }
 
 export async function action({ request }){
@@ -191,8 +191,8 @@ export default function Clientes (){
     setClients(loader)
   }, [loader]);
 
-  const showFormCliente = ( isEditign ) => {
-    if(isEditign){
+  const showFormCliente = ( isEditing ) => {
+    if(isEditing){
       if(Object.keys(clientSelected).length > 0){
         setVisibleFormClientForEditing(true)
       } else {
@@ -213,7 +213,7 @@ export default function Clientes (){
 
   const searchClient = ( event ) => {
     const value = event.target.value.toString().toLowerCase()
-    const actualizedClients = loader.filter( client => client.Name.toLowerCase().includes(value) );
+    const actualizedClients = loader?.filter( client => client.Name.toLowerCase().includes(value) );
     setClients( actualizedClients );
   }
 
@@ -356,20 +356,25 @@ export default function Clientes (){
         </div>
 
         <div className="list-scroll">
-          { clients.length > 0
-            ?
-              clients.map( client =>
-                <Cliente
-                  key = {client.ClientID}
-                  client={client}
-                  clientSelected={clientSelected}
-                  setClientSelected={setClientSelected}
-                />
-              )
-            :
-              <div className='center'>
-                <Spinner/>
-              </div>
+          {
+            clients.length > 0
+              ?
+                clients.map( client =>
+                  <Cliente
+                    key = {client.ClientID}
+                    client={client}
+                    clientSelected={clientSelected}
+                    setClientSelected={setClientSelected}
+                  />
+                )
+              :
+                loader?.length === 0
+                  ?
+                    <p className='no-found'>Aún no hay clientes registrados</p>
+                  :
+                    <div className='center'>
+                      <Spinner/>
+                    </div>
           }
         </div>
       </div>

@@ -2,7 +2,7 @@ import {Document, Page, pdfjs} from "react-pdf";
 import {useState} from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-export default function ModalDocument ({ URL, setShowModalDocument }){
+export default function ModalDocument ({ URL, setShowModalDocument, isInternalDocument = false }){
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -36,7 +36,7 @@ export default function ModalDocument ({ URL, setShowModalDocument }){
             }
           />
           <Document
-            file={`http://localhost:3001/api/document/download/${URL}`}
+            file={`http://localhost:3001/api/${ isInternalDocument ? 'internaldocument' : 'document' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

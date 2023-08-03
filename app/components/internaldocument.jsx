@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import { Link } from "@remix-run/react";
 import ModalDocument from "./modalDocument";
+import { useState } from "react";
+import {Link} from "@remix-run/react";
 
-
-export default function Document ({ document, setSelectedDocument, setShowFormDeletedMessage }){
-  const { Name, URL } = document
+export default function InternalDocument ({ InternalDocument, setSelectedDocument, setShowFormDeletedMessage }){
+  const { Name, URL } = InternalDocument
   const [showModalDocument, setShowModalDocument] = useState(false);
 
   return (
@@ -12,6 +11,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
       { showModalDocument &&
         <ModalDocument
           URL={URL}
+          isInternalDocument={true}
           setShowModalDocument={setShowModalDocument}
         />
       }
@@ -25,7 +25,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
         </div>
 
         <div className='actions'>
-          <Link to={`http://localhost:3001/api/document/download/${URL}`}>
+          <Link to={`http://localhost:3001/api/internaldocument/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="square"
