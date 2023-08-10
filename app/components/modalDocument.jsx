@@ -36,7 +36,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
             }
           />
           <Document
-            file={`http://localhost:3001/api/${ isInternalDocument ? 'internaldocument' : 'document' }/download/${URL}`}
+            file={`https://buffete-server-134d0676d181.herokuapp.com/api/${ isInternalDocument ? 'internaldocument' : 'document' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'
