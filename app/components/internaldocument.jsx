@@ -18,7 +18,7 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
 
       <div className='item-list'>
         <div className="item-main">
-          <img src="/img/file-description.svg" alt="user"/>
+          <img src="/img/file-description.svg" alt="file"/>
           <div className='item-information' onClick={() => { setShowModalDocument(true) }}>
             <h4>{Name}</h4>
           </div>
@@ -28,12 +28,12 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
           <Link to={`http://localhost:3001/api/internaldocument/download/${URL}`}>
             <img
               src='/img/download.svg'
-              alt="square"
+              alt="download"
             />
           </Link>
           <img
             onClick={ () => {
-                setSelectedDocument(document)
+                setSelectedDocument(InternalDocument)
                 setShowFormDeletedMessage(true)
               }
             }

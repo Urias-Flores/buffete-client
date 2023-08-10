@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {useActionData, useLoaderData} from "@remix-run/react";
 
-import { getInternalDocuments, addInternalDocument } from "../models/internaldocuments.server";
+import {getInternalDocuments, addInternalDocument, deleteInternalDocument} from "../models/internaldocuments.server";
 
 import ModalMessage from "../components/modalMessage";
 import InternalDocument from "../components/internaldocument";
@@ -13,6 +13,7 @@ export async function loader(){
 
 export async function action({ request }){
   const form = await request.formData();
+  const InternalDocumentID = form.get('InternalDocumentID');
   const name = form.get('Name');
   const file = form.get('File');
 
@@ -46,9 +47,11 @@ export async function action({ request }){
         errors: {}
       }
     case 'DELETE':
+      console.log(`InternalDocumentID: ${InternalDocumentID}`)
+      const resultDeleted = await deleteInternalDocument(InternalDocumentID);
       return {
         status: 'DELETED',
-        data: null,
+        data: resultDeleted,
         errors: {}
       }
   }
@@ -56,7 +59,7 @@ export async function action({ request }){
 
 export default function Documentacioninterna (){
   const [internalDocuments, setInternalDocuments] = useState([]);
-  const [selectedDocument, setSelectedDocument] = useState({});
+  const [selectedDocument, setSelectedDocument] = useState({ algo: 1});
 
   const [showInsertedMessage, setShowInsertedMessage] = useState(false)
   const [showDeletedMessage, setShowDeletedMessage] = useState(false)
@@ -85,6 +88,11 @@ export default function Documentacioninterna (){
     setInternalDocuments(loader)
   }, [loader]);
 
+  const searchInternalDocument = (event) => {
+    const value = event.target.value.toString().toLowerCase()
+    const actualizedInternalDocuments = loader?.filter( client => client.Name.toLowerCase().includes(value) );
+    setInternalDocuments( actualizedInternalDocuments );
+  }
 
   return (
     <div className="container">
@@ -95,7 +103,6 @@ export default function Documentacioninterna (){
           setShowModalInternalDocument={ setShowFormInternalDocument }
         />
       }
-
 
       { showFormDeletedMessage &&
         <ModalMessage
@@ -148,6 +155,7 @@ export default function Documentacioninterna (){
       <div className="search">
         <img src="/img/search.svg" alt="search"/>
         <input
+          onChange={ (event) => { searchInternalDocument(event) }}
           type="text"
           placeholder="Buscar"
         />
@@ -161,24 +169,6 @@ export default function Documentacioninterna (){
         >
           <img src="/img/add.svg" alt="add"/>
           <p>Agregar nuevo documento</p>
-        </button>
-
-        <button
-          className="button"
-          onClick={ ()=>{  } }
-        >
-          <img src="/img/edit.svg" alt="add"/>
-          <p>Editar documento</p>
-        </button>
-
-        <button
-          className="button"
-          onClick={() => {  }}
-          type="button"
-          value="Eliminar"
-        >
-          <img src="/img/x.svg" alt="add"/>
-          <p>Eliminar documento</p>
         </button>
       </div>
 
