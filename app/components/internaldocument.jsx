@@ -25,7 +25,7 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
         </div>
 
         <div className='actions'>
-          <Link to={`http://localhost:3001/api/internaldocument/download/${URL}`}>
+          <Link to={`https://buffete-server-134d0676d181.herokuapp.com/api/internaldocument/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="download"

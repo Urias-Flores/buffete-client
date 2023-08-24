@@ -25,7 +25,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
         </div>
 
         <div className='actions'>
-          <Link to={`http://localhost:3001/api/document/download/${URL}`}>
+          <Link to={`https://buffete-server-134d0676d181.herokuapp.com/api/document/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="square"
