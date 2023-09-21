@@ -1,10 +1,12 @@
-import ModalDocument from "./modalDocument";
 import { useState } from "react";
-import {Link} from "@remix-run/react";
+import {Link, useOutletContext} from "@remix-run/react";
+
+import ModalDocument from "./modalDocument";
 
 export default function InternalDocument ({ InternalDocument, setSelectedDocument, setShowFormDeletedMessage }){
   const { Name, URL } = InternalDocument
   const [showModalDocument, setShowModalDocument] = useState(false);
+  const context = useOutletContext();
 
   return (
     <>
@@ -25,7 +27,7 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
         </div>
 
         <div className='actions'>
-          <Link to={`https://buffete-server-134d0676d181.herokuapp.com/api/internaldocument/download/${URL}`}>
+          <Link to={`${context.URL_API}/internaldocument/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="download"

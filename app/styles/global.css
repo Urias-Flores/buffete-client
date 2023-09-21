@@ -5,7 +5,7 @@
     color: white;
 }
 
-h1, h2, h3, h4, p{
+h1, h2, h3, h4, p, a{
     margin: 0;
 }
 
@@ -19,6 +19,11 @@ header{
     width: 100%;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, .1);
+}
+
+.logo{
+    padding: .3rem;
+    width: 2.7rem;
 }
 
 .container{
@@ -60,6 +65,7 @@ header{
 .nav{
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .bar{
@@ -81,6 +87,17 @@ header{
     text-transform: uppercase;
 }
 
+.link:last-child{
+    padding: 0;
+    margin: 0;
+}
+
+.user{
+    cursor: pointer;
+    margin: 0;
+    width: 2.3rem;
+}
+
 .link.active{
     border-bottom: 4px solid white;
 }
@@ -99,6 +116,37 @@ header{
         font-size: 1.8rem;
         font-weight: 600;
     }
+}
+
+.dropdownlist{
+    position: absolute;
+    top: 3rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: .7rem;
+}
+
+.dropdownlist .info{
+    margin-bottom: 1rem;
+}
+
+.dropdownlist .logout{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-top: 1px solid white;
+    padding-top: .5rem;
+    text-decoration: none;
+}
+
+.dropdownlist .username{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.dropdownlist .logout img{
+    width: 1.5rem;
 }
 /* ================== Navigation Bar ===================== */
 
@@ -227,6 +275,7 @@ header{
     width: 45%;
     margin: 2rem auto;
     height: fit-content;
+    backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
     border-radius: .7rem;
     padding: 2rem;
@@ -563,3 +612,8 @@ input[type='file']{
 }
 /* ========================= List ========================= */
 
+/* ========================= Login ======================== */
+.login{
+    margin-top: 10rem;
+}
+/* ========================= Login ======================== */

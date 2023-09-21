@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { Link } from "@remix-run/react";
+import {Link, useOutletContext} from "@remix-run/react";
 import ModalDocument from "./modalDocument";
 
 
 export default function Document ({ document, setSelectedDocument, setShowFormDeletedMessage }){
   const { Name, URL } = document
   const [showModalDocument, setShowModalDocument] = useState(false);
+  const context = useOutletContext();
+
+
 
   return (
     <>
@@ -25,7 +28,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
         </div>
 
         <div className='actions'>
-          <Link to={`https://buffete-server-134d0676d181.herokuapp.com/api/document/download/${URL}`}>
+          <Link to={`${context.URL_API}/document/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="square"

@@ -1,5 +1,6 @@
 import {Document, Page, pdfjs} from "react-pdf";
 import {useState} from "react";
+import {useOutletContext} from "@remix-run/react";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function ModalDocument ({ URL, setShowModalDocument, isInternalDocument = false }){
@@ -22,6 +23,8 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
       }
     }
 
+    const context = useOutletContext();
+
     return (
       <div className='modal'>
         <div className='document'>
@@ -36,7 +39,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
             }
           />
           <Document
-            file={`https://buffete-server-134d0676d181.herokuapp.com/api/${ isInternalDocument ? 'internaldocument' : 'document' }/download/${URL}`}
+            file={`${context.URL_API}/${ isInternalDocument ? 'internaldocument' : 'document' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

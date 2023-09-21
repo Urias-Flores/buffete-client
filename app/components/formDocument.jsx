@@ -1,20 +1,15 @@
 import {Form, useNavigation} from "@remix-run/react";
 
+import Spinner from "./spinner";
+import CloseButton from "./close_button";
 
 export default function FormDocument ({ method, errors, subjects, ClientID, setShowModalDocument }){
   const navigation = useNavigation()
   return (
     <div className="modal">
       <Form className="form" method={method} encType="multipart/form-data">
-        <img
-          src="/img/x.svg"
-          className="button-close"
-          alt="x"
-          onClick={
-            ()=> {
-              setShowModalDocument(false)
-            }
-          }
+        <CloseButton
+          setVisibleForm={setShowModalDocument}
         />
 
         <h1 className="heading">Agregar nuevo documento</h1>
@@ -69,11 +64,7 @@ export default function FormDocument ({ method, errors, subjects, ClientID, setS
         <div className='loading'>
           <input className="button" type="submit" value='Guardar'/>
           { navigation?.state !== 'idle' &&
-            <div className="spinner">
-              <div className="bounce1"></div>
-              <div className="bounce2"></div>
-              <div className="bounce3"></div>
-            </div>
+            <Spinner/>
           }
         </div>
       </Form>

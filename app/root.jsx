@@ -1,4 +1,4 @@
-import Navegacion from "~/components/navegacion";
+import Navigation from "~/components/navigation";
 import stylesNormalize from "~/styles/normalize.css"
 import stylesGlobal from "~/styles/global.css"
 import textLayer from 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -11,7 +11,7 @@ import {
   Outlet,
   Scripts,
   isRouteErrorResponse,
-  useRouteError
+  useRouteError, useLoaderData, useLocation
 } from "@remix-run/react";
 
 export function meta(){
@@ -64,31 +64,49 @@ export const links = () => [
     }
 ];
 
+export async function loader(){
+  return {
+    ENV: {
+      URL_API: process.env.API_URL
+    }
+  }
+}
+
 export default function App() {
+  const loader = useLoaderData();
   return (
     <Document>
-        <Outlet/>
+        <Outlet context={
+          {
+            URL_API: loader?.ENV.URL_API
+          }
+        }/>
     </Document>
   );
 }
 
 function Document({children}){
-    return(
-        < html lang = "es" >
-            <head>
-                <Meta/>
-                <Links/>
-                <title></title>
-            </head>
+  const { pathname } = useLocation()
+  console.log(typeof pathname);
+  return(
+    < html lang = "es" >
+      <head>
+        <Meta/>
+        <Links/>
+        <title></title>
+      </head>
 
-            <body>
-                <Navegacion/>
-                {children}
-                <Scripts/>
-                <LiveReload/>
-            </body>
-        </html>
-    )
+      <body>
+      { pathname === '/login'
+        ? <></>
+        : <Navigation/>
+      }
+        {children}
+        <Scripts/>
+        <LiveReload/>
+      </body>
+    </html>
+  )
 }
 
 export function ErrorBoundary() {
