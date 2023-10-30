@@ -1,4 +1,5 @@
-import {Form} from "@remix-run/react";
+import { Form } from "@remix-run/react";
+import CloseButton from "./close_button";
 
 export default function ModalMessage ({ features, setVisibleMessage }){
 
@@ -13,15 +14,8 @@ export default function ModalMessage ({ features, setVisibleMessage }){
   return (
     <div className="modal">
       <div className="message">
-        <img
-          src="/img/x.svg"
-          alt="x"
-          className="button-close"
-          onClick={
-            () => {
-              setVisibleMessage(false)
-            }
-          }
+        <CloseButton
+          setVisibleForm={ setVisibleMessage }
         />
 
         <div className="message-information">

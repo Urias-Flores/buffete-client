@@ -1,13 +1,18 @@
 import {useState, useEffect} from "react";
 import {useActionData, useLoaderData} from "@remix-run/react";
 
-import {getInternalDocuments, addInternalDocument, deleteInternalDocument} from "../models/internaldocuments.server";
+import {getInternalDocuments, addInternalDocument, deleteInternalDocument} from "../services/internaldocuments.server";
 
 import ModalMessage from "../components/modalMessage";
 import InternalDocument from "../components/internaldocument";
 import FormInternalDocument from "../components/formInternalDocument";
+import {authenticator} from "../auth/auth.server";
 
-export async function loader(){
+export async function loader({ request }){
+  await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+
   return await getInternalDocuments();
 }
 
@@ -47,7 +52,6 @@ export async function action({ request }){
         errors: {}
       }
     case 'DELETE':
-      console.log(`InternalDocumentID: ${InternalDocumentID}`)
       const resultDeleted = await deleteInternalDocument(InternalDocumentID);
       return {
         status: 'DELETED',
@@ -72,7 +76,6 @@ export default function Documentacioninterna (){
   useEffect(() => {
     switch (actionResult?.status){
       case 'INSERTED':
-        console.log(actionResult?.data)
         setShowFormInternalDocument(false);
         setShowInsertedMessage(true)
         break;

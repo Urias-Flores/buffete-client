@@ -7,13 +7,14 @@ import ModalMessage from "../components/modalMessage";
 import Spinner from "../components/spinner";
 
 //Server Actions
-import { getSubjectByName } from "../models/subject.server";
-import { deleteDocument } from "../models/document.server";
+import { getSubjectByName } from "../services/subject.server";
+import { deleteDocument } from "../services/document.server";
 import { formattedDate } from "../utils/helpers";
 
 //Styles
 import stylesSubject from '../styles/materias.css';
 import stylesClient from '../styles/clientes.css';
+import {authenticator} from "../auth/auth.server";
 
 
 export function links(){
@@ -29,7 +30,11 @@ export function links(){
   ]
 }
 
-export async function loader({params}){
+export async function loader({params, request}){
+  await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+
   const { name } = params
   return await getSubjectByName(name)
 }

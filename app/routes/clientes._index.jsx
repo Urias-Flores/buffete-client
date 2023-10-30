@@ -8,11 +8,13 @@ import Cliente from "../components/client";
 import Spinner from "../components/spinner";
 
 //Server actions
-import { getClients, addClient, updateClient, deleteClient } from "../models/client.server";
-import { deleteDocument } from "../models/document.server";
+import { addClient, deleteClient, getClients, updateClient } from "../services/client.server";
+import { deleteDocument } from "../services/document.server";
+import { authenticator } from "../auth/auth.server";
 
 //Styles
 import styles from '~/styles/clientes.css'
+
 
 export function links(){
   return [
@@ -23,12 +25,18 @@ export function links(){
   ]
 }
 
-export async function loader(){
-  return await getClients();
+export async function loader({ request }) {
+  const currentUser = await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+
+  let clients = await getClients();
+  return clients.filter(client =>  client.User.UserID === currentUser.UserID);
 }
 
 export async function action({ request }){
   const form = await request.formData();
+  const currentUser = await authenticator.isAuthenticated(request);
 
   const clientID = form.get('ClientID')
   const documentID = form.get('DocumentID')
@@ -91,7 +99,7 @@ export async function action({ request }){
   }
 
   const client = {
-    User: 2,
+    User: currentUser.UserID,
     Name: name,
     Identity: identity,
     Phone: phone,
@@ -167,7 +175,6 @@ export default function Clientes (){
   const loader = useLoaderData();
   const actionResult = useActionData();
 
-
   useEffect(() => {
     switch (actionResult?.state){
       case 'INSERTED':
@@ -219,21 +226,20 @@ export default function Clientes (){
 
   return (
       <div className="container">
-
         { isVisibleFormCliente  &&
           <FormClient
-            method={'POST'}
+            method={ 'POST' }
             errors={ actionResult?.errors }
-            setVisibleFormClient = { setVisibleFormClient }
+            setVisibleFormClient={ setVisibleFormClient }
           />
         }
 
         { isVisibleFormClienteForEditing  &&
           <FormClient
-            method={'PUT'}
+            method={ 'PUT' }
             errors={ actionResult?.errors }
-            client = { clientSelected }
-            setVisibleFormClient = { setVisibleFormClientForEditing }
+            client={ clientSelected }
+            setVisibleFormClient={ setVisibleFormClientForEditing }
           />
         }
 
@@ -312,7 +318,8 @@ export default function Clientes (){
 
         <h1 className="heading">Gestiona tus clientes</h1>
         <p className="subheading">
-          Lista completa de los clientes registrados por ti, puedes escribir y filtrar para una busqueda mas rapida.
+          Lista completa de los clientes registrados, puedes escribir y
+          filtrar para una búsqueda mas rápida.
         </p>
 
         <div className='top-options'>
@@ -324,35 +331,35 @@ export default function Clientes (){
               onChange={ (event) => { searchClient( event) } }
             />
           </div>
+        </div>
 
-          <div className="actions">
-            <button
-              className="button"
-              onClick={ ()=>{ showFormCliente(false) } }
-              type="button"
-            >
-              <img src="/img/add.svg" alt="add"/>
-              <p>Agregar</p>
-            </button>
+        <div className="actions">
+          <button
+            className="button"
+            onClick={ ()=>{ showFormCliente(false) } }
+            type="button"
+          >
+            <img src="/img/add.svg" alt="add"/>
+            <p>Agregar</p>
+          </button>
 
-            <button
-              className="button"
-              onClick={ ()=>{ showFormCliente(true) } }
-            >
-              <img src="/img/edit.svg" alt="add"/>
-              <p>Editar</p>
-            </button>
+          <button
+            className="button"
+            onClick={ ()=>{ showFormCliente(true) } }
+          >
+            <img src="/img/edit.svg" alt="add"/>
+            <p>Editar</p>
+          </button>
 
-            <button
-              className="button"
-              onClick={() => { showEliminatedClient() }}
-              type="button"
-              value="Eliminar"
-            >
-              <img src="/img/x.svg" alt="add"/>
-              <p>Eliminar</p>
-            </button>
-          </div>
+          <button
+            className="button"
+            onClick={() => { showEliminatedClient() }}
+            type="button"
+            value="Eliminar"
+          >
+            <img src="/img/x.svg" alt="add"/>
+            <p>Eliminar</p>
+          </button>
         </div>
 
         <div className="list-scroll">
@@ -372,9 +379,13 @@ export default function Clientes (){
                   ?
                     <p className='no-found'>Aún no hay clientes registrados</p>
                   :
-                    <div className='center'>
-                      <Spinner/>
-                    </div>
+                    loader?.length > 0 && clients.length === 0
+                    ?
+                      <p className='no-found'>No se pudieron encontrar clientes</p>
+                    :
+                      <div className='center'>
+                        <Spinner/>
+                      </div>
           }
         </div>
       </div>

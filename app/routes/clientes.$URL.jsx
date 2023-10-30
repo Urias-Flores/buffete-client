@@ -7,9 +7,10 @@ import FormDocument from "../components/formDocument";
 import ModalMessage from "../components/modalMessage";
 
 //Server actions
-import { addDocument, deleteDocument } from "../models/document.server";
-import { getSubjects } from "../models/subject.server";
-import { getClientByURL } from "../models/client.server";
+import { addDocument, deleteDocument } from "../services/document.server";
+import { getSubjects } from "../services/subject.server";
+import { getClientByURL } from "../services/client.server";
+import {authenticator} from "../auth/auth.server";
 
 //Styles
 import styles from "../styles/clientes.css"
@@ -24,13 +25,18 @@ export function links(){
 }
 
 
-export async function loader({params}){
+export async function loader({params, request}){
+  const currentUser = await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+
   const { URL } = params
   const client = await getClientByURL(URL);
   const subjects = await getSubjects();
   return {
     client,
-    subjects
+    subjects,
+    currentUser
   }
 }
 
@@ -50,7 +56,7 @@ export async function action({request}){
       errors.name = 'El titulo del documento no debe exceder las 30 letras'
     }
     if(parseInt(subject) === -1){
-      errors.subject = 'La seleccion de una materia es obligatoria'
+      errors.subject = 'La selección de una materia es obligatoria'
     }
     if(!file){
       errors.file = 'debe seleccionar un documento'
@@ -67,12 +73,22 @@ export async function action({request}){
 
   switch ( request.method ){
     case 'POST': {
-      const returnedDocument = await addDocument(documentFormData);
-      return {
-        state: 'INSERTED',
-        data: returnedDocument,
-        errors: {}
+      try {
+        const returnedDocument = await addDocument(documentFormData);
+        return {
+          state: 'INSERTED',
+          data: returnedDocument,
+          errors: {}
+        }
+      } catch ( error ){
+        return {
+          state: 'ERROR',
+          data: null,
+          errors: {}
+        }
       }
+
+
     }
     case 'DELETE': {
       const returnedState = await deleteDocument( documentID )
@@ -90,7 +106,7 @@ export async function action({request}){
 
 export default function ClientesClientID (){
 
-  const { client, subjects } = useLoaderData();
+  const { client, subjects, currentUser } = useLoaderData();
   const actionResult = useActionData();
   const { ClientID, Name, Identity, Email, Phone, Address, Documents } = client[0]
 
@@ -112,15 +128,15 @@ export default function ClientesClientID (){
   Documents.forEach( document => {
     let subjectExist = false
     record.forEach( item => {
-      if(document.Subject === item.SubjectID){
+      if(document?.Subject === item.SubjectID){
         item.Documents = [...item.Documents, document]
         subjectExist = true
       }
     })
     if(!subjectExist){
       record.push({
-        SubjectID: document.Subject,
-        Name: subjectsNamed[document.Subject],
+        SubjectID: document?.Subject,
+        Name: subjectsNamed[document?.Subject],
         Documents: [document]
       })
     }
@@ -149,6 +165,7 @@ export default function ClientesClientID (){
           errors={actionResult?.errors}
           subjects={subjects}
           ClientID={ClientID}
+          UserID={currentUser?.UserID}
           setShowModalDocument={ setShowFormDocument }
         />
       }

@@ -1,0 +1,67 @@
+.dates{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    overflow-y: scroll;
+    height: 60vh;
+    padding-right: 1rem;
+}
+
+.dates::-webkit-scrollbar {
+    width: 10px;
+}
+
+.dates::-webkit-scrollbar-thumb {
+    border-radius: .3rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+}
+
+.date{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: 1rem;
+    border-radius: .7rem;
+    border: 1px solid rgb(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    transition:
+            border-bottom-color 300ms,
+            border-left-color 300ms,
+            border-right-color 300ms,
+            border-top-color 300ms;
+}
+
+.date.active{
+    border: 1px solid rgb(255, 255, 255, 1);
+}
+
+.date-issue{
+    margin-bottom: 1rem;
+}
+
+.date-issue span{
+    font-weight: bold;
+}
+
+.date-issue p{
+    font-weight: normal;
+}
+
+.information-item{
+    margin-bottom: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .2rem;
+}
+
+.information-item span{
+    font-weight: bold;
+}
+
+.information-item p{
+    font-weight: normal;
+}

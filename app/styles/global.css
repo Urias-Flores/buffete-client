@@ -61,6 +61,44 @@ header{
 }
 /* ====================== General ======================== */
 
+
+/* ======================== Logo ========================== */
+.brand {
+    width: 21rem;
+}
+
+.brand .grafic{
+    height: 3px;
+    background: linear-gradient(90deg, #cda74d 0%, transparent 35%, transparent 50%, transparent 65%, #cda74d 100%);
+}
+
+.group-text{
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.brand .names{
+    display: flex;
+    justify-content: space-between;
+}
+
+.names-text{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.brand .subtitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtitle-text{
+    font-size: 1rem;
+    font-weight: lighter;
+}
+/* ======================== Logo ========================= */
+
+
 /* ================== Navigation Bar ===================== */
 .nav{
     display: flex;
@@ -82,7 +120,7 @@ header{
 }
 
 .link{
-    padding: .8rem 0;
+    padding: .9rem 0;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -138,6 +176,7 @@ header{
     border-top: 1px solid white;
     padding-top: .5rem;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .dropdownlist .username{
@@ -150,7 +189,37 @@ header{
 }
 /* ================== Navigation Bar ===================== */
 
+
+/* ================== Error component ===================== */
+.error-page{
+    text-align: center;
+    width: 40rem;
+    margin: 10rem auto 0 auto;
+}
+
+.error-page .title{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.error-page .image{
+    margin: 1rem 0;
+    width: 6rem;
+}
+
+.error-page .information{
+    font-size: 1.5rem;
+}
+/* ================== Error component ===================== */
+
+
 /* =================== Search Field ====================== */
+.top-options{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.8rem;
+}
+
 .search{
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
@@ -161,7 +230,6 @@ header{
     border: none;
     border-radius: .7rem;
     width: 18rem;
-    margin-top: 1.8rem;
     padding: .3rem;
 }
 
@@ -220,6 +288,14 @@ header{
     font-weight: normal;
 }
 
+.button.center{
+    justify-content: center;
+}
+
+.logout .button{
+    width: 100%;
+}
+
 .button img{
     width: 1.4rem;
 }
@@ -229,10 +305,6 @@ header{
     font-size: 1rem;
     font-weight: normal;
     text-align: center;
-}
-
-.form .button{
-    margin: 1.5rem 0 0 0;
 }
 
 @media (max-width: 768px) {
@@ -259,10 +331,24 @@ header{
 
 
 /* ====================== Modals ========================= */
+.login-modal{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0 auto 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
 .modal{
     position: absolute;
     inset: 0;
     width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     backdrop-filter: blur(10px);
     background-color: rgb(0, 0, 0, .1);
     z-index: 101;
@@ -273,7 +359,7 @@ header{
     inset: 0;
     z-index: 102;
     width: 45%;
-    margin: 2rem auto;
+    margin: 0 auto;
     height: fit-content;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
@@ -283,7 +369,6 @@ header{
 
 .message{
     position: relative;
-    inset: 11rem 0;
     margin: 0 auto;
     width: 35%;
     height: fit-content;
@@ -306,6 +391,10 @@ header{
 
 
 /* ====================== Inputs ========================= */
+.message-information .inputs{
+    margin: 1rem 0;
+}
+
 .inputs{
     display: flex;
     flex-direction: column;
@@ -336,9 +425,9 @@ header{
 .input select{
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, .1);
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: .4rem;
+    font-weight: normal;
+    font-size: 1.2rem;
+    padding: .5rem;
     border: none;
     border-radius: .7rem;
     outline: none;
@@ -352,6 +441,15 @@ header{
 input[type='file']{
     border: none;
     cursor: pointer;
+}
+
+input[type='datetime-local']{
+    outline: none;
+    padding: .6rem;
+    border: none;
+    border-radius: .7rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, .1);
 }
 /* ====================== Inputs ========================= */
 
@@ -367,6 +465,7 @@ input[type='file']{
 .loading{
     display: flex;
     gap: .7rem;
+    margin-top: 1.5rem;
 }
 /* ====================== Forms ========================= */
 
@@ -378,6 +477,7 @@ input[type='file']{
     justify-content: space-around;
     align-items: center;
     padding: 1.2rem;
+    text-align: center;
 }
 
 .message-information .buttons{
@@ -494,7 +594,7 @@ input[type='file']{
     inset: 0;
     z-index: 102;
     width: 31%;
-    margin: 0.8rem auto 0 auto;
+    margin: 0 auto;
     height: fit-content;
     background-color: rgb(255, 255, 255, 0.2);
     border-radius: .7rem;
@@ -613,7 +713,92 @@ input[type='file']{
 /* ========================= List ========================= */
 
 /* ========================= Login ======================== */
-.login{
-    margin-top: 10rem;
+.account-options{
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-options .option{
+    font-size: .9rem;
+    font-weight: 400;
 }
 /* ========================= Login ======================== */
+
+/* ========================= Steps ======================== */
+.steps{
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step{
+    width: 3rem;
+    height: 3rem;
+    z-index: 100;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    transition: background-color 500ms ease;
+}
+
+.step.active{
+    background-color: rgb(255, 255, 255, 0.6);
+}
+
+.step-line{
+    margin: 0 -.1rem;
+    width: 1.5rem;
+    height: .8rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+}
+/* ========================= Steps ======================== */
+
+/* ===================== Code Messages ==================== */
+.just-text{
+    margin-top: 1.5rem;
+}
+
+.subheading + .code {
+    margin: 0;
+}
+
+.code{
+    margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.code-letter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: .7rem;
+    outline: none;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+}
+/* ===================== Code Messages ==================== */
+
+.no-found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .7rem;
+    padding: .6rem;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255, 0.2);
+    margin-right: 1rem;
+    font-weight: bold;
+}

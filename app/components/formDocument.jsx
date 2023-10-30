@@ -3,8 +3,9 @@ import {Form, useNavigation} from "@remix-run/react";
 import Spinner from "./spinner";
 import CloseButton from "./close_button";
 
-export default function FormDocument ({ method, errors, subjects, ClientID, setShowModalDocument }){
+export default function FormDocument ({ method, errors, subjects, ClientID, UserID, setShowModalDocument }){
   const navigation = useNavigation()
+
   return (
     <div className="modal">
       <Form className="form" method={method} encType="multipart/form-data">
@@ -17,7 +18,8 @@ export default function FormDocument ({ method, errors, subjects, ClientID, setS
 
         <div className="inputs">
           <div className="input">
-            <input name="Client" type="hidden" value={ClientID}/>
+            <input name='Client' type="hidden" value={ClientID}/>
+            <input name='User' type="hidden" value={UserID}/>
 
             <label htmlFor="title">Titulo</label>
             <input

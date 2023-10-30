@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Link, useLocation } from "@remix-run/react";
+import {Form, Link, useLocation} from "@remix-run/react";
 
-// eslint-disable-next-line no-empty-pattern
-export default function Navigation ({}){
-
+export default function Navigation ({ user }){
   const { pathname } = useLocation()
   const [showList, setShowList] = useState(false);
 
@@ -20,19 +18,39 @@ export default function Navigation ({}){
             to="/" >
             Inicio
           </Link>
+
           <Link
             className={`link ${pathname.includes('/clientes') ? 'active' : ''}`}
             to="/clientes" >
             Clientes
           </Link>
+
+          { user?.AccessLevel === 'A' || user?.AccessLevel === 'R'
+            ?
+            <Link
+              className={`link ${pathname.includes('/usuarios') ? 'active' : ''}`}
+              to="/usuarios" >
+              Usuarios
+            </Link>
+            :
+            null
+          }
+
+          <Link
+            className={`link ${pathname.includes('/citas') ? 'active' : ''}`}
+            to="/citas" >
+            Citas
+          </Link>
+
           <Link
             className={`link ${pathname.includes('/materias') ? 'active' : ''}`}
             to="/materias" >
             Materias
           </Link>
+
           <Link
             className={`link ${pathname === '/documentacioninterna' ? 'active' : ''}`}
-            to="/documentacioninterna" >
+            to="/documentacioninterna">
             Documentación interna
           </Link>
 
@@ -41,14 +59,16 @@ export default function Navigation ({}){
             { showList &&
               <div className='dropdownlist'>
                 <div className='info'>
-                  <p className='username'>Administrator user</p>
-                  <p className='email'>correo@correo.com</p>
+                  <p className='username'>{ user?.Name }</p>
+                  <p className='email'>{ user?.Email }</p>
                 </div>
 
-                <Link to='login' className='logout'>
-                  <img src="/img/logout.svg" alt="logout"/>
-                  <p className='close'>Cerrar sesión</p>
-                </Link>
+                <Form className='logout' method='post' action='/'>
+                  <button className='button' type='submit'>
+                    <img src="/img/logout.svg" alt="logout"/>
+                    <p>Cerrar sesión</p>
+                  </button>
+                </Form>
               </div>
             }
           </div>

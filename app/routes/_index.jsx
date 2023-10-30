@@ -1,5 +1,10 @@
-import { Link } from "@remix-run/react";
-import styles from '../styles/inicio.css'
+import {useEffect} from "react";
+import {Link, useNavigate} from "@remix-run/react";
+
+import Logo from '../components/logo';
+
+import styles from '../styles/inicio.css';
+import {authenticator} from "../auth/auth.server";
 
 export const meta = () => {
   return [
@@ -17,37 +22,58 @@ export function links(){
   ]
 }
 
+export async function loader({ request }){
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+}
+
 export default function Index() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('TOKEN');
+    if(!token){
+      navigate('/login');
+    }
+  }, []);
+
+
   return (
-      <div className="container home">
-        <p className="title">Grupo Sosa Morales</p>
-        <p className="subtitle">Notaria - Abogacia - Asesoria - Bienes raices</p>
+    <div className="container home">
+      <Logo/>
 
-          <div className="panels">
-            <Link to="/clientes" className="panel">
-              <img src="/img/users-group.svg" alt="user-group"/>
-              <h4>Clientes</h4>
-              <p>Gestiona tus clientes desde aqui.</p>
-            </Link>
+      <div className="panels">
+        <Link to="/clientes" className="panel">
+          <img src="/img/users-group.svg" alt="user-group"/>
+          <h4>Clientes</h4>
+          <p>Gestiona tus clientes desde aqui.</p>
+        </Link>
 
-            <Link to="/materias" className="panel">
-              <img src="/img/category.svg" alt="category"/>
-              <h4>Materias</h4>
-              <p>Busca documentos de clientes según las materias disponibles</p>
-            </Link>
+        <Link to="/citas" className="panel">
+          <img src="/img/calendar-event.svg" alt="calendar"/>
+          <h4>Citas</h4>
+          <p>Gestiona todas tus citas desde aqui.</p>
+        </Link>
 
-            <Link to="/documentacioninterna" className="panel">
-              <img src="/img/category-2.svg" alt="category-2"/>
-              <h4>Documentación interna</h4>
-              <p>Gestiona tu documentación interna</p>
-            </Link>
+        <Link to="/materias" className="panel">
+          <img src="/img/category.svg" alt="category"/>
+          <h4>Materias</h4>
+          <p>Busca documentos de clientes según las materias disponibles</p>
+        </Link>
 
-            <Link to="/nosotros" className="panel">
-              <img src="/img/info-octagon.svg" alt="info"/>
-              <h4>A cerca de</h4>
-              <p>Gestiona tus subcategorias desde aqui.</p>
-            </Link>
-          </div>
+        <Link to="/documentacioninterna" className="panel">
+          <img src="/img/file-description.svg" alt="category-2"/>
+          <h4>Documentación interna</h4>
+          <p>Gestiona tu documentación interna</p>
+        </Link>
+
+        <Link to="/nosotros" className="panel">
+          <img src="/img/info-octagon.svg" alt="info"/>
+          <h4>A cerca de</h4>
+          <p>Conoce mas sobre el software.</p>
+        </Link>
       </div>
+    </div>
   );
 }

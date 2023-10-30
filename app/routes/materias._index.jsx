@@ -8,10 +8,11 @@ import Subject from "../components/subject";
 import Spinner from "../components/spinner";
 
 //Server actions
-import { getSubjects, addSubject, updateSubject } from "../models/subject.server";
+import { getSubjects, addSubject, updateSubject } from "../services/subject.server";
 
 //Styles
 import clientStyle from '~/styles/clientes.css'
+import {authenticator} from "../auth/auth.server";
 
 
 export function links(){
@@ -23,7 +24,11 @@ export function links(){
   ]
 }
 
-export async function loader(){
+export async function loader({ request }){
+  await authenticator.isAuthenticated(request, {
+    failureRedirect: "/login",
+  });
+
   return await getSubjects()
 }
 
@@ -103,7 +108,7 @@ export default function Materias (){
 
   const searchSubjects = ( event ) => {
     const value = event.target.value.toString().toLowerCase()
-    const actualizedSubjects= loader.filter( subject => subject.Name.toLowerCase().includes(value) );
+    const actualizedSubjects= loader?.filter( subject => subject.Name.toLowerCase().includes(value) );
     setSubjects( actualizedSubjects );
   }
 
@@ -242,9 +247,17 @@ export default function Materias (){
               />
             )
           :
-            <div className='center'>
-              <Spinner/>
-            </div>
+            loader?.length === 0
+              ?
+              <p className='no-found'>Aún no hay materias registrados</p>
+              :
+              loader?.length > 0 && subjects.length === 0
+                ?
+                <p className='no-found'>No se pudieron encontrar materias</p>
+                :
+                <div className='center'>
+                  <Spinner/>
+                </div>
         }
       </div>
     </div>
