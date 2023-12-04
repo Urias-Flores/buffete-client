@@ -6,7 +6,7 @@ import Input from "./input";
 import Dropdownlist from "./dropdownlist";
 import Spinner from "./spinner";
 
-export default function FormDate ({ date = {}, clients = [], users = [], errors = {}, setShowFormDate}){
+export default function FormDate ({ currentUser = null, date = {}, clients = [], users = [], errors = {}, setShowFormDate}){
   const dateID = date?.DateID;
   const [issue, setIssue] = useState('');
   const [datetime, setDatetime] = useState(new Date());
@@ -36,12 +36,17 @@ export default function FormDate ({ date = {}, clients = [], users = [], errors 
             error={errors?.issue}
           />
 
-          <Dropdownlist
-            title='Abogado a cargo'
-            name='user'
-            items={users}
-            error={errors?.user}
-          />
+          { currentUser !== null
+            ?
+              <input type="hidden" name='user' value={currentUser.UserID}/>
+            :
+              <Dropdownlist
+                title='Abogado a cargo'
+                name='user'
+                items={users}
+                error={errors?.user}
+              />
+          }
 
           <Dropdownlist
             title='Cliente'

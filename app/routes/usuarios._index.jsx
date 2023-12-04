@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import {useActionData, useLoaderData} from "@remix-run/react";
 
-import {createPreviousUser, getUsers} from "../services/user.server";
+//Server
+import {createPreviousUser, deleteUser, getUsers, getUsersByID, updateUser} from "../services/user.server";
 import { authenticator } from "../auth/auth.server";
 
+//Components
 import User from '../components/user';
 import Spinner from "../components/spinner";
 import ModalCodeMessage from "../components/modalCodeMessage";
@@ -25,20 +27,61 @@ export async function action({ request }){
   const form = await request.formData();
   const currentAction = form.get('action');
 
-  switch ( currentAction ){
-    case 'CREATE-USER':
-      const token = form.get('Token');
-      const accessLevelSelected = form.get('AccessLevel');
+  if(currentAction){
+    switch ( currentAction ){
+      case 'CREATE-USER':
+        const token = form.get('Token');
+        const accessLevelSelected = form.get('AccessLevel');
 
-      const result = await createPreviousUser(token, accessLevelSelected);
+        const result = await createPreviousUser(token, accessLevelSelected);
 
-      return {
-        STATUS: 'CODE-SAVE',
-        RESULT: result,
-        ERROR: '',
-      }
-    default:
-      throw new Error('Invalid selected option')
+        return {
+          STATUS: 'CODE-SAVE',
+          RESULT: result,
+          ERROR: '',
+        }
+      default:
+        throw new Error('Invalid option')
+    }
+  } else {
+    const userID = form.get('UserID');
+    switch (request.method) {
+      case 'PUT':
+        const userInactivated = await getUsersByID(userID)
+        const inactivatedUser = {
+          UserID: userID,
+          State: userInactivated.State === 1 ? 0 : 1,
+        }
+
+        const resultUpdate = await updateUser(inactivatedUser)
+        return {
+          STATUS: 'USER STATE CHANGE',
+          RESULT: resultUpdate,
+          ERROR: '',
+        }
+      case 'DELETE':
+        const user = await getUsersByID(userID);
+        if(user?.Documents.length > 0
+        || user?.Dates.length > 0
+        || user?.InternalDocuments.length > 0
+        || user?.Subjects.length > 0
+        || user?.Clients.length > 0){
+          return {
+            STATUS: 'USER HAVE DATA',
+            RESULT: null,
+            ERROR: '',
+          }
+        }
+
+        const resultDeleted = await deleteUser(userID);
+        return {
+          STATUS: 'DELETED',
+          RESULT: resultDeleted,
+          ERROR: '',
+        }
+      default:
+        throw new Error('Invalid method')
+    }
   }
 }
 
@@ -49,7 +92,13 @@ export default function Usuarios (){
 
   //Modal states
   const [addUserStep, setAddUserStep] = useState(0);
+  const [errorSelectedMessage, showErrorSelectedMessage] = useState(false);
   const [showMessageAddUser, setShowMessageAddUser] = useState(false);
+  const [showMessageDeleteUser, setShowMessageDeleteUser] = useState(false);
+  const [showMessageEnableUser, setShowMessageEnableUser] = useState(false);
+  const [showMessageUserDeleted, setShowMessageUserDeleted] = useState(false);
+  const [showMessageUserHavaData, setShowMessageUserHavaData] = useState(false);
+  const [showMessageUserStateChange, setShowMessageUserStateChange] = useState(false);
 
   const loader = useLoaderData()
   const action = useActionData();
@@ -62,12 +111,45 @@ export default function Usuarios (){
 
         setShowMessageAddUser(true);
         break;
+      case 'DELETED':
+        setUserSelected({});
+
+        setShowMessageUserDeleted(true);
+        setShowMessageDeleteUser(false);
+        break;
+      case 'USER HAVE DATA':
+        setUserSelected({});
+
+        setShowMessageDeleteUser(false);
+        setShowMessageUserHavaData(true);
+        break;
+      case 'USER STATE CHANGE':
+        setUserSelected({});
+
+        setShowMessageEnableUser(false);
+        setShowMessageUserStateChange(true);
     }
   }, [action]);
 
   useEffect(() => {
     setUsers(loader)
   }, [loader]);
+
+  const showEliminatedClient = () => {
+    if(Object.keys(userSelected).length <= 0){
+      showErrorSelectedMessage(true)
+    } else {
+      setShowMessageDeleteUser(true)
+    }
+  }
+
+  const showDisableUser = () => {
+    if(Object.keys(userSelected).length <= 0){
+      showErrorSelectedMessage(true)
+    } else {
+      setShowMessageEnableUser(true)
+    }
+  }
 
   const searchClient = ( event ) => {
     const value = event.target.value.toString().toLowerCase()
@@ -77,6 +159,19 @@ export default function Usuarios (){
 
   return (
     <main className='container'>
+      { errorSelectedMessage &&
+        <ModalMessage
+          features={
+            {
+              text: "Seleccione un cliente de la lista",
+              isOkCancel: false,
+              indexIcon: 0,
+              data: null
+            }
+          }
+          setVisibleMessage={ showErrorSelectedMessage }
+        />
+      }
 
       { addUserStep === 1 &&
         <ModalCodeMessage
@@ -97,13 +192,90 @@ export default function Usuarios (){
         <ModalMessage
           features={
             {
-              text: "El código generado ha sido almacenamdo exitosamente",
+              text: "El código generado ha sido almacenado exitosamente",
               isOkCancel: false,
               indexIcon: 2,
               data: null
             }
           }
           setVisibleMessage={ setShowMessageAddUser }
+        />
+      }
+
+      { showMessageDeleteUser &&
+        <ModalMessage
+          features={
+            {
+              text: "¿Esta seguro que desea eliminar el usuario seleccionado?",
+              isOkCancel: true,
+              indexIcon: 2,
+              data: {
+                name: 'UserID',
+                value: userSelected.UserID
+              }
+            }
+          }
+          setVisibleMessage={ setShowMessageDeleteUser }
+        />
+      }
+
+      { showMessageEnableUser &&
+        <ModalMessage
+          features={
+            {
+              text: `¿Esta seguro que desea ${ userSelected.State === 1 ? 'Inactivar' : 'Activar' } el usuario seleccionado?`,
+              isOkCancel: true,
+              indexIcon: 2,
+              data: {
+                method: 'PUT',
+                name: 'UserID',
+                value: userSelected.UserID
+              }
+            }
+          }
+          setVisibleMessage={ setShowMessageEnableUser }
+        />
+      }
+
+      { showMessageUserDeleted &&
+        <ModalMessage
+          features={
+            {
+              text: "El usuario ha sido eliminado exitosamente",
+              isOkCancel: false,
+              indexIcon: 2,
+              data: null
+            }
+          }
+          setVisibleMessage={ setShowMessageUserDeleted }
+        />
+      }
+
+      { showMessageUserStateChange &&
+        <ModalMessage
+          features={
+            {
+              text: `El usuario ha sido ${ userSelected.State === 1 ? 'Inactivado' : 'Activado' } exitosamente`,
+              isOkCancel: false,
+              indexIcon: 2,
+              data: null
+            }
+          }
+          setVisibleMessage={ setShowMessageUserStateChange }
+        />
+      }
+
+      { showMessageUserHavaData &&
+        <ModalMessage
+          features={
+            {
+              text: "El usuario no pudo ser eliminado ya que se encontraron datos (documentos, citas, clientes, documentos internos, materias) registrados para este usuario",
+              isOkCancel: false,
+              indexIcon: 0,
+              data: null
+            }
+          }
+          setVisibleMessage={ setShowMessageUserHavaData }
         />
       }
 
@@ -139,7 +311,7 @@ export default function Usuarios (){
 
         <button
           className="button"
-          onClick={ ()=>{  } }
+          onClick={ ()=>{ showDisableUser() } }
         >
           <img src="/img/edit.svg" alt="add"/>
           <p>Inhabilitar</p>
@@ -147,7 +319,7 @@ export default function Usuarios (){
 
         <button
           className="button"
-          onClick={() => {  }}
+          onClick={() => { showEliminatedClient() }}
           type="button"
           value="Eliminar"
         >

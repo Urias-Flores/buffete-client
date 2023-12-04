@@ -7,7 +7,6 @@ import ModalMessage from "../components/modalMessage";
 import Spinner from "../components/spinner";
 
 //Server Actions
-import { getSubjectByName } from "../services/subject.server";
 import { deleteDocument } from "../services/document.server";
 import { formattedDate } from "../utils/helpers";
 
@@ -15,6 +14,7 @@ import { formattedDate } from "../utils/helpers";
 import stylesSubject from '../styles/materias.css';
 import stylesClient from '../styles/clientes.css';
 import {authenticator} from "../auth/auth.server";
+import {getSubjects} from "../services/subject.server";
 
 
 export function links(){
@@ -36,7 +36,15 @@ export async function loader({params, request}){
   });
 
   const { name } = params
-  return await getSubjectByName(name)
+
+  const subjects = getSubjects();
+  const selectedSubject = subjects.filter( subject => subject.Name === name);
+
+  if(selectedSubject.length === 0) {
+    throw new Error('Nombre de materia no valido');
+  }
+
+  return selectedSubject[0];
 }
 
 export async function action({request}){

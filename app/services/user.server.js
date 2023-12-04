@@ -1,12 +1,12 @@
 import {fetch} from "@remix-run/node";
 
 export async function getUsers(){
-  const response = await fetch(`${process.env.API_URL}/user`);
+  const response = await fetch(`${process.env.API_URL}/users`);
   return await response.json();
 }
 
 export async function getUsersByID( UserID ){
-  const response = await fetch(`${process.env.API_URL}/user/${UserID}`);
+  const response = await fetch(`${process.env.API_URL}/users/${UserID}`);
   return await response.json();
 }
 
@@ -20,7 +20,7 @@ export async function createPreviousUser(code, accessLevel){
     AccessLevel: accessLevel,
     State: 0
   }
-  const response = await fetch(`${process.env.API_URL}/user`, {
+  const response = await fetch(`${process.env.API_URL}/users`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -31,12 +31,19 @@ export async function createPreviousUser(code, accessLevel){
 }
 
 export async function updateUser(user){
-  const response = await fetch(`${process.env.API_URL}/user/${user.UserID}`, {
+  const response = await fetch(`${process.env.API_URL}/users`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
+  });
+  return await response.json();
+}
+
+export async function deleteUser(userID){
+  const response = await fetch(`${process.env.API_URL}/users/${userID}`, {
+    method: "DELETE"
   });
   return await response.json();
 }

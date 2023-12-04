@@ -144,12 +144,7 @@ export function ErrorBoundary() {
         <div className="error-page">
           <h1 className="title">Ups... Ha ocurrido un error</h1>
           <img className='image' src="/img/info-octagon.svg" alt="error"/>
-          <p className="information">
-            { error.name.toString() === 'FetchError'
-              ? 'No se ha podido establecer conexión con el servidor'
-              : 'Probablemente no se pudo establecer conexión con el servidor'
-            }
-          </p>
+          <p className="information">Error: { error.message }</p>
         </div>
       </Document>
     );

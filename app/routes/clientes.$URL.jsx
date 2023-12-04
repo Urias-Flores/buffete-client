@@ -9,8 +9,8 @@ import ModalMessage from "../components/modalMessage";
 //Server actions
 import { addDocument, deleteDocument } from "../services/document.server";
 import { getSubjects } from "../services/subject.server";
-import { getClientByURL } from "../services/client.server";
-import {authenticator} from "../auth/auth.server";
+import { getClients } from "../services/client.server";
+import { authenticator } from "../auth/auth.server";
 
 //Styles
 import styles from "../styles/clientes.css"
@@ -31,7 +31,12 @@ export async function loader({params, request}){
   });
 
   const { URL } = params
-  const client = await getClientByURL(URL);
+  const clients = await getClients();
+  const client = clients.filter( value => value.URL === URL);
+  if(client.length === 0) {
+    throw new Error('Cliente no encontrado');
+  }
+
   const subjects = await getSubjects();
   return {
     client,

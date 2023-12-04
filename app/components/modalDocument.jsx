@@ -39,7 +39,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
             }
           />
           <Document
-            file={`${context.URL_API}/${ isInternalDocument ? 'internaldocument' : 'document' }/download/${URL}`}
+            file={`${context.URL_API}/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

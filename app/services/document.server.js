@@ -1,7 +1,5 @@
-
-
 export async function addDocument( documentFormData ){
-  const response = await fetch(`${process.env.API_URL}/document`, {
+  const response = await fetch(`${process.env.API_URL}/documents`, {
     method: 'POST',
     body: documentFormData
   })
@@ -9,7 +7,7 @@ export async function addDocument( documentFormData ){
 }
 
 export async function deleteDocument(DocumentID){
-  const response = await fetch(`${process.env.API_URL}/document/${DocumentID}`, {
+  const response = await fetch(`${process.env.API_URL}/documents/${DocumentID}`, {
     method: 'DELETE',
   })
   return await response.json();

@@ -1,10 +1,10 @@
 export async function getAllDates(){
-  const response = await fetch(`${process.env.API_URL}/date`)
+  const response = await fetch(`${process.env.API_URL}/dates`)
   return await response.json();
 }
 
 export async function addDate( date ){
-  const response = await fetch(`${process.env.API_URL}/date`, {
+  const response = await fetch(`${process.env.API_URL}/dates`, {
     method: "POST",
     headers: {
       "Content-Type" : "application/json"
@@ -15,7 +15,7 @@ export async function addDate( date ){
 }
 
 export async function updateDate( date ){
-  const response = await fetch(`${process.env.API_URL}/date/${date.DateID}`, {
+  const response = await fetch(`${process.env.API_URL}/dates`, {
     method: "PUT",
     headers: {
       "Content-Type" : "application/json"
@@ -26,7 +26,7 @@ export async function updateDate( date ){
 }
 
 export async function deleteDate( DateID ){
-  const response = await fetch(`${process.env.API_URL}/date/${DateID}`, {
+  const response = await fetch(`${process.env.API_URL}/dates/${DateID}`, {
     method: "DELETE"
   });
   return await response.json();

@@ -8,7 +8,7 @@ import Cliente from "../components/client";
 import Spinner from "../components/spinner";
 
 //Server actions
-import { addClient, deleteClient, getClients, updateClient } from "../services/client.server";
+import {addClient, deleteClient, getClientByID, getClients, updateClient} from "../services/client.server";
 import { deleteDocument } from "../services/document.server";
 import { authenticator } from "../auth/auth.server";
 
@@ -127,6 +127,15 @@ export async function action({ request }){
     }
     case 'DELETE': {
       let returnedState;
+      const selectedClient = await getClientByID( clientID );
+      if (selectedClient?.Documents.length > 0 || selectedClient?.Dates.length > 0) {
+        return {
+          state: 'CLIENT HAVE DOCUMENTS',
+          data: null,
+          errors: {}
+        }
+      }
+
       if(clientID){
         returnedState = await deleteClient( clientID )
         return {
@@ -166,6 +175,7 @@ export default function Clientes (){
   const [insertedMessage, showInsertedMessage] = useState(false);
   const [updatedMessage, showUpdatedMessage] = useState(false);
   const [deleteClientMessage, showDeleteClientMessage] = useState(false);
+  const [clientHaveDocumentsMessage, showClientHaveDocumentsMessage] = useState(false);
   const [errorSelectedMessage, showErrorSelectedMessage] = useState(false);
 
   //State for client and document selection
@@ -188,6 +198,10 @@ export default function Clientes (){
       case 'CLIENT DELETED':
         setVisibleDeleteClient(false)
         showDeleteClientMessage(true)
+        break;
+      case 'CLIENT HAVE DOCUMENTS':
+        setVisibleDeleteClient(false);
+        showClientHaveDocumentsMessage(true);
         break;
       default:
         break;
@@ -313,6 +327,20 @@ export default function Clientes (){
               }
             }
             setVisibleMessage={ showDeleteClientMessage }
+          />
+        }
+
+        { clientHaveDocumentsMessage &&
+          <ModalMessage
+            features={
+              {
+                text: "El cliente no ha sido eliminado ya que se encontraron datos (documentos, citas) registrados para este cliente",
+                isOkCancel: false,
+                indexIcon: 0,
+                data: null
+              }
+            }
+            setVisibleMessage={ showClientHaveDocumentsMessage }
           />
         }
 

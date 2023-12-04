@@ -50,8 +50,8 @@ export async function action({ request }){
   const issue = form.get('issue');
   const user = form.get('user');
   const client = form.get('client');
-  const formdatetime = form.get('datetime');
-  const datetime = new Date(formdatetime);
+  const formDateTime = form.get('datetime');
+  const datetime = new Date(formDateTime);
 
   const errors = {};
   if(request.method === 'POST'){
@@ -186,6 +186,7 @@ export default function Citas (){
     <>
       { showFormDate &&
         <FormDate
+          currentUser={loader?.currentUser.AccessLevel !== 'N' ? null : loader?.currentUser}
           clients={loader?.clients}
           users={loader?.users}
           setShowFormDate={setShowFormDate}
