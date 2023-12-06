@@ -23,10 +23,12 @@ authenticator.use(
 
     const response = await login(email, password);
     switch ( response?.Result ){
-      case -1:
+      case -2:
         throw  new AuthorizationError('El correo electrónico no fue encontrado')
-      case 0:
+      case -1:
         throw  new AuthorizationError('La contraseña ingresada es incorrecta')
+      case 0:
+        throw new AuthorizationError('El usuario ingresado se encuentra inhabilitado')
       case 1:
         return response?.User
       default:

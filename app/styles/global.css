@@ -31,6 +31,10 @@ header{
     width: 85%;
 }
 
+.home{
+    margin: 8rem auto 0 auto;
+}
+
 .heading{
     font-size: 2rem;
     font-weight: 600;
@@ -460,6 +464,7 @@ input[type='datetime-local']{
     font-size: 1.1rem;
     font-weight: 400;
     margin: 0;
+    border-radius: .4rem;
 }
 
 .loading{

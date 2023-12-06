@@ -8,7 +8,7 @@ import Subject from "../components/subject";
 import Spinner from "../components/spinner";
 
 //Server actions
-import { getSubjects, addSubject, updateSubject } from "../services/subject.server";
+import { getSubjects, addSubject, updateSubject, deleteSubject } from "../services/subject.server";
 
 //Styles
 import clientStyle from '~/styles/clientes.css'
@@ -40,7 +40,7 @@ export async function action({request}){
   const errors = {}
   if(request.method === 'POST' || request.method === 'PUT'){
     if(name.length === 0){
-      errors.name = 'El nombre de la categoria es obligatorio';
+      errors.name = 'El nombre de la categoría es obligatorio';
     }
     if(name.length > 30){
       errors.name = 'El nombre no debe exceder los 30 caracteres';
@@ -70,17 +70,21 @@ export async function action({request}){
       }
     case 'PUT':
       const SubjectID = form.get('SubjectID')
-      const updatedSubject = await updateSubject( SubjectID, subject )
+      subject.SubjectID = SubjectID;
+      const updatedSubject = await updateSubject(subject);
       return {
         status: 'UPDATED',
         errors: {},
         data: updatedSubject
       }
     case 'DELETE':
+      const SubjectIDForDelete = form.get('SubjectID');
+      const deleteResponse = await deleteSubject(SubjectIDForDelete);
+
       return {
         status: 'DELETED',
         errors: {},
-        data: null
+        data: deleteResponse
       }
     default: {
       throw new Error("Unexpected action");
@@ -93,9 +97,11 @@ export default function Materias (){
 
   const [ showModalSubject, setShowModalSubject ] = useState(false);
   const [ showModalSubjectForEditing, setShowModalSubjectForEditing ] = useState(false);
+  const [ showModalSubjectDelete, setShowModalSubjectDelete ] = useState(false);
   const [ showErrorSelectedMessage, setShowErrorSelectedMessage ] = useState(false)
   const [ showInsertedMessage, setShowInsertedMessage ] = useState(false);
   const [ showUpdatedMessage, setShowUpdatedMessage ] = useState(false);
+  const [ showDeletedMessage, setShowDeletedMessage] = useState(false)
 
   const loader = useLoaderData()
   const actionResult = useActionData();
@@ -124,6 +130,14 @@ export default function Materias (){
     }
   }
 
+  const showDeleteMessage = ( ) => {
+    if(Object.keys(subjectSelected).length > 0){
+      setShowModalSubjectDelete(true)
+    } else {
+      setShowErrorSelectedMessage(true)
+    }
+  }
+
   useEffect(() => {
     switch (actionResult?.status){
       case 'INSERTED':
@@ -133,6 +147,10 @@ export default function Materias (){
       case 'UPDATED':
         setShowModalSubjectForEditing(false)
         setShowUpdatedMessage(true)
+        break;
+      case 'DELETED':
+        setShowModalSubjectDelete(false);
+        setShowDeletedMessage(true);
         break;
       default:
         break;
@@ -192,13 +210,44 @@ export default function Materias (){
         <ModalMessage
           features={
             {
-              text: "La materia ha sido modificada con exito",
+              text: "La materia ha sido modificada exitosamente",
               isOkCancel: false,
               indexIcon: 2,
               data: null
             }
           }
           setVisibleMessage={ setShowUpdatedMessage }
+        />
+      }
+
+      { showDeletedMessage &&
+        <ModalMessage
+          features={
+            {
+              text: "La materia ha sido eliminada exitosamente",
+              isOkCancel: false,
+              indexIcon: 2,
+              data: null
+            }
+          }
+          setVisibleMessage={ setShowDeletedMessage }
+        />
+      }
+
+      { showModalSubjectDelete &&
+        <ModalMessage
+          features={
+            {
+              text: "¿Esta seguro de la eliminación de la materia seleccionada?",
+              isOkCancel: true,
+              indexIcon: 1,
+              data: {
+                name: 'SubjectID',
+                value: subjectSelected?.SubjectID
+              }
+            }
+          }
+          setVisibleMessage={ setShowModalSubjectDelete }
         />
       }
 
@@ -232,6 +281,14 @@ export default function Materias (){
         >
           <img src="/img/edit.svg" alt="add"/>
           <p>Editar materia</p>
+        </button>
+
+        <button
+          className="button"
+          onClick={ ()=>{ showDeleteMessage(true) } }
+        >
+          <img src="/img/x.svg" alt="delete"/>
+          <p>Eliminar materia</p>
         </button>
       </div>
 

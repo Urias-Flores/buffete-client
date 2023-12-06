@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ModalDocument from "./modalDocument";
-import { Link } from "@remix-run/react";
+import {Link, useOutletContext} from "@remix-run/react";
 
 export default function SelectDocument  ({ document, setShowFormDeletedMessage, setSelectedDocument }){
 
@@ -8,6 +8,7 @@ export default function SelectDocument  ({ document, setShowFormDeletedMessage, 
 
   const [showModalDocument, setShowModalDocument] = useState(false);
 
+  const context = useOutletContext();
 
   return (
     <div className='subject-document'>
@@ -23,7 +24,7 @@ export default function SelectDocument  ({ document, setShowFormDeletedMessage, 
       >
         <p onClick={ () => { setShowModalDocument(true) } }>{ Name }</p>
         <p className='actions'>
-          <Link to={`http://localhost:3001/api/document/download/${URL}`}>
+          <Link to={`${context.URL_API}/documents/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="trash"

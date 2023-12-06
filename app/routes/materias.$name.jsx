@@ -37,7 +37,7 @@ export async function loader({params, request}){
 
   const { name } = params
 
-  const subjects = getSubjects();
+  const subjects = await getSubjects();
   const selectedSubject = subjects.filter( subject => subject.Name === name);
 
   if(selectedSubject.length === 0) {
