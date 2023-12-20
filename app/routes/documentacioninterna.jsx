@@ -21,15 +21,23 @@ export async function action({ request }){
   const InternalDocumentID = form.get('InternalDocumentID');
   const name = form.get('Name');
   const file = form.get('File');
+  const internalFiles = await getInternalDocuments();
 
   const errors = {}
   if(request.method === 'POST'){
+    //Name validation
     if(name.length === 0){
       errors.name = 'El titulo del documento es obligatorio';
     }
     if(name.length > 80){
       errors.name = 'El titulo del documento no puede exceder las 80 letras';
     }
+    const coincidentNames = internalFiles.filter( internalFile => internalFile.Name.toLowerCase() === name.toLowerCase() );
+    if(coincidentNames.length > 0) {
+      errors.name = 'Ya existe un documento registrado con el nombre descrito'
+    }
+
+    //File validation
     if(!file){
       errors.file = 'Debe seleccionar un documento';
     }
@@ -155,13 +163,15 @@ export default function Documentacioninterna (){
       <h1 className="heading">Documentación interna</h1>
       <h2 className="subheading">Gestiona toda la documentacion interna del buffete</h2>
 
-      <div className="search">
-        <img src="/img/search.svg" alt="search"/>
-        <input
-          onChange={ (event) => { searchInternalDocument(event) }}
-          type="text"
-          placeholder="Buscar"
-        />
+      <div className='top-options'>
+        <div className="search">
+          <img src="/img/search.svg" alt="search"/>
+          <input
+            onChange={ (event) => { searchInternalDocument(event) }}
+            type="text"
+            placeholder="Buscar"
+          />
+        </div>
       </div>
 
       <div className='actions'>

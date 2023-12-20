@@ -3,8 +3,9 @@ import { useState } from "react";
 import Dropdownlist from "./dropdownlist";
 import { accessLevel } from "../utils/helpers";
 
-export default function ModalCodeMessage ({ setStep, accessLevelSelected, setAccessLevelSelected }){
+export default function ModalCodeMessage ({ currentUser, setStep, accessLevelSelected, setAccessLevelSelected }){
   const [error, setError] = useState('')
+
 
   const validateAccessLevelSelected = () => {
     if( accessLevelSelected === -1) {
@@ -40,7 +41,7 @@ export default function ModalCodeMessage ({ setStep, accessLevelSelected, setAcc
             <Dropdownlist
               title='Nivel de acceso otorgado'
               name='user'
-              items={ accessLevel }
+              items={ currentUser?.AccessLevel === 'R' ? accessLevel : [accessLevel[0]] }
               error=''
               setItemSelected={ setAccessLevelSelected }
             />

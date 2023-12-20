@@ -286,10 +286,14 @@ header{
     padding: .6rem;
     outline: none;
     cursor: pointer;
-    border: none;
+    border: 1px solid rgb(255, 255, 255, 0);
     border-radius: .7rem;
-    transition: backdrop-filter 200ms;
+    transition: backdrop-filter 200ms, border 500ms;
     font-weight: normal;
+}
+
+.button:hover{
+    border: 1px solid rgb(255, 255, 255, 1);
 }
 
 .button.center{
@@ -806,4 +810,22 @@ input[type='datetime-local']{
     background-color: rgb(255, 255, 255, 0.2);
     margin-right: 1rem;
     font-weight: bold;
+}
+
+.state{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.point{
+    width: .7rem;
+    height: .7rem;
+    border-radius: 999px;
+    background-color: red;
+    transition: background-color 500ms;
+}
+
+.point.active{
+    background-color: green;
 }

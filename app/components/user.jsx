@@ -1,7 +1,7 @@
 import {Link} from "@remix-run/react";
 
 export default function User ({ user, userSelected, setUserSelected }){
-  const { UserID, Name, Email, URL } = user
+  const { UserID, Name, Email, State, URL } = user
 
   return (
     <div className="item-list">
@@ -9,7 +9,13 @@ export default function User ({ user, userSelected, setUserSelected }){
         <img src="/img/user-circle.svg" alt="user"/>
         <div className="item-information">
           <h4>{Name}</h4>
-          <p>{Email}</p>
+          <div>
+            <p>{Email}</p>
+            <div className='state'>
+              <div className={`point ${State === 0 ? '' : 'active'}`}></div>
+              <p>{State === 1 ? 'Habilitado' : 'Inhabilitado'}</p>
+            </div>
+          </div>
         </div>
       </Link>
 

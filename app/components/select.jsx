@@ -1,7 +1,6 @@
 import SelectItem from "./select-item";
 
-export default function Select ({ id, title, items = [], urlPrefix, showSelect, setShowSelect }){
-
+export default function Select ({ id, title, items = [], urlPrefix, type, showSelect, setShowSelect }){
   return (
     <div className='record-subject'>
       <div
@@ -25,9 +24,10 @@ export default function Select ({ id, title, items = [], urlPrefix, showSelect, 
         { items?.length > 0 ?
           items.map( item =>
             <SelectItem
-              key={ item.ClientID }
+              key={ item.ClientID || item.DocumentID }
               title={ item.Name }
-              url={ `/${urlPrefix}/${item.URL}` }
+              type={type}
+              url={ item.DocumentID ? item.URL : `/${urlPrefix}/${item.URL}` }
             />
           )
           :

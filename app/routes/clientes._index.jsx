@@ -37,6 +37,7 @@ export async function loader({ request }) {
 export async function action({ request }){
   const form = await request.formData();
   const currentUser = await authenticator.isAuthenticated(request);
+  const clients = await getClients();
 
   const clientID = form.get('ClientID')
   const documentID = form.get('DocumentID')
@@ -66,6 +67,10 @@ export async function action({ request }){
     if(identity.length > 13 || identity.length < 13){
       errors.identity = 'La identidad debe contener 13 caracteres'
     }
+    const coincidentIdentities = clients.filter( client => client.Identity.toLowerCase() === identity.toLowerCase())
+    if(coincidentIdentities.length > 0){
+      errors.identity = 'Ya existe un cliente registrado con esta identidad'
+    }
 
     //Phone number validation
     if(phone.length !== 8 && phone.length !== 11){
@@ -73,6 +78,10 @@ export async function action({ request }){
     }
     if(phone.length === 0){
       errors.phone = 'El numero telefónico es obligatorio'
+    }
+    const coincidentPhone = clients.filter( client => client.Phone.toLowerCase() === phone.toLowerCase())
+    if(coincidentPhone.length > 0){
+      errors.phone = 'Ya existe un cliente registrado con este numéro telefónico'
     }
 
     //Email validation
@@ -82,6 +91,10 @@ export async function action({ request }){
     }
     if(email.length === 0){
       errors.email = 'El correo electrónico es obligatorio'
+    }
+    const coincidentEmail = clients.filter( client => client.Email.toLowerCase() === email.toLowerCase())
+    if(coincidentEmail.length > 0){
+      errors.email = 'Ya existe un cliente registrado con este correo electrónico'
     }
 
     //Address validation

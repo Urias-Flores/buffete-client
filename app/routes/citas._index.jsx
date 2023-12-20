@@ -247,18 +247,6 @@ export default function Citas (){
         />
       }
 
-      { showUpdatedMessage &&
-        <ModalMessage
-          features={{
-            text: "La cita ha sido marcada como realizada",
-            isOkCancel: false,
-            indexIcon: 2,
-            data: null
-          }}
-          setVisibleMessage={setShowUpdatedMessage}
-        />
-      }
-
       <div className='container'>
         <h1 className='heading'>Citas</h1>
         <p className='subheading'>Aquí veras todas las citas tanto pendientes como las realizadas anteriormente</p>

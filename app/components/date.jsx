@@ -6,7 +6,7 @@ export default function Date ({ date, selectedDate, setSelectedDate }){
   return (
     <div
       className={`date ${selectedDate.DateID === DateID ? 'active' : ''}`}
-      onClick={ () => { setSelectedDate( date ) } }
+      onClick={ () => { setSelectedDate( date?.DateID === selectedDate?.DateID ? {} : date) } }
     >
       <div>
         <div className='date-issue'>
@@ -37,7 +37,10 @@ export default function Date ({ date, selectedDate, setSelectedDate }){
 
           <div className='information-item'>
             <span>Estado actual</span>
-            <p>{State === 'P' ? 'Pendiente' : 'Realizada'}</p>
+            <div className='state'>
+              <div className={`point ${State === 'P' ? '' : 'active'}`}></div>
+              <p>{State === 'P' ? 'Pendiente' : 'Realizada'}</p>
+            </div>
           </div>
         </div>
       </div>

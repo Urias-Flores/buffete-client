@@ -3,6 +3,11 @@ export async function getSubjects(){
   return await response.json()
 }
 
+export async function getSubjectByID(SubjectID){
+  const response = await fetch(`${process.env.API_URL}/subjects/${SubjectID}`)
+  return await response.json();
+}
+
 export async function addSubject( subject ){
   const response = await fetch(`${process.env.API_URL}/subjects`, {
     method: 'POST',

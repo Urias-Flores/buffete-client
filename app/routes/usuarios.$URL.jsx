@@ -33,11 +33,12 @@ export async function loader({ params }){
 }
 
 export default function UsuariosURL (){
-  const [showSelect, setShowSelect] = useState()
+  const [showClients, setShowClients] = useState()
+  const [showDocuments, setShowDocuments] = useState();
 
   const loader = useLoaderData();
 
-  const { Name, Email, Phone, State, AccessLevel } = loader?.User;
+  const { Name, Email, Phone, State, AccessLevel, Clients, Documents } = loader?.User;
 
   const accessLevel = {
     'A': 'Usuario administrador',
@@ -73,7 +74,10 @@ export default function UsuariosURL (){
             </div>
             <div className="item">
               <p>Estado actual:</p>
-              <b>{ State === 1 ? 'Activo' : 'Inactivo' }</b>
+              <div className='state'>
+                <div className={`point ${ State === 1 ? 'active' : ''}`}></div>
+                <b>{ State === 1 ? 'Habilitado' : 'Inhabilitado' }</b>
+              </div>
             </div>
           </div>
         </section>
@@ -85,10 +89,20 @@ export default function UsuariosURL (){
             <Select
               id={1}
               title={'Clientes'}
-              items={loader?.Clients}
+              items={Clients}
               urlPrefix={'clientes'}
-              showSelect={showSelect}
-              setShowSelect={setShowSelect}
+              showSelect={showClients}
+              setShowSelect={setShowClients}
+            />
+
+            <Select
+              id={2}
+              title={'Documentos'}
+              items={Documents}
+              type='BUTTON'
+              urlPrefix={'documentos'}
+              showSelect={showDocuments}
+              setShowSelect={setShowDocuments}
             />
           </div>
         </section>

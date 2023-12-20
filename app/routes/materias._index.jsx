@@ -8,7 +8,7 @@ import Subject from "../components/subject";
 import Spinner from "../components/spinner";
 
 //Server actions
-import { getSubjects, addSubject, updateSubject, deleteSubject } from "../services/subject.server";
+import {getSubjects, addSubject, updateSubject, deleteSubject, getSubjectByID} from "../services/subject.server";
 
 //Styles
 import clientStyle from '~/styles/clientes.css'
@@ -36,6 +36,7 @@ export async function action({request}){
   const form = await request.formData();
 
   const name = form.get('Name');
+  const subjects = await getSubjects();
 
   const errors = {}
   if(request.method === 'POST' || request.method === 'PUT'){
@@ -44,6 +45,10 @@ export async function action({request}){
     }
     if(name.length > 30){
       errors.name = 'El nombre no debe exceder los 30 caracteres';
+    }
+    const coincidentName = subjects.filter( subject => subject.Name.toLowerCase() === name.toLowerCase() )
+    if(coincidentName.length > 0){
+      errors.name = 'Ya existe una categoría con el nombre descrito'
     }
   }
 
@@ -79,6 +84,20 @@ export async function action({request}){
       }
     case 'DELETE':
       const SubjectIDForDelete = form.get('SubjectID');
+
+      //Verificando que la materia no tenga documentos vinculados
+      const subjectTarget= await getSubjectByID(SubjectIDForDelete);
+
+      console.log(subjectTarget);
+
+      if( subjectTarget?.Documents.length > 0){
+        return {
+          status: 'SUBJECT HAVE DOCUMENTS',
+          errors: {},
+          data: null
+        }
+      }
+
       const deleteResponse = await deleteSubject(SubjectIDForDelete);
 
       return {
@@ -98,7 +117,8 @@ export default function Materias (){
   const [ showModalSubject, setShowModalSubject ] = useState(false);
   const [ showModalSubjectForEditing, setShowModalSubjectForEditing ] = useState(false);
   const [ showModalSubjectDelete, setShowModalSubjectDelete ] = useState(false);
-  const [ showErrorSelectedMessage, setShowErrorSelectedMessage ] = useState(false)
+  const [ showErrorSelectedMessage, setShowErrorSelectedMessage ] = useState(false);
+  const [ showErrorEliminationMessage, setShowErrorEliminationMessage] = useState(false);
   const [ showInsertedMessage, setShowInsertedMessage ] = useState(false);
   const [ showUpdatedMessage, setShowUpdatedMessage ] = useState(false);
   const [ showDeletedMessage, setShowDeletedMessage] = useState(false)
@@ -152,6 +172,10 @@ export default function Materias (){
         setShowModalSubjectDelete(false);
         setShowDeletedMessage(true);
         break;
+      case 'SUBJECT HAVE DOCUMENTS':
+        setShowModalSubjectDelete(false);
+        setShowErrorEliminationMessage(true);
+        break;
       default:
         break;
     }
@@ -189,6 +213,20 @@ export default function Materias (){
             }
           }
           setVisibleMessage={ setShowErrorSelectedMessage }
+        />
+      }
+
+      { showErrorEliminationMessage &&
+        <ModalMessage
+          features={
+            {
+              text: "La materia no ha sido eliminada ya que se encontraron datos (documentos) vinculados a la materia",
+              isOkCancel: false,
+              indexIcon: 0,
+              data: null
+            }
+          }
+          setVisibleMessage={ setShowErrorEliminationMessage }
         />
       }
 
@@ -256,13 +294,15 @@ export default function Materias (){
         Gestiona las listas disponibles en la plataforma creando nuevas materias.
       </h2>
 
-      <div className="search">
-        <img src="/img/search.svg" alt="search"/>
-        <input
-          type="text"
-          placeholder="Buscar"
-          onChange={ (event) => { searchSubjects(event) } }
-        />
+      <div className='top-options'>
+        <div className="search">
+          <img src="/img/search.svg" alt="search"/>
+          <input
+            type="text"
+            placeholder="Buscar"
+            onChange={ (event) => { searchSubjects(event) } }
+          />
+        </div>
       </div>
 
       <div className="actions">

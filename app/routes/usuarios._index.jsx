@@ -20,7 +20,11 @@ export async function loader({ request }){
     throw new Error('Acceso no permitido')
   }
 
-  return users.filter( user => currentUser.UserID !== user.UserID && user.Name.length > 0)
+  return {
+    currentUser: currentUser,
+    users: users.filter( user => currentUser.UserID !== user.UserID && user.Name.length > 0)
+  }
+
 }
 
 export async function action({ request }){
@@ -100,7 +104,7 @@ export default function Usuarios (){
   const [showMessageUserHavaData, setShowMessageUserHavaData] = useState(false);
   const [showMessageUserStateChange, setShowMessageUserStateChange] = useState(false);
 
-  const loader = useLoaderData()
+  const loader = useLoaderData();
   const action = useActionData();
 
   useEffect(() => {
@@ -132,7 +136,7 @@ export default function Usuarios (){
   }, [action]);
 
   useEffect(() => {
-    setUsers(loader)
+    setUsers(loader?.users)
   }, [loader]);
 
   const showEliminatedClient = () => {
@@ -153,7 +157,7 @@ export default function Usuarios (){
 
   const searchClient = ( event ) => {
     const value = event.target.value.toString().toLowerCase()
-    const actualizedUsers = loader?.filter( user => user.Name.toLowerCase().includes(value) );
+    const actualizedUsers = loader?.users?.filter( user => user.Name.toLowerCase().includes(value) );
     setUsers( actualizedUsers );
   }
 
@@ -175,6 +179,7 @@ export default function Usuarios (){
 
       { addUserStep === 1 &&
         <ModalCodeMessage
+          currentUser={loader?.currentUser}
           setStep={ setAddUserStep }
           accessLevelSelected={ accessLevelSelected }
           setAccessLevelSelected={ setAccessLevelSelected }
@@ -251,19 +256,7 @@ export default function Usuarios (){
         />
       }
 
-      { showMessageUserStateChange &&
-        <ModalMessage
-          features={
-            {
-              text: `El usuario ha sido ${ userSelected.State === 1 ? 'Inactivado' : 'Activado' } exitosamente`,
-              isOkCancel: false,
-              indexIcon: 2,
-              data: null
-            }
-          }
-          setVisibleMessage={ setShowMessageUserStateChange }
-        />
-      }
+
 
       { showMessageUserHavaData &&
         <ModalMessage
@@ -341,11 +334,11 @@ export default function Usuarios (){
               />
             )
             :
-            loader?.length === 0
+            loader?.users?.length === 0
               ?
               <p className='no-found'>Aún no hay usuarios registrados</p>
               :
-              loader?.length > 0 && users.length === 0
+              loader?.users?.length > 0 && users.length === 0
                 ?
                 <p className='no-found'>No se pudieron encontrar usuarios</p>
                 :
