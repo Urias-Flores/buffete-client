@@ -27,7 +27,7 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
         </div>
 
         <div className='actions'>
-          <Link to={`${context.URL_API}/internaldocument/download/${URL}`}>
+          <Link to={`http://localhost:8000/internaldocument/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="download"

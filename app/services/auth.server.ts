@@ -4,7 +4,7 @@ export async function login( username: string, password: string ){
     Password: password
   }
 
-  const response = await fetch(`${process.env.API_URL}/auth`, {
+  const response = await fetch(`http://localhost:8000/api/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

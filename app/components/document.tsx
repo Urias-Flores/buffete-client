@@ -28,7 +28,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
         </div>
 
         <div className='actions'>
-          <Link to={`${context.URL_API}/document/download/${URL}`}>
+          <Link to={`http://localhost:8000/document/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="square"
