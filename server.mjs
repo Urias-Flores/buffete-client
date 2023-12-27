@@ -1,7 +1,7 @@
-import { createRequestHandler } from "@remix-run/express";
-import fs from 'fs';
-import https from 'https';
-import express from "express";
+const { createRequestHandler } = require("@remix-run/express");
+const fs = require ('fs');
+const https = require('https');
+const express = require("express");
 
 // notice that the result of `remix build` is "just a module"
 import * as build from "./build/index.js";
