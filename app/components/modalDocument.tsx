@@ -39,7 +39,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
             }
           />
           <Document
-            file={`http://localhost:8000/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
+            file={`https://ufsofts.com/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'
