@@ -4,7 +4,7 @@ const https = require('https');
 const express = require("express");
 
 // notice that the result of `remix build` is "just a module"
-import * as build from "./build/index.js";
+const build =  require('./build/index.js');
 
 const app = express();
 app.use(express.static("public"));
@@ -22,7 +22,7 @@ const credentials = {
 app.all("*", createRequestHandler({ build }));
 
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(3000, () => {
+httpsServer.listen(443, () => {
     console.log('Inited server');
     console.log('port: 443');
 });
