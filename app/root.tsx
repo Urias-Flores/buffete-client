@@ -1,6 +1,6 @@
-import Navigation from "~/components/navigation";
-import stylesNormalize from "~/styles/normalize.css"
-import stylesGlobal from "~/styles/global.css"
+import Navigation from "./components/navigation";
+import stylesNormalize from "./styles/normalize.css";
+import stylesGlobal from "./styles/global.css";
 import textLayer from 'react-pdf/dist/esm/Page/TextLayer.css';
 import annotationLayer from'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
