@@ -22,7 +22,7 @@ const credentials = {
 app.all("*", createRequestHandler({ build }));
 
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(3000, () => {
+httpsServer.listen(443, () => {
     console.log('Inited server');
     console.log('port: 443');
 });
