@@ -1,10 +1,10 @@
 export async function getAllDates(){
-  const response = await fetch(`https://ufsofts.com:8000/api/dates`)
+  const response = await fetch(`http://localhost:8000/api/dates`)
   return await response.json();
 }
 
 export async function addDate( date: any ){
-  const response = await fetch(`https://ufsofts.com:8000/api/dates`, {
+  const response = await fetch(`http://localhost:8000/api/dates`, {
     method: "POST",
     headers: {
       "Content-Type" : "application/json"
@@ -15,7 +15,7 @@ export async function addDate( date: any ){
 }
 
 export async function updateDate( date: any ){
-  const response = await fetch(`https://ufsofts.com:8000/api/dates`, {
+  const response = await fetch(`http://localhost:8000/api/dates`, {
     method: "PUT",
     headers: {
       "Content-Type" : "application/json"
@@ -26,7 +26,7 @@ export async function updateDate( date: any ){
 }
 
 export async function deleteDate( DateID: any ){
-  const response = await fetch(`https://ufsofts.com:8000/api/dates/${DateID}`, {
+  const response = await fetch(`http://localhost:8000/api/dates/${DateID}`, {
     method: "DELETE"
   });
   return await response.json();

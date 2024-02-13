@@ -67,10 +67,13 @@ export async function action({ request }: any){
     if(identity.length > 13 || identity.length < 13){
       errors.identity = 'La identidad debe contener 13 caracteres'
     }
-    const coincidentIdentities = clients.filter( (client: { Identity: string; }) => client.Identity.toLowerCase() === identity.toLowerCase())
-    if(coincidentIdentities.length > 0){
-      errors.identity = 'Ya existe un cliente registrado con esta identidad'
+    if(request.method === 'POST'){
+      const coincidentIdentities = clients.filter( (client: { Identity: string; }) => client.Identity.toLowerCase() === identity.toLowerCase())
+      if(coincidentIdentities.length > 0){
+        errors.identity = 'Ya existe un cliente registrado con esta identidad'
+      }
     }
+    
 
     //Phone number validation
     if(phone.length !== 8 && phone.length !== 11){
@@ -79,9 +82,11 @@ export async function action({ request }: any){
     if(phone.length === 0){
       errors.phone = 'El numero telefónico es obligatorio'
     }
-    const coincidentPhone = clients.filter( (client: { Phone: string; }) => client.Phone.toLowerCase() === phone.toLowerCase())
-    if(coincidentPhone.length > 0){
-      errors.phone = 'Ya existe un cliente registrado con este numéro telefónico'
+    if(request.method === 'POST') {
+      const coincidentPhone = clients.filter( (client: { Phone: string; }) => client.Phone.toLowerCase() === phone.toLowerCase())
+      if(coincidentPhone.length > 0){
+        errors.phone = 'Ya existe un cliente registrado con este numéro telefónico'
+      }
     }
 
     //Email validation
@@ -92,9 +97,11 @@ export async function action({ request }: any){
     if(email.length === 0){
       errors.email = 'El correo electrónico es obligatorio'
     }
-    const coincidentEmail = clients.filter( (client: { Email: string; }) => client.Email.toLowerCase() === email.toLowerCase())
-    if(coincidentEmail.length > 0){
-      errors.email = 'Ya existe un cliente registrado con este correo electrónico'
+    if(request.method === 'POST') {
+      const coincidentEmail = clients.filter( (client: { Email: string; }) => client.Email.toLowerCase() === email.toLowerCase())
+      if(coincidentEmail.length > 0){
+        errors.email = 'Ya existe un cliente registrado con este correo electrónico'
+      }
     }
 
     //Address validation
@@ -357,10 +364,9 @@ export default function Clientes (){
           />
         }
 
-        <h1 className="heading">Gestiona tus clientes</h1>
+        <h1 className="heading">Clientes</h1>
         <p className="subheading">
-          Lista completa de los clientes registrados, puedes escribir y
-          filtrar para una búsqueda mas rápida.
+          Lista completa de los clientes registrados
         </p>
 
         <div className='top-options'>

@@ -22,12 +22,15 @@ export function meta(){
           title : 'Inicio'
       },
       {
-          property: 'charset',
-          content: 'utf-8'
+          charset: 'UTF-8'
       },
       {
-          property: 'viewport',
-          content: 'width=device-widht, initial-scale=1'
+          httpEquiv: 'X-UA-Compatible',
+          content: 'IE=edge'
+      },
+      {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1.0'
       }
     ]
   )

@@ -249,7 +249,7 @@ export default function Citas (){
 
       <div className='container'>
         <h1 className='heading'>Citas</h1>
-        <p className='subheading'>Aquí veras todas las citas tanto pendientes como las realizadas anteriormente</p>
+        <p className='subheading'>Aquí veras todas las citas</p>
 
         <div className='top-options'>
           <div className="search">

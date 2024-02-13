@@ -4,24 +4,49 @@ import {Form, Link, useLocation} from "@remix-run/react";
 export default function Navigation ({ user }: any){
   const { pathname } = useLocation()
   const [showList, setShowList] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <header>
       <div className="bar">
-        <Link to='/'>
-          <img src='/img/logo-only.png' alt='logo' className='logo'/>
-        </Link>
+        <div className="logo-menu">
+          <Link to='/'>
+          <img 
+            src='/img/logo-only.png' 
+            alt='logo' 
+            className='logo'
+            />
+          </Link>
+         
+          <img 
+            className='menu-icon' 
+            src='/img/menu.svg' 
+            alt='menu'
+            onClick={ () => {
+              setShowMenu(!showMenu)
+            }}
+          />
+        </div>
+        
 
-        <nav className="nav">
+        <nav className={`nav ${showMenu ? 'active' : ''}`}>
           <Link
             className={`link ${pathname === '/' ? 'active' : ''}`}
-            to="/" >
+            to="/" 
+            onClick={ () => {
+              setShowMenu(false)
+            }}
+          >
             Inicio
           </Link>
 
           <Link
             className={`link ${pathname.includes('/clientes') ? 'active' : ''}`}
-            to="/clientes" >
+            to="/clientes" 
+            onClick={ () => {
+              setShowMenu(false)
+            }}
+          >
             Clientes
           </Link>
 
@@ -29,7 +54,11 @@ export default function Navigation ({ user }: any){
             ?
             <Link
               className={`link ${pathname.includes('/usuarios') ? 'active' : ''}`}
-              to="/usuarios" >
+              to="/usuarios" 
+              onClick={ () => {
+                setShowMenu(false)
+              }}  
+            >
               Usuarios
             </Link>
             :
@@ -38,20 +67,32 @@ export default function Navigation ({ user }: any){
 
           <Link
             className={`link ${pathname.includes('/citas') ? 'active' : ''}`}
-            to="/citas" >
+            to="/citas" 
+            onClick={ () => {
+              setShowMenu(false)
+            }}
+          >
             Citas
           </Link>
 
           <Link
             className={`link ${pathname.includes('/materias') ? 'active' : ''}`}
-            to="/materias" >
+            to="/materias" 
+            onClick={ () => {
+              setShowMenu(false)
+            }}
+          >
             Materias
           </Link>
 
           <Link
             className={`link ${pathname === '/documentacioninterna' ? 'active' : ''}`}
-            to="/documentacioninterna">
-            Documentación interna
+            to="/documentacioninterna"
+            onClick={ () => {
+              setShowMenu(false)
+            }}
+          >
+            Doc. interna
           </Link>
 
           <div>

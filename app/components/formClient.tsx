@@ -26,11 +26,10 @@ export default function FormClient ({ method, errors, client = {}, setVisibleFor
           setVisibleForm={setVisibleFormClient}
         />
 
-        <h1 className="heading">{Object.keys(client).length === 0 ? 'Agregar nuevo cliente' : 'Modificar cliente' }</h1>
+        <h1 className="heading">{Object.keys(client).length === 0 ? 'Nuevo cliente' : 'Modificar cliente' }</h1>
         <h2 className="subheading">
           Ingresa toda la información del cliente para {Object.keys(client).length === 0 ? 'agregarlo' : 'modificarlo'}
         </h2>
-        <br/>
 
         <div className="inputs">
           <input name="ClientID" type="hidden" value={ClientID}/>

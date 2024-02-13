@@ -272,10 +272,9 @@ export default function Usuarios (){
         />
       }
 
-      <h1 className="heading">Gestiona los usuarios</h1>
+      <h1 className="heading">Usuarios</h1>
       <p className="subheading">
-        Lista completa de los usuarios registrados, puedes escribir y
-        filtrar para una búsqueda mas rápida.
+        Lista completa de los usuarios registrados
       </p>
 
       <div className='top-options'>
