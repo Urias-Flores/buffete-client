@@ -1,8 +1,8 @@
 import { useState } from "react";
-import {Form, Link, useLocation} from "@remix-run/react";
+import {Form, Link, useLocation, useOutlet, useOutletContext} from "@remix-run/react";
 
 export default function Navigation ({ user }: any){
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   const [showList, setShowList] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -23,7 +23,8 @@ export default function Navigation ({ user }: any){
             src='/img/menu.svg' 
             alt='menu'
             onClick={ () => {
-              setShowMenu(!showMenu)
+              setShowMenu(!showMenu);
+              setShowList(false);
             }}
           />
         </div>
@@ -95,7 +96,7 @@ export default function Navigation ({ user }: any){
             Doc. interna
           </Link>
 
-          <div>
+          <div className="current-user">
             <img src="/img/user-circle.svg" alt="user" className='user' onClick={ () => { setShowList(!showList) } }/>
             { showList &&
               <div className='dropdownlist'>

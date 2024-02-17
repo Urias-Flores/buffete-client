@@ -1,4 +1,11 @@
 var __defProp = Object.defineProperty;
+var __require = /* @__PURE__ */ ((x) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(x, {
+  get: (a, b) => (typeof require < "u" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require < "u")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: !0 });
@@ -158,7 +165,7 @@ function Navigation({ user }) {
           src: "/img/menu.svg",
           alt: "menu",
           onClick: () => {
-            setShowMenu(!showMenu);
+            setShowMenu(!showMenu), setShowList(!1);
           }
         },
         void 0,
@@ -190,7 +197,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 33,
+          lineNumber: 34,
           columnNumber: 11
         },
         this
@@ -209,7 +216,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 43,
+          lineNumber: 44,
           columnNumber: 11
         },
         this
@@ -228,7 +235,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 55,
+          lineNumber: 56,
           columnNumber: 13
         },
         this
@@ -247,7 +254,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 68,
+          lineNumber: 69,
           columnNumber: 11
         },
         this
@@ -266,7 +273,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 78,
+          lineNumber: 79,
           columnNumber: 11
         },
         this
@@ -285,69 +292,69 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 88,
+          lineNumber: 89,
           columnNumber: 11
         },
         this
       ),
-      /* @__PURE__ */ jsxDEV2("div", { children: [
+      /* @__PURE__ */ jsxDEV2("div", { className: "current-user", children: [
         /* @__PURE__ */ jsxDEV2("img", { src: "/img/user-circle.svg", alt: "user", className: "user", onClick: () => {
           setShowList(!showList);
         } }, void 0, !1, {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 99,
+          lineNumber: 100,
           columnNumber: 13
         }, this),
         showList && /* @__PURE__ */ jsxDEV2("div", { className: "dropdownlist", children: [
           /* @__PURE__ */ jsxDEV2("div", { className: "info", children: [
             /* @__PURE__ */ jsxDEV2("p", { className: "username", children: user?.Name }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 103,
+              lineNumber: 104,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ jsxDEV2("p", { className: "email", children: user?.Email }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 104,
+              lineNumber: 105,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/navigation.tsx",
-            lineNumber: 102,
+            lineNumber: 103,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ jsxDEV2(Form, { className: "logout", method: "post", action: "/", children: /* @__PURE__ */ jsxDEV2("button", { className: "button", type: "submit", children: [
             /* @__PURE__ */ jsxDEV2("img", { src: "/img/logout.svg", alt: "logout" }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 109,
+              lineNumber: 110,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ jsxDEV2("p", { children: "Cerrar sesi\xF3n" }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 110,
+              lineNumber: 111,
               columnNumber: 21
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/navigation.tsx",
-            lineNumber: 108,
+            lineNumber: 109,
             columnNumber: 19
           }, this) }, void 0, !1, {
             fileName: "app/components/navigation.tsx",
-            lineNumber: 107,
+            lineNumber: 108,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 101,
+          lineNumber: 102,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/navigation.tsx",
-        lineNumber: 98,
+        lineNumber: 99,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/navigation.tsx",
-      lineNumber: 32,
+      lineNumber: 33,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
@@ -365,7 +372,7 @@ function Navigation({ user }) {
 var normalize_default = "/build/_assets/normalize-H7PQAZ5S.css";
 
 // app/styles/global.css
-var global_default = "/build/_assets/global-4UIIQ6OT.css";
+var global_default = "/build/_assets/global-SXRFSQHQ.css";
 
 // node_modules/react-pdf/dist/esm/Page/TextLayer.css
 var TextLayer_default = "/build/_assets/TextLayer-7XZ4NHUX.css";
@@ -406,7 +413,7 @@ var sessionStorage = createCookieSessionStorage({
 
 // app/services/auth.server.ts
 async function login(username, password) {
-  return await (await fetch("http://localhost:8000/api/auth", {
+  return await (await fetch("http://ufsofts.com:8000/api/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -448,6 +455,7 @@ authenticator.use(
 );
 
 // app/root.tsx
+import { useState as useState2 } from "react";
 import { Fragment, jsxDEV as jsxDEV3 } from "react/jsx-dev-runtime";
 function meta() {
   return [
@@ -512,16 +520,17 @@ async function action({ request }) {
   });
 }
 function App() {
-  let loader13 = useLoaderData();
+  let loader13 = useLoaderData(), [showMenu, setShowMenu] = useState2(!1);
   return /* @__PURE__ */ jsxDEV3(Document, { user: loader13?.USER, children: /* @__PURE__ */ jsxDEV3(Outlet, { context: {
-    URL_API: loader13?.ENV.URL_API
+    URL_API: loader13?.ENV.URL_API,
+    menuState: [showMenu, setShowMenu]
   } }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 98,
+    lineNumber: 100,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 97,
+    lineNumber: 99,
     columnNumber: 5
   }, this);
 }
@@ -531,53 +540,62 @@ function Document({ children, user }) {
     /* @__PURE__ */ jsxDEV3("head", { children: [
       /* @__PURE__ */ jsxDEV3(Meta, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 112,
+        lineNumber: 116,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(Links, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 113,
+        lineNumber: 117,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3("title", {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 114,
+        lineNumber: 118,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 111,
+      lineNumber: 115,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV3("body", { children: [
       pathname === "/login" || pathname === "/create-account" || pathname === "/forgot-password" ? /* @__PURE__ */ jsxDEV3(Fragment, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 121,
+        lineNumber: 125,
         columnNumber: 9
-      }, this) : /* @__PURE__ */ jsxDEV3(Navigation, { user }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 122,
-        columnNumber: 9
-      }, this),
+      }, this) : /* @__PURE__ */ jsxDEV3(
+        Navigation,
+        {
+          user
+        },
+        void 0,
+        !1,
+        {
+          fileName: "app/root.tsx",
+          lineNumber: 126,
+          columnNumber: 9
+        },
+        this
+      ),
       children,
       /* @__PURE__ */ jsxDEV3(Scripts, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 125,
+        lineNumber: 131,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(LiveReload, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 126,
+        lineNumber: 132,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 117,
+      lineNumber: 121,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 110,
+    lineNumber: 114,
     columnNumber: 5
   }, this);
 }
@@ -586,31 +604,31 @@ function ErrorBoundary() {
   return isRouteErrorResponse(error) ? /* @__PURE__ */ jsxDEV3(Document, { children: /* @__PURE__ */ jsxDEV3("div", { className: "container", children: [
     /* @__PURE__ */ jsxDEV3("h1", { className: "heading", children: "Error" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 139,
+      lineNumber: 145,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV3("p", { className: "subheading", children: "Error: 404 pagina no encontrado" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 140,
+      lineNumber: 146,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 138,
+    lineNumber: 144,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 137,
+    lineNumber: 143,
     columnNumber: 7
   }, this) : error instanceof Error ? /* @__PURE__ */ jsxDEV3(Document, { children: /* @__PURE__ */ jsxDEV3("div", { className: "error-page", children: [
     /* @__PURE__ */ jsxDEV3("h1", { className: "title", children: "Ups... Ha ocurrido un error" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 148,
+      lineNumber: 154,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV3("img", { className: "image", src: "/img/info-octagon.svg", alt: "error" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 149,
+      lineNumber: 155,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV3("p", { className: "information", children: [
@@ -618,20 +636,20 @@ function ErrorBoundary() {
       error.message
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 150,
+      lineNumber: 156,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 147,
+    lineNumber: 153,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 146,
+    lineNumber: 152,
     columnNumber: 7
   }, this) : /* @__PURE__ */ jsxDEV3("h1", { children: "Unknown Error" }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 155,
+    lineNumber: 161,
     columnNumber: 12
   }, this);
 }
@@ -643,21 +661,21 @@ __export(documentacioninterna_exports, {
   default: () => Documentacioninterna,
   loader: () => loader2
 });
-import { useState as useState4, useEffect } from "react";
+import { useState as useState7, useEffect as useEffect4 } from "react";
 import { useActionData, useLoaderData as useLoaderData2 } from "@remix-run/react";
 
 // app/services/internaldocuments.server.ts
 async function getInternalDocuments() {
-  return await (await fetch("http://localhost:8000/api/internal-documents")).json();
+  return await (await fetch("http://ufsofts.com:8000/api/internal-documents")).json();
 }
 async function addInternalDocument(internalDocumentFormData) {
-  return await (await fetch("http://localhost:8000/api/internal-documents", {
+  return await (await fetch("http://ufsofts.com:8000/api/internal-documents", {
     method: "POST",
     body: internalDocumentFormData
   })).json();
 }
 async function deleteInternalDocument(InternalDocumentID) {
-  return await (await fetch(`http://localhost:8000/api/internal-documents/${InternalDocumentID}`, {
+  return await (await fetch(`http://ufsofts.com:8000/api/internal-documents/${InternalDocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -667,7 +685,7 @@ import { Form as Form2 } from "@remix-run/react";
 
 // app/components/close_button.tsx
 import { jsxDEV as jsxDEV4 } from "react/jsx-dev-runtime";
-function CloseButton({ setVisibleForm }) {
+function CloseButton({ hideModal }) {
   return /* @__PURE__ */ jsxDEV4(
     "img",
     {
@@ -675,7 +693,7 @@ function CloseButton({ setVisibleForm }) {
       className: "button-close",
       alt: "close",
       onClick: () => {
-        setVisibleForm(!1);
+        hideModal();
       }
     },
     void 0,
@@ -690,44 +708,55 @@ function CloseButton({ setVisibleForm }) {
 }
 
 // app/components/modalMessage.tsx
+import { useEffect, useState as useState3 } from "react";
 import { Fragment as Fragment2, jsxDEV as jsxDEV5 } from "react/jsx-dev-runtime";
 function ModalMessage({ features, setVisibleMessage }) {
-  let { text, indexIcon, isOkCancel, data } = features;
-  return /* @__PURE__ */ jsxDEV5("div", { className: "modal", children: /* @__PURE__ */ jsxDEV5("div", { className: "message", children: [
+  let { text, indexIcon, isOkCancel, data } = features, [beVisible, setBevisible] = useState3(!1), icon = {
+    0: "alert-triangle.svg",
+    1: "alert-circle.svg",
+    2: "progress-check.svg"
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []);
+  let hideModal = () => {
+    setBevisible(!1), setTimeout(() => {
+      setVisibleMessage(!1);
+    }, 300);
+  };
+  return /* @__PURE__ */ jsxDEV5("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV5("div", { className: "message", children: [
     /* @__PURE__ */ jsxDEV5(
       CloseButton,
       {
-        setVisibleForm: setVisibleMessage
+        hideModal
       },
       void 0,
       !1,
       {
         fileName: "app/components/modalMessage.tsx",
-        lineNumber: 17,
+        lineNumber: 33,
         columnNumber: 9
       },
       this
     ),
     /* @__PURE__ */ jsxDEV5("div", { className: "message-information", children: [
-      /* @__PURE__ */ jsxDEV5("img", { src: `/img/${{
-        0: "alert-triangle.svg",
-        1: "alert-circle.svg",
-        2: "progress-check.svg"
-      }[indexIcon]}`, alt: "reference" }, void 0, !1, {
+      /* @__PURE__ */ jsxDEV5("img", { src: `/img/${icon[indexIcon]}`, alt: "reference" }, void 0, !1, {
         fileName: "app/components/modalMessage.tsx",
-        lineNumber: 22,
+        lineNumber: 38,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV5("p", { children: text }, void 0, !1, {
         fileName: "app/components/modalMessage.tsx",
-        lineNumber: 23,
+        lineNumber: 39,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV5("div", { className: "buttons", children: isOkCancel ? /* @__PURE__ */ jsxDEV5(Fragment2, { children: [
         /* @__PURE__ */ jsxDEV5(Form2, { method: data?.method ? data.method : "DELETE", children: [
           /* @__PURE__ */ jsxDEV5("input", { name: data?.name, type: "hidden", value: data?.value }, void 0, !1, {
             fileName: "app/components/modalMessage.tsx",
-            lineNumber: 28,
+            lineNumber: 44,
             columnNumber: 19
           }, this),
           /* @__PURE__ */ jsxDEV5(
@@ -741,14 +770,14 @@ function ModalMessage({ features, setVisibleMessage }) {
             !1,
             {
               fileName: "app/components/modalMessage.tsx",
-              lineNumber: 29,
+              lineNumber: 45,
               columnNumber: 19
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/components/modalMessage.tsx",
-          lineNumber: 27,
+          lineNumber: 43,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ jsxDEV5(
@@ -757,7 +786,7 @@ function ModalMessage({ features, setVisibleMessage }) {
             className: "button",
             type: "button",
             onClick: () => {
-              setVisibleMessage(!1);
+              hideModal();
             },
             value: "Cancelar"
           },
@@ -765,14 +794,14 @@ function ModalMessage({ features, setVisibleMessage }) {
           !1,
           {
             fileName: "app/components/modalMessage.tsx",
-            lineNumber: 36,
+            lineNumber: 52,
             columnNumber: 17
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/components/modalMessage.tsx",
-        lineNumber: 26,
+        lineNumber: 42,
         columnNumber: 15
       }, this) : /* @__PURE__ */ jsxDEV5(
         "input",
@@ -780,7 +809,7 @@ function ModalMessage({ features, setVisibleMessage }) {
           className: "button",
           type: "button",
           onClick: () => {
-            setVisibleMessage(!1);
+            hideModal();
           },
           value: "Aceptar"
         },
@@ -788,65 +817,70 @@ function ModalMessage({ features, setVisibleMessage }) {
         !1,
         {
           fileName: "app/components/modalMessage.tsx",
-          lineNumber: 44,
+          lineNumber: 60,
           columnNumber: 15
         },
         this
       ) }, void 0, !1, {
         fileName: "app/components/modalMessage.tsx",
-        lineNumber: 24,
+        lineNumber: 40,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalMessage.tsx",
-      lineNumber: 21,
+      lineNumber: 37,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/modalMessage.tsx",
-    lineNumber: 16,
+    lineNumber: 32,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/modalMessage.tsx",
-    lineNumber: 15,
+    lineNumber: 31,
     columnNumber: 5
   }, this);
 }
 
 // app/components/internaldocument.tsx
-import { useState as useState3 } from "react";
-import { Link as Link2, useOutletContext as useOutletContext2 } from "@remix-run/react";
+import { useState as useState5 } from "react";
+import { Link as Link2, useOutletContext as useOutletContext4 } from "@remix-run/react";
 
 // app/components/modalDocument.tsx
 import { Document as Document2, Page, pdfjs } from "react-pdf";
-import { useState as useState2 } from "react";
-import { useOutletContext } from "@remix-run/react";
+import { useEffect as useEffect2, useState as useState4 } from "react";
+import { useOutletContext as useOutletContext3 } from "@remix-run/react";
 import { jsxDEV as jsxDEV6 } from "react/jsx-dev-runtime";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
-  let [numPages, setNumPages] = useState2(0), [pageNumber, setPageNumber] = useState2(1), onDocumentLoadSuccess = ({ numPages: numPages2 }) => {
+  let [numPages, setNumPages] = useState4(0), [pageNumber, setPageNumber] = useState4(1), [beVisible, setBevisible] = useState4(!1);
+  useEffect2(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []);
+  let hideModal = () => {
+    setBevisible(!1), setTimeout(() => {
+      setShowModalDocument(!1);
+    }, 300);
+  }, onDocumentLoadSuccess = ({ numPages: numPages2 }) => {
     setNumPages(numPages2);
   }, reduce = () => {
     pageNumber !== 1 && setPageNumber(pageNumber - 1);
   }, add = () => {
     pageNumber !== numPages && setPageNumber(pageNumber + 1);
-  }, context = useOutletContext();
-  return /* @__PURE__ */ jsxDEV6("div", { className: "modal", children: /* @__PURE__ */ jsxDEV6("div", { className: "document", children: [
+  }, context = useOutletContext3();
+  return /* @__PURE__ */ jsxDEV6("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV6("div", { className: "document", children: [
     /* @__PURE__ */ jsxDEV6(
-      "img",
+      CloseButton,
       {
-        src: "/img/x.svg",
-        className: "button-close",
-        alt: "close",
-        onClick: () => {
-          setShowModalDocument(!1);
-        }
+        hideModal: "hideModal"
       },
       void 0,
       !1,
       {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 31,
+        lineNumber: 48,
         columnNumber: 11
       },
       this
@@ -854,13 +888,13 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6(
       Document2,
       {
-        file: `http://localhost:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
+        file: `http://ufsofts.com:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
         onLoadError: console.error,
         onLoadSuccess: onDocumentLoadSuccess,
         className: "file",
         children: /* @__PURE__ */ jsxDEV6(Page, { pageNumber }, void 0, !1, {
           fileName: "app/components/modalDocument.tsx",
-          lineNumber: 47,
+          lineNumber: 58,
           columnNumber: 13
         }, this)
       },
@@ -868,7 +902,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
       !1,
       {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 41,
+        lineNumber: 52,
         columnNumber: 11
       },
       this
@@ -876,7 +910,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6("div", { className: "changerpage", children: [
       /* @__PURE__ */ jsxDEV6("img", { src: "/img/arror-left.svg", alt: "left", onClick: reduce }, void 0, !1, {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 50,
+        lineNumber: 61,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ jsxDEV6("p", { children: [
@@ -885,26 +919,26 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
         numPages
       ] }, void 0, !0, {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 51,
+        lineNumber: 62,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ jsxDEV6("img", { src: "/img/arrow-right.svg", alt: "right", onClick: add }, void 0, !1, {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 52,
+        lineNumber: 63,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalDocument.tsx",
-      lineNumber: 49,
+      lineNumber: 60,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/modalDocument.tsx",
-    lineNumber: 30,
+    lineNumber: 46,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/components/modalDocument.tsx",
-    lineNumber: 29,
+    lineNumber: 45,
     columnNumber: 7
   }, this);
 }
@@ -912,7 +946,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
 // app/components/internaldocument.tsx
 import { Fragment as Fragment3, jsxDEV as jsxDEV7 } from "react/jsx-dev-runtime";
 function InternalDocument({ InternalDocument: InternalDocument2, setSelectedDocument, setShowFormDeletedMessage }) {
-  let { Name, URL } = InternalDocument2, [showModalDocument, setShowModalDocument] = useState3(!1), context = useOutletContext2();
+  let { Name, URL } = InternalDocument2, [showModalDocument, setShowModalDocument] = useState5(!1), context = useOutletContext4();
   return /* @__PURE__ */ jsxDEV7(Fragment3, { children: [
     showModalDocument && /* @__PURE__ */ jsxDEV7(
       ModalDocument,
@@ -954,7 +988,7 @@ function InternalDocument({ InternalDocument: InternalDocument2, setSelectedDocu
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV7("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV7(Link2, { to: `http://localhost:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
+        /* @__PURE__ */ jsxDEV7(Link2, { to: `http://ufsofts.com:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
           "img",
           {
             src: "/img/download.svg",
@@ -1010,54 +1044,58 @@ function InternalDocument({ InternalDocument: InternalDocument2, setSelectedDocu
 
 // app/components/formInternalDocument.tsx
 import { Form as Form3, useNavigation } from "@remix-run/react";
+import { useEffect as useEffect3, useState as useState6 } from "react";
 import { jsxDEV as jsxDEV8 } from "react/jsx-dev-runtime";
 function FormInternalDocument({ method, errors = {}, setShowModalInternalDocument }) {
-  let navigation = useNavigation();
-  return /* @__PURE__ */ jsxDEV8("div", { className: "modal", children: /* @__PURE__ */ jsxDEV8(Form3, { className: "form", method, encType: "multipart/form-data", children: [
+  let navigation = useNavigation(), [beVisible, setBevisible] = useState6(!1);
+  return useEffect3(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []), /* @__PURE__ */ jsxDEV8("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV8(Form3, { className: "form", method, encType: "multipart/form-data", children: [
     /* @__PURE__ */ jsxDEV8(
-      "img",
+      CloseButton,
       {
-        src: "/img/x.svg",
-        className: "button-close",
-        alt: "x",
-        onClick: () => {
-          setShowModalInternalDocument(!1);
+        hideModal: () => {
+          setBevisible(!1), setTimeout(() => {
+            setShowModalInternalDocument(!1);
+          }, 300);
         }
       },
       void 0,
       !1,
       {
         fileName: "app/components/formInternalDocument.tsx",
-        lineNumber: 9,
+        lineNumber: 25,
         columnNumber: 11
       },
       this
     ),
     /* @__PURE__ */ jsxDEV8("h1", { className: "heading", children: "Agregar nuevo documento" }, void 0, !1, {
       fileName: "app/components/formInternalDocument.tsx",
-      lineNumber: 20,
+      lineNumber: 29,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV8("h2", { className: "subheading", children: "Agrega toda la informaci\xF3n sobre el documento para agregarlo al expediente" }, void 0, !1, {
       fileName: "app/components/formInternalDocument.tsx",
-      lineNumber: 21,
+      lineNumber: 30,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV8("br", {}, void 0, !1, {
       fileName: "app/components/formInternalDocument.tsx",
-      lineNumber: 21,
+      lineNumber: 30,
       columnNumber: 117
     }, this),
     /* @__PURE__ */ jsxDEV8("div", { className: "inputs", children: [
       /* @__PURE__ */ jsxDEV8("input", { type: "hidden", name: "User", value: 2 }, void 0, !1, {
         fileName: "app/components/formInternalDocument.tsx",
-        lineNumber: 24,
+        lineNumber: 33,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ jsxDEV8("div", { className: "input", children: [
         /* @__PURE__ */ jsxDEV8("label", { htmlFor: "title", children: "Titulo" }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 27,
+          lineNumber: 36,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ jsxDEV8(
@@ -1072,25 +1110,25 @@ function FormInternalDocument({ method, errors = {}, setShowModalInternalDocumen
           !1,
           {
             fileName: "app/components/formInternalDocument.tsx",
-            lineNumber: 28,
+            lineNumber: 37,
             columnNumber: 15
           },
           this
         ),
         errors?.name ? /* @__PURE__ */ jsxDEV8("p", { className: "error", children: errors.name }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 34,
+          lineNumber: 43,
           columnNumber: 32
         }, this) : null
       ] }, void 0, !0, {
         fileName: "app/components/formInternalDocument.tsx",
-        lineNumber: 26,
+        lineNumber: 35,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ jsxDEV8("div", { className: "input", children: [
         /* @__PURE__ */ jsxDEV8("label", { htmlFor: "file", children: "Archivo" }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 38,
+          lineNumber: 47,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ jsxDEV8(
@@ -1104,65 +1142,65 @@ function FormInternalDocument({ method, errors = {}, setShowModalInternalDocumen
           !1,
           {
             fileName: "app/components/formInternalDocument.tsx",
-            lineNumber: 39,
+            lineNumber: 48,
             columnNumber: 15
           },
           this
         ),
         errors?.file ? /* @__PURE__ */ jsxDEV8("p", { className: "error", children: errors.file }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 44,
+          lineNumber: 53,
           columnNumber: 32
         }, this) : null
       ] }, void 0, !0, {
         fileName: "app/components/formInternalDocument.tsx",
-        lineNumber: 37,
+        lineNumber: 46,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/formInternalDocument.tsx",
-      lineNumber: 23,
+      lineNumber: 32,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV8("div", { className: "loading", children: [
       /* @__PURE__ */ jsxDEV8("input", { className: "button", type: "submit", value: "Guardar" }, void 0, !1, {
         fileName: "app/components/formInternalDocument.tsx",
-        lineNumber: 49,
+        lineNumber: 58,
         columnNumber: 13
       }, this),
       navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV8("div", { className: "spinner", children: [
         /* @__PURE__ */ jsxDEV8("div", { className: "bounce1" }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 52,
+          lineNumber: 61,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ jsxDEV8("div", { className: "bounce2" }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 53,
+          lineNumber: 62,
           columnNumber: 17
         }, this),
         /* @__PURE__ */ jsxDEV8("div", { className: "bounce3" }, void 0, !1, {
           fileName: "app/components/formInternalDocument.tsx",
-          lineNumber: 54,
+          lineNumber: 63,
           columnNumber: 17
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/formInternalDocument.tsx",
-        lineNumber: 51,
+        lineNumber: 60,
         columnNumber: 15
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/formInternalDocument.tsx",
-      lineNumber: 48,
+      lineNumber: 57,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/formInternalDocument.tsx",
-    lineNumber: 8,
+    lineNumber: 24,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/components/formInternalDocument.tsx",
-    lineNumber: 7,
+    lineNumber: 23,
     columnNumber: 7
   }, this);
 }
@@ -1198,8 +1236,8 @@ async function action2({ request }) {
   }
 }
 function Documentacioninterna() {
-  let [internalDocuments, setInternalDocuments] = useState4([]), [selectedDocument, setSelectedDocument] = useState4({ algo: 1 }), [showInsertedMessage, setShowInsertedMessage] = useState4(!1), [showDeletedMessage, setShowDeletedMessage] = useState4(!1), [showFormDeletedMessage, setShowFormDeletedMessage] = useState4(!1), [showFormInternalDocument, setShowFormInternalDocument] = useState4(!1), loader13 = useLoaderData2(), actionResult = useActionData();
-  useEffect(() => {
+  let [internalDocuments, setInternalDocuments] = useState7([]), [selectedDocument, setSelectedDocument] = useState7({ algo: 1 }), [showInsertedMessage, setShowInsertedMessage] = useState7(!1), [showDeletedMessage, setShowDeletedMessage] = useState7(!1), [showFormDeletedMessage, setShowFormDeletedMessage] = useState7(!1), [showFormInternalDocument, setShowFormInternalDocument] = useState7(!1), loader13 = useLoaderData2(), actionResult = useActionData();
+  useEffect4(() => {
     switch (actionResult?.status) {
       case "INSERTED":
         setShowFormInternalDocument(!1), setShowInsertedMessage(!0);
@@ -1208,7 +1246,7 @@ function Documentacioninterna() {
         setShowFormDeletedMessage(!1), setShowDeletedMessage(!0);
         break;
     }
-  }, [actionResult]), useEffect(() => {
+  }, [actionResult]), useEffect4(() => {
     setInternalDocuments(loader13);
   }, [loader13]);
   let searchInternalDocument = (event) => {
@@ -1409,11 +1447,11 @@ __export(clientes_index_exports, {
   links: () => links2,
   loader: () => loader3
 });
-import { useEffect as useEffect2, useState as useState6 } from "react";
+import { useEffect as useEffect6, useState as useState9 } from "react";
 import { useActionData as useActionData2, useLoaderData as useLoaderData3 } from "@remix-run/react";
 
 // app/components/formClient.tsx
-import { useState as useState5 } from "react";
+import { useEffect as useEffect5, useState as useState8 } from "react";
 import { Form as Form4, useNavigation as useNavigation2 } from "@remix-run/react";
 
 // app/components/spinner.tsx
@@ -1488,8 +1526,12 @@ function Input({ title, name, type = "text", placeholder = "", maxLength = 1e3, 
 // app/components/formClient.tsx
 import { jsxDEV as jsxDEV12 } from "react/jsx-dev-runtime";
 function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
-  let navigation = useNavigation2(), ClientID = client?.ClientID, [name, setName] = useState5(client?.Name || ""), [identity, setIdentity] = useState5(client?.Identity || ""), [phone, setPhone] = useState5(client?.Phone || ""), [email, setEmail] = useState5(client?.Email || ""), [address, setAddress] = useState5(client?.Address || "");
-  return /* @__PURE__ */ jsxDEV12("div", { className: "modal", children: /* @__PURE__ */ jsxDEV12(
+  let navigation = useNavigation2(), ClientID = client?.ClientID, [name, setName] = useState8(client?.Name || ""), [identity, setIdentity] = useState8(client?.Identity || ""), [phone, setPhone] = useState8(client?.Phone || ""), [email, setEmail] = useState8(client?.Email || ""), [address, setAddress] = useState8(client?.Address || ""), [beVisible, setBevisible] = useState8(!1);
+  return useEffect5(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []), /* @__PURE__ */ jsxDEV12("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV12(
     Form4,
     {
       className: "form",
@@ -1498,20 +1540,24 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
         /* @__PURE__ */ jsxDEV12(
           CloseButton,
           {
-            setVisibleForm: setVisibleFormClient
+            hideModal: () => {
+              setBevisible(!1), setTimeout(() => {
+                setVisibleFormClient(!1);
+              }, 300);
+            }
           },
           void 0,
           !1,
           {
             fileName: "app/components/formClient.tsx",
-            lineNumber: 25,
+            lineNumber: 39,
             columnNumber: 9
           },
           this
         ),
         /* @__PURE__ */ jsxDEV12("h1", { className: "heading", children: Object.keys(client).length === 0 ? "Nuevo cliente" : "Modificar cliente" }, void 0, !1, {
           fileName: "app/components/formClient.tsx",
-          lineNumber: 29,
+          lineNumber: 43,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV12("h2", { className: "subheading", children: [
@@ -1519,13 +1565,13 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
           Object.keys(client).length === 0 ? "agregarlo" : "modificarlo"
         ] }, void 0, !0, {
           fileName: "app/components/formClient.tsx",
-          lineNumber: 30,
+          lineNumber: 44,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV12("div", { className: "inputs", children: [
           /* @__PURE__ */ jsxDEV12("input", { name: "ClientID", type: "hidden", value: ClientID }, void 0, !1, {
             fileName: "app/components/formClient.tsx",
-            lineNumber: 35,
+            lineNumber: 49,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ jsxDEV12(
@@ -1542,7 +1588,7 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
             !1,
             {
               fileName: "app/components/formClient.tsx",
-              lineNumber: 37,
+              lineNumber: 51,
               columnNumber: 11
             },
             this
@@ -1562,7 +1608,7 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
             !1,
             {
               fileName: "app/components/formClient.tsx",
-              lineNumber: 46,
+              lineNumber: 60,
               columnNumber: 11
             },
             this
@@ -1583,7 +1629,7 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
             !1,
             {
               fileName: "app/components/formClient.tsx",
-              lineNumber: 56,
+              lineNumber: 70,
               columnNumber: 11
             },
             this
@@ -1603,7 +1649,7 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
             !1,
             {
               fileName: "app/components/formClient.tsx",
-              lineNumber: 67,
+              lineNumber: 81,
               columnNumber: 11
             },
             this
@@ -1622,30 +1668,30 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
             !1,
             {
               fileName: "app/components/formClient.tsx",
-              lineNumber: 77,
+              lineNumber: 91,
               columnNumber: 11
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/components/formClient.tsx",
-          lineNumber: 34,
+          lineNumber: 48,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV12("div", { className: "loading", children: [
           /* @__PURE__ */ jsxDEV12("input", { className: "button", type: "submit", value: "Guardar" }, void 0, !1, {
             fileName: "app/components/formClient.tsx",
-            lineNumber: 88,
+            lineNumber: 102,
             columnNumber: 11
           }, this),
           navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV12(Spinner, {}, void 0, !1, {
             fileName: "app/components/formClient.tsx",
-            lineNumber: 90,
+            lineNumber: 104,
             columnNumber: 13
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/formClient.tsx",
-          lineNumber: 87,
+          lineNumber: 101,
           columnNumber: 9
         }, this)
       ]
@@ -1654,13 +1700,13 @@ function FormClient({ method, errors, client = {}, setVisibleFormClient }) {
     !0,
     {
       fileName: "app/components/formClient.tsx",
-      lineNumber: 21,
+      lineNumber: 35,
       columnNumber: 7
     },
     this
   ) }, void 0, !1, {
     fileName: "app/components/formClient.tsx",
-    lineNumber: 20,
+    lineNumber: 34,
     columnNumber: 5
   }, this);
 }
@@ -1726,13 +1772,13 @@ function Client({ client, clientSelected, setClientSelected }) {
 
 // app/services/client.server.ts
 async function getClients() {
-  return await (await fetch("http://localhost:8000/api/clients")).json();
+  return await (await fetch("http://ufsofts.com:8000/api/clients")).json();
 }
 async function getClientByID(clientID) {
-  return await (await fetch(`http://localhost:8000/api/clients/${clientID}`)).json();
+  return await (await fetch(`http://ufsofts.com:8000/api/clients/${clientID}`)).json();
 }
 async function addClient(client) {
-  return await (await fetch("http://localhost:8000/api/clients", {
+  return await (await fetch("http://ufsofts.com:8000/api/clients", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -1741,7 +1787,7 @@ async function addClient(client) {
   })).json();
 }
 async function updateClient(client) {
-  return await (await fetch("http://localhost:8000/api/clients", {
+  return await (await fetch("http://ufsofts.com:8000/api/clients", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -1750,20 +1796,20 @@ async function updateClient(client) {
   })).json();
 }
 async function deleteClient(ClientID) {
-  return await (await fetch(`http://localhost:8000/api/clients/${ClientID}`, {
+  return await (await fetch(`http://ufsofts.com:8000/api/clients/${ClientID}`, {
     method: "DELETE"
   })).json();
 }
 
 // app/services/document.server.ts
 async function addDocument(documentFormData) {
-  return await (await fetch("http://localhost:8000/api/documents", {
+  return await (await fetch("http://ufsofts.com:8000/api/documents", {
     method: "POST",
     body: documentFormData
   })).json();
 }
 async function deleteDocument(DocumentID) {
-  return await (await fetch(`http://localhost:8000/api/documents/${DocumentID}`, {
+  return await (await fetch(`http://ufsofts.com:8000/api/documents/${DocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -1843,8 +1889,8 @@ async function action3({ request }) {
   }
 }
 function Clientes() {
-  let [isVisibleFormCliente, setVisibleFormClient] = useState6(!1), [isVisibleFormClienteForEditing, setVisibleFormClientForEditing] = useState6(!1), [isVisibleDeleteClient, setVisibleDeleteClient] = useState6(!1), [insertedMessage, showInsertedMessage] = useState6(!1), [updatedMessage, showUpdatedMessage] = useState6(!1), [deleteClientMessage, showDeleteClientMessage] = useState6(!1), [clientHaveDocumentsMessage, showClientHaveDocumentsMessage] = useState6(!1), [errorSelectedMessage, showErrorSelectedMessage] = useState6(!1), [clients, setClients] = useState6([]), [clientSelected, setClientSelected] = useState6({}), loader13 = useLoaderData3(), actionResult = useActionData2();
-  useEffect2(() => {
+  let [isVisibleFormCliente, setVisibleFormClient] = useState9(!1), [isVisibleFormClienteForEditing, setVisibleFormClientForEditing] = useState9(!1), [isVisibleDeleteClient, setVisibleDeleteClient] = useState9(!1), [insertedMessage, showInsertedMessage] = useState9(!1), [updatedMessage, showUpdatedMessage] = useState9(!1), [deleteClientMessage, showDeleteClientMessage] = useState9(!1), [clientHaveDocumentsMessage, showClientHaveDocumentsMessage] = useState9(!1), [errorSelectedMessage, showErrorSelectedMessage] = useState9(!1), [clients, setClients] = useState9([]), [clientSelected, setClientSelected] = useState9({}), loader13 = useLoaderData3(), actionResult = useActionData2();
+  useEffect6(() => {
     switch (actionResult?.state) {
       case "INSERTED":
         setVisibleFormClient(!1), showInsertedMessage(!0);
@@ -1861,7 +1907,7 @@ function Clientes() {
       default:
         break;
     }
-  }, [actionResult]), useEffect2(() => {
+  }, [actionResult]), useEffect6(() => {
     setClients(loader13);
   }, [loader13]);
   let showFormCliente = (isEditing) => {
@@ -2219,18 +2265,18 @@ __export(forgot_password_exports, {
   action: () => action4,
   default: () => ForgotPassword
 });
-import { useState as useState7, useEffect as useEffect3 } from "react";
+import { useState as useState10, useEffect as useEffect7 } from "react";
 import { Form as Form5, useActionData as useActionData6, useNavigate } from "@remix-run/react";
 
 // app/services/user.server.ts
 async function getUsers() {
-  return await (await fetch("http://localhost:8000/api/users")).json();
+  return await (await fetch("http://ufsofts.com:8000/api/users")).json();
 }
 async function getUsersByID(UserID) {
-  return await (await fetch(`http://localhost:8000/api/users/${UserID}`)).json();
+  return await (await fetch(`http://ufsofts.com:8000/api/users/${UserID}`)).json();
 }
 async function createPreviousUser(code, accessLevel2) {
-  return await (await fetch("http://localhost:8000/api/users", {
+  return await (await fetch("http://ufsofts.com:8000/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -2247,7 +2293,7 @@ async function createPreviousUser(code, accessLevel2) {
   })).json();
 }
 async function updateUser(user) {
-  return await (await fetch("http://localhost:8000/api/users", {
+  return await (await fetch("http://ufsofts.com:8000/api/users", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -2256,7 +2302,7 @@ async function updateUser(user) {
   })).json();
 }
 async function deleteUser(userID) {
-  return await (await fetch(`http://localhost:8000/api/users/${userID}`, {
+  return await (await fetch(`http://ufsofts.com:8000/api/users/${userID}`, {
     method: "DELETE"
   })).json();
 }
@@ -2628,9 +2674,8 @@ function generateRandomCode(length) {
 }
 
 // app/services/email.server.ts
-import nodemailer from "nodemailer";
 async function sendRecoverAccountEmail(name, token, email) {
-  let transporter = nodemailer.createTransport({
+  let transporter = __require("nodemailer").createTransport({
     service: "Gmail",
     auth: {
       user: process.env.EMAIL,
@@ -2780,8 +2825,8 @@ async function action4({ request }) {
   }
 }
 function ForgotPassword() {
-  let action12 = useActionData6(), navigate = useNavigate(), [step, setStep] = useState7(1), [userID, setUserID] = useState7(0), [email, setEmail] = useState7(""), [password, setPassword] = useState7(""), [repeatPassword, setRepeatPassword] = useState7("");
-  return useEffect3(() => {
+  let action12 = useActionData6(), navigate = useNavigate(), [step, setStep] = useState10(1), [userID, setUserID] = useState10(0), [email, setEmail] = useState10(""), [password, setPassword] = useState10(""), [repeatPassword, setRepeatPassword] = useState10("");
+  return useEffect7(() => {
     switch (action12?.STATUS) {
       case "VALIDATED":
         setUserID(action12?.DATA), setStep(2);
@@ -2889,16 +2934,20 @@ __export(materias_index_exports, {
   links: () => links3,
   loader: () => loader4
 });
-import { useState as useState9, useEffect as useEffect4 } from "react";
+import { useState as useState12, useEffect as useEffect9 } from "react";
 import { useActionData as useActionData7, useLoaderData as useLoaderData4 } from "@remix-run/react";
 
 // app/components/formSubject.tsx
-import { useState as useState8 } from "react";
+import { useEffect as useEffect8, useState as useState11 } from "react";
 import { Form as Form6, useNavigation as useNavigation6 } from "@remix-run/react";
 import { jsxDEV as jsxDEV19 } from "react/jsx-dev-runtime";
 function FormSubject({ subject, method, errors = {}, setShowModalCategory }) {
-  let isSubject = Object.keys(subject).length > 0, [name, setName] = useState8(subject?.Name || ""), navigation = useNavigation6();
-  return /* @__PURE__ */ jsxDEV19("div", { className: "modal", children: /* @__PURE__ */ jsxDEV19(
+  let isSubject = Object.keys(subject).length > 0, [name, setName] = useState11(subject?.Name || ""), navigation = useNavigation6(), [beVisible, setBevisible] = useState11(!1);
+  return useEffect8(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []), /* @__PURE__ */ jsxDEV19("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV19(
     Form6,
     {
       className: "form",
@@ -2906,48 +2955,47 @@ function FormSubject({ subject, method, errors = {}, setShowModalCategory }) {
       action: "/materias",
       children: [
         /* @__PURE__ */ jsxDEV19(
-          "img",
+          CloseButton,
           {
-            src: "/img/x.svg",
-            className: "button-close",
-            alt: "x",
-            onClick: () => {
-              setShowModalCategory(!1);
+            hideModal: () => {
+              setBevisible(!1), setTimeout(() => {
+                setShowModalCategory(!1);
+              }, 300);
             }
           },
           void 0,
           !1,
           {
             fileName: "app/components/formSubject.tsx",
-            lineNumber: 17,
+            lineNumber: 32,
             columnNumber: 9
           },
           this
         ),
         /* @__PURE__ */ jsxDEV19("h1", { className: "heading", children: isSubject ? "Modificar materia" : "Agregar nueva materia" }, void 0, !1, {
           fileName: "app/components/formSubject.tsx",
-          lineNumber: 28,
+          lineNumber: 36,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV19("h2", { className: "subheading", children: isSubject ? "Realice los cambios necesarios para guardar" : "Agregue el nombre de la materia para guardar en la lista" }, void 0, !1, {
           fileName: "app/components/formSubject.tsx",
-          lineNumber: 31,
+          lineNumber: 39,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV19("br", {}, void 0, !1, {
           fileName: "app/components/formSubject.tsx",
-          lineNumber: 37,
+          lineNumber: 45,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV19("div", { className: "inputs", children: /* @__PURE__ */ jsxDEV19("div", { className: "input", children: [
           isSubject && /* @__PURE__ */ jsxDEV19("input", { type: "hidden", name: "SubjectID", value: subject?.SubjectID }, void 0, !1, {
             fileName: "app/components/formSubject.tsx",
-            lineNumber: 42,
+            lineNumber: 50,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV19("label", { htmlFor: "name", children: "Nombre" }, void 0, !1, {
             fileName: "app/components/formSubject.tsx",
-            lineNumber: 45,
+            lineNumber: 53,
             columnNumber: 13
           }, this),
           /* @__PURE__ */ jsxDEV19(
@@ -2966,55 +3014,55 @@ function FormSubject({ subject, method, errors = {}, setShowModalCategory }) {
             !1,
             {
               fileName: "app/components/formSubject.tsx",
-              lineNumber: 46,
+              lineNumber: 54,
               columnNumber: 13
             },
             this
           ),
           errors?.name ? /* @__PURE__ */ jsxDEV19("p", { className: "error", children: errors.name }, void 0, !1, {
             fileName: "app/components/formSubject.tsx",
-            lineNumber: 55,
+            lineNumber: 63,
             columnNumber: 30
           }, this) : null
         ] }, void 0, !0, {
           fileName: "app/components/formSubject.tsx",
-          lineNumber: 40,
+          lineNumber: 48,
           columnNumber: 11
         }, this) }, void 0, !1, {
           fileName: "app/components/formSubject.tsx",
-          lineNumber: 39,
+          lineNumber: 47,
           columnNumber: 9
         }, this),
         /* @__PURE__ */ jsxDEV19("div", { className: "loading", children: [
           /* @__PURE__ */ jsxDEV19("input", { className: "button", type: "submit", value: isSubject ? "Modificar" : "Guardar" }, void 0, !1, {
             fileName: "app/components/formSubject.tsx",
-            lineNumber: 60,
+            lineNumber: 68,
             columnNumber: 11
           }, this),
           navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV19("div", { className: "spinner", children: [
             /* @__PURE__ */ jsxDEV19("div", { className: "bounce1" }, void 0, !1, {
               fileName: "app/components/formSubject.tsx",
-              lineNumber: 63,
+              lineNumber: 71,
               columnNumber: 15
             }, this),
             /* @__PURE__ */ jsxDEV19("div", { className: "bounce2" }, void 0, !1, {
               fileName: "app/components/formSubject.tsx",
-              lineNumber: 64,
+              lineNumber: 72,
               columnNumber: 15
             }, this),
             /* @__PURE__ */ jsxDEV19("div", { className: "bounce3" }, void 0, !1, {
               fileName: "app/components/formSubject.tsx",
-              lineNumber: 65,
+              lineNumber: 73,
               columnNumber: 15
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/formSubject.tsx",
-            lineNumber: 62,
+            lineNumber: 70,
             columnNumber: 13
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/formSubject.tsx",
-          lineNumber: 59,
+          lineNumber: 67,
           columnNumber: 9
         }, this)
       ]
@@ -3023,13 +3071,13 @@ function FormSubject({ subject, method, errors = {}, setShowModalCategory }) {
     !0,
     {
       fileName: "app/components/formSubject.tsx",
-      lineNumber: 12,
+      lineNumber: 27,
       columnNumber: 7
     },
     this
   ) }, void 0, !1, {
     fileName: "app/components/formSubject.tsx",
-    lineNumber: 11,
+    lineNumber: 26,
     columnNumber: 5
   }, this);
 }
@@ -3098,13 +3146,13 @@ function Subject({ subject, subjectSelected, setSubjectSelected }) {
 
 // app/services/subject.server.ts
 async function getSubjects() {
-  return await (await fetch("http://localhost:8000/api/subjects")).json();
+  return await (await fetch("http://ufsofts.com:8000/api/subjects")).json();
 }
 async function getSubjectByID(SubjectID) {
-  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`)).json();
+  return await (await fetch(`http://ufsofts.com:8000/api/subjects/${SubjectID}`)).json();
 }
 async function addSubject(subject) {
-  return await (await fetch("http://localhost:8000/api/subjects", {
+  return await (await fetch("http://ufsofts.com:8000/api/subjects", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -3113,7 +3161,7 @@ async function addSubject(subject) {
   })).json();
 }
 async function updateSubject(subject) {
-  return await (await fetch("http://localhost:8000/api/subjects", {
+  return await (await fetch("http://ufsofts.com:8000/api/subjects", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -3122,7 +3170,7 @@ async function updateSubject(subject) {
   })).json();
 }
 async function deleteSubject(SubjectID) {
-  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`, {
+  return await (await fetch(`http://ufsofts.com:8000/api/subjects/${SubjectID}`, {
     method: "DELETE"
   })).json();
 }
@@ -3190,8 +3238,8 @@ async function action5({ request }) {
   }
 }
 function Materias() {
-  let [subjectSelected, setSubjectSelected] = useState9({}), [showModalSubject, setShowModalSubject] = useState9(!1), [showModalSubjectForEditing, setShowModalSubjectForEditing] = useState9(!1), [showModalSubjectDelete, setShowModalSubjectDelete] = useState9(!1), [showErrorSelectedMessage, setShowErrorSelectedMessage] = useState9(!1), [showErrorEliminationMessage, setShowErrorEliminationMessage] = useState9(!1), [showInsertedMessage, setShowInsertedMessage] = useState9(!1), [showUpdatedMessage, setShowUpdatedMessage] = useState9(!1), [showDeletedMessage, setShowDeletedMessage] = useState9(!1), loader13 = useLoaderData4(), actionResult = useActionData7(), [subjects, setSubjects] = useState9([]);
-  useEffect4(() => {
+  let [subjectSelected, setSubjectSelected] = useState12({}), [showModalSubject, setShowModalSubject] = useState12(!1), [showModalSubjectForEditing, setShowModalSubjectForEditing] = useState12(!1), [showModalSubjectDelete, setShowModalSubjectDelete] = useState12(!1), [showErrorSelectedMessage, setShowErrorSelectedMessage] = useState12(!1), [showErrorEliminationMessage, setShowErrorEliminationMessage] = useState12(!1), [showInsertedMessage, setShowInsertedMessage] = useState12(!1), [showUpdatedMessage, setShowUpdatedMessage] = useState12(!1), [showDeletedMessage, setShowDeletedMessage] = useState12(!1), loader13 = useLoaderData4(), actionResult = useActionData7(), [subjects, setSubjects] = useState12([]);
+  useEffect9(() => {
     setSubjects(loader13);
   }, [loader13]);
   let searchSubjects = (event) => {
@@ -3202,7 +3250,7 @@ function Materias() {
   }, showDeleteMessage = () => {
     Object.keys(subjectSelected).length > 0 ? setShowModalSubjectDelete(!0) : setShowErrorSelectedMessage(!0);
   };
-  return useEffect4(() => {
+  return useEffect9(() => {
     switch (actionResult?.status) {
       case "INSERTED":
         setShowModalSubject(!1), setShowInsertedMessage(!0);
@@ -3566,7 +3614,7 @@ __export(usuarios_index_exports, {
   default: () => Usuarios,
   loader: () => loader5
 });
-import { useState as useState12, useEffect as useEffect6 } from "react";
+import { useState as useState15, useEffect as useEffect12 } from "react";
 import { useActionData as useActionData8, useLoaderData as useLoaderData5 } from "@remix-run/react";
 
 // app/components/user.tsx
@@ -3651,7 +3699,7 @@ function User({ user, userSelected, setUserSelected }) {
 }
 
 // app/components/modalCodeMessage.tsx
-import { useState as useState10 } from "react";
+import { useEffect as useEffect10, useState as useState13 } from "react";
 
 // app/components/dropdownlist.tsx
 import { Fragment as Fragment7, jsxDEV as jsxDEV23 } from "react/jsx-dev-runtime";
@@ -3723,10 +3771,24 @@ function Dropdownlist({ title, name, items = [], error, setItemSelected }) {
 // app/components/modalCodeMessage.tsx
 import { jsxDEV as jsxDEV24 } from "react/jsx-dev-runtime";
 function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccessLevelSelected }) {
-  let [error, setError] = useState10(""), validateAccessLevelSelected = () => {
-    accessLevelSelected === -1 ? setError("Debe seleccionar el nivel de acceso del usuario") : accessLevelSelected === "A" || accessLevelSelected === "R" || accessLevelSelected === "N" ? setStep(2) : setError("El nivel de acceso seleccionado no es valido");
+  let [error, setError] = useState13(""), [beVisible, setBevisible] = useState13(!1);
+  useEffect10(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []);
+  let hideModal = () => {
+    setBevisible(!1), setTimeout(() => {
+      setStep(0);
+    }, 300);
+  }, nextModal = () => {
+    setBevisible(!1), setTimeout(() => {
+      setStep(2);
+    }, 300);
+  }, validateAccessLevelSelected = () => {
+    accessLevelSelected === -1 ? setError("Debe seleccionar el nivel de acceso del usuario") : accessLevelSelected === "A" || accessLevelSelected === "R" || accessLevelSelected === "N" ? nextModal() : setError("El nivel de acceso seleccionado no es valido");
   };
-  return /* @__PURE__ */ jsxDEV24("div", { className: "modal", children: /* @__PURE__ */ jsxDEV24("div", { className: "message", children: [
+  return /* @__PURE__ */ jsxDEV24("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV24("div", { className: "message", children: [
     /* @__PURE__ */ jsxDEV24(
       "img",
       {
@@ -3734,14 +3796,14 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
         className: "button-close",
         alt: "close",
         onClick: () => {
-          setStep(0);
+          hideModal();
         }
       },
       void 0,
       !1,
       {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 23,
+        lineNumber: 43,
         columnNumber: 9
       },
       this
@@ -3749,7 +3811,7 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
     /* @__PURE__ */ jsxDEV24("div", { className: "message-information", children: [
       /* @__PURE__ */ jsxDEV24("p", { className: "just-text", children: "Para la creaci\xF3n de un nuevo usuario debera proporcionarle el c\xF3digo de creaci\xF3n al usuario en cuesti\xF3n con el cual podr\xE1 llenar el formulario de registro." }, void 0, !1, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 35,
+        lineNumber: 55,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV24("div", { className: "inputs", children: /* @__PURE__ */ jsxDEV24(
@@ -3765,18 +3827,18 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
         !1,
         {
           fileName: "app/components/modalCodeMessage.tsx",
-          lineNumber: 41,
+          lineNumber: 61,
           columnNumber: 13
         },
         this
       ) }, void 0, !1, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 40,
+        lineNumber: 60,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV24("p", { className: "error", children: error }, void 0, !1, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 50,
+        lineNumber: 70,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV24("div", { className: "buttons", children: [
@@ -3794,7 +3856,7 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
           !1,
           {
             fileName: "app/components/modalCodeMessage.tsx",
-            lineNumber: 53,
+            lineNumber: 73,
             columnNumber: 13
           },
           this
@@ -3813,38 +3875,48 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
           !1,
           {
             fileName: "app/components/modalCodeMessage.tsx",
-            lineNumber: 60,
+            lineNumber: 80,
             columnNumber: 13
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 52,
+        lineNumber: 72,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalCodeMessage.tsx",
-      lineNumber: 34,
+      lineNumber: 54,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/modalCodeMessage.tsx",
-    lineNumber: 22,
+    lineNumber: 42,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/modalCodeMessage.tsx",
-    lineNumber: 21,
+    lineNumber: 41,
     columnNumber: 5
   }, this);
 }
 
 // app/components/modalCodeShow.tsx
-import { useState as useState11, useEffect as useEffect5 } from "react";
+import { useState as useState14, useEffect as useEffect11 } from "react";
 import { Form as Form7, useNavigation as useNavigation7 } from "@remix-run/react";
 import { jsxDEV as jsxDEV25 } from "react/jsx-dev-runtime";
 function ModalCodeShow({ setStep, accessLevelSelected }) {
-  let navigation = useNavigation7(), [code, setCode] = useState11("000000");
+  let navigation = useNavigation7(), [code, setCode] = useState14("000000"), [beVisible, setBevisible] = useState14(!1);
+  useEffect11(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []);
+  let hideModal = () => {
+    setBevisible(!1), setTimeout(() => {
+      setStep(0);
+    }, 300);
+  };
   function generateRandomCode2(length) {
     let character = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", code2 = "";
     for (let i = 0; i < length; i++) {
@@ -3853,9 +3925,9 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
     }
     return code2;
   }
-  return useEffect5(() => {
+  return useEffect11(() => {
     setCode(generateRandomCode2(6));
-  }, []), /* @__PURE__ */ jsxDEV25("div", { className: "modal", children: /* @__PURE__ */ jsxDEV25("div", { className: "message", children: [
+  }, []), /* @__PURE__ */ jsxDEV25("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV25("div", { className: "message", children: [
     /* @__PURE__ */ jsxDEV25(
       "img",
       {
@@ -3863,14 +3935,14 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
         className: "button-close",
         alt: "close",
         onClick: () => {
-          setStep(0);
+          hideModal();
         }
       },
       void 0,
       !1,
       {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 28,
+        lineNumber: 42,
         columnNumber: 9
       },
       this
@@ -3878,64 +3950,64 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
     /* @__PURE__ */ jsxDEV25("div", { className: "message-information", children: [
       /* @__PURE__ */ jsxDEV25("p", { className: "just-text", children: "Recuerda no compartir el c\xF3digo generado con nadie diferente al usuario que requiere crear la cuenta." }, void 0, !1, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 40,
+        lineNumber: 54,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV25("p", { children: "El c\xF3digo generado es el siguiente:" }, void 0, !1, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 45,
+        lineNumber: 59,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV25("div", { className: "code", children: [
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[0] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 48,
+          lineNumber: 62,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[1] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 49,
+          lineNumber: 63,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[2] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 50,
+          lineNumber: 64,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[3] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 51,
+          lineNumber: 65,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[4] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 52,
+          lineNumber: 66,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[5] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 53,
+          lineNumber: 67,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 47,
+        lineNumber: 61,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV25(Form7, { method: "POST", children: [
         /* @__PURE__ */ jsxDEV25("input", { type: "hidden", name: "action", value: "CREATE-USER" }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 57,
+          lineNumber: 71,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("input", { type: "hidden", name: "Token", value: code }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 58,
+          lineNumber: 72,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("input", { type: "hidden", name: "AccessLevel", value: accessLevelSelected }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 59,
+          lineNumber: 73,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("div", { className: "loading", children: [
@@ -3950,38 +4022,38 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
             !1,
             {
               fileName: "app/components/modalCodeShow.tsx",
-              lineNumber: 62,
+              lineNumber: 76,
               columnNumber: 15
             },
             this
           ),
           navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV25(Spinner, {}, void 0, !1, {
             fileName: "app/components/modalCodeShow.tsx",
-            lineNumber: 68,
+            lineNumber: 82,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 61,
+          lineNumber: 75,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 56,
+        lineNumber: 70,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalCodeShow.tsx",
-      lineNumber: 39,
+      lineNumber: 53,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/modalCodeShow.tsx",
-    lineNumber: 27,
+    lineNumber: 41,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/modalCodeShow.tsx",
-    lineNumber: 26,
+    lineNumber: 40,
     columnNumber: 5
   }, this);
 }
@@ -4041,8 +4113,8 @@ async function action6({ request }) {
   }
 }
 function Usuarios() {
-  let [users, setUsers] = useState12([]), [userSelected, setUserSelected] = useState12({}), [accessLevelSelected, setAccessLevelSelected] = useState12(""), [addUserStep, setAddUserStep] = useState12(0), [errorSelectedMessage, showErrorSelectedMessage] = useState12(!1), [showMessageAddUser, setShowMessageAddUser] = useState12(!1), [showMessageDeleteUser, setShowMessageDeleteUser] = useState12(!1), [showMessageEnableUser, setShowMessageEnableUser] = useState12(!1), [showMessageUserDeleted, setShowMessageUserDeleted] = useState12(!1), [showMessageUserHavaData, setShowMessageUserHavaData] = useState12(!1), [showMessageUserStateChange, setShowMessageUserStateChange] = useState12(!1), loader13 = useLoaderData5(), action12 = useActionData8();
-  useEffect6(() => {
+  let [users, setUsers] = useState15([]), [userSelected, setUserSelected] = useState15({}), [accessLevelSelected, setAccessLevelSelected] = useState15(""), [addUserStep, setAddUserStep] = useState15(0), [errorSelectedMessage, showErrorSelectedMessage] = useState15(!1), [showMessageAddUser, setShowMessageAddUser] = useState15(!1), [showMessageDeleteUser, setShowMessageDeleteUser] = useState15(!1), [showMessageEnableUser, setShowMessageEnableUser] = useState15(!1), [showMessageUserDeleted, setShowMessageUserDeleted] = useState15(!1), [showMessageUserHavaData, setShowMessageUserHavaData] = useState15(!1), [showMessageUserStateChange, setShowMessageUserStateChange] = useState15(!1), loader13 = useLoaderData5(), action12 = useActionData8();
+  useEffect12(() => {
     switch (action12?.STATUS) {
       case "CODE-SAVE":
         setAddUserStep(0), setAccessLevelSelected(""), setShowMessageAddUser(!0);
@@ -4056,7 +4128,7 @@ function Usuarios() {
       case "USER STATE CHANGE":
         setUserSelected({}), setShowMessageEnableUser(!1), setShowMessageUserStateChange(!0);
     }
-  }, [action12]), useEffect6(() => {
+  }, [action12]), useEffect12(() => {
     setUsers(loader13?.users);
   }, [loader13]);
   let showEliminatedClient = () => {
@@ -4167,7 +4239,7 @@ function Usuarios() {
       ModalMessage,
       {
         features: {
-          text: `\xBFEsta seguro que desea ${userSelected.State === 1 ? "Inactivar" : "Activar"} el usuario seleccionado?`,
+          text: `\xBFEsta seguro que desea ${userSelected.State === 1 ? "inactivar" : "activar"} el usuario seleccionado?`,
           isOkCancel: !0,
           indexIcon: 2,
           data: {
@@ -4176,6 +4248,7 @@ function Usuarios() {
             value: userSelected.UserID
           }
         },
+        visibleMessage: showMessageEnableUser,
         setVisibleMessage: setShowMessageEnableUser
       },
       void 0,
@@ -4202,7 +4275,7 @@ function Usuarios() {
       !1,
       {
         fileName: "app/routes/usuarios._index.tsx",
-        lineNumber: 246,
+        lineNumber: 247,
         columnNumber: 9
       },
       this
@@ -4222,25 +4295,25 @@ function Usuarios() {
       !1,
       {
         fileName: "app/routes/usuarios._index.tsx",
-        lineNumber: 262,
+        lineNumber: 263,
         columnNumber: 9
       },
       this
     ),
     /* @__PURE__ */ jsxDEV26("h1", { className: "heading", children: "Usuarios" }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 275,
+      lineNumber: 276,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV26("p", { className: "subheading", children: "Lista completa de los usuarios registrados" }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 276,
+      lineNumber: 277,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV26("div", { className: "top-options", children: /* @__PURE__ */ jsxDEV26("div", { className: "search", children: [
       /* @__PURE__ */ jsxDEV26("img", { src: "/img/search.svg", alt: "search" }, void 0, !1, {
         fileName: "app/routes/usuarios._index.tsx",
-        lineNumber: 282,
+        lineNumber: 283,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV26(
@@ -4256,18 +4329,18 @@ function Usuarios() {
         !1,
         {
           fileName: "app/routes/usuarios._index.tsx",
-          lineNumber: 283,
+          lineNumber: 284,
           columnNumber: 11
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 281,
+      lineNumber: 282,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 280,
+      lineNumber: 281,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV26("div", { className: "actions", children: [
@@ -4282,12 +4355,12 @@ function Usuarios() {
           children: [
             /* @__PURE__ */ jsxDEV26("img", { src: "/img/add.svg", alt: "add" }, void 0, !1, {
               fileName: "app/routes/usuarios._index.tsx",
-              lineNumber: 300,
+              lineNumber: 301,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV26("p", { children: "Agregar" }, void 0, !1, {
               fileName: "app/routes/usuarios._index.tsx",
-              lineNumber: 301,
+              lineNumber: 302,
               columnNumber: 11
             }, this)
           ]
@@ -4296,7 +4369,7 @@ function Usuarios() {
         !0,
         {
           fileName: "app/routes/usuarios._index.tsx",
-          lineNumber: 292,
+          lineNumber: 293,
           columnNumber: 9
         },
         this
@@ -4311,12 +4384,12 @@ function Usuarios() {
           children: [
             /* @__PURE__ */ jsxDEV26("img", { src: "/img/edit.svg", alt: "add" }, void 0, !1, {
               fileName: "app/routes/usuarios._index.tsx",
-              lineNumber: 308,
+              lineNumber: 309,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV26("p", { children: "Inhabilitar" }, void 0, !1, {
               fileName: "app/routes/usuarios._index.tsx",
-              lineNumber: 309,
+              lineNumber: 310,
               columnNumber: 11
             }, this)
           ]
@@ -4325,7 +4398,7 @@ function Usuarios() {
         !0,
         {
           fileName: "app/routes/usuarios._index.tsx",
-          lineNumber: 304,
+          lineNumber: 305,
           columnNumber: 9
         },
         this
@@ -4342,12 +4415,12 @@ function Usuarios() {
           children: [
             /* @__PURE__ */ jsxDEV26("img", { src: "/img/x.svg", alt: "add" }, void 0, !1, {
               fileName: "app/routes/usuarios._index.tsx",
-              lineNumber: 318,
+              lineNumber: 319,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV26("p", { children: "Eliminar" }, void 0, !1, {
               fileName: "app/routes/usuarios._index.tsx",
-              lineNumber: 319,
+              lineNumber: 320,
               columnNumber: 11
             }, this)
           ]
@@ -4356,14 +4429,14 @@ function Usuarios() {
         !0,
         {
           fileName: "app/routes/usuarios._index.tsx",
-          lineNumber: 312,
+          lineNumber: 313,
           columnNumber: 9
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 291,
+      lineNumber: 292,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV26("div", { className: "list-scroll", children: users.length > 0 ? users.map(
@@ -4378,30 +4451,30 @@ function Usuarios() {
         !1,
         {
           fileName: "app/routes/usuarios._index.tsx",
-          lineNumber: 328,
+          lineNumber: 329,
           columnNumber: 15
         },
         this
       )
     ) : loader13?.users?.length === 0 ? /* @__PURE__ */ jsxDEV26("p", { className: "no-found", children: "A\xFAn no hay usuarios registrados" }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 338,
+      lineNumber: 339,
       columnNumber: 15
     }, this) : loader13?.users?.length > 0 && users.length === 0 ? /* @__PURE__ */ jsxDEV26("p", { className: "no-found", children: "No se pudieron encontrar usuarios" }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 342,
+      lineNumber: 343,
       columnNumber: 17
     }, this) : /* @__PURE__ */ jsxDEV26("div", { className: "center", children: /* @__PURE__ */ jsxDEV26(Spinner, {}, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 345,
+      lineNumber: 346,
       columnNumber: 19
     }, this) }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 344,
+      lineNumber: 345,
       columnNumber: 17
     }, this) }, void 0, !1, {
       fileName: "app/routes/usuarios._index.tsx",
-      lineNumber: 323,
+      lineNumber: 324,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
@@ -4417,7 +4490,7 @@ __export(create_account_exports, {
   action: () => action7,
   default: () => CreateAccount
 });
-import { useEffect as useEffect7, useState as useState13 } from "react";
+import { useEffect as useEffect13, useState as useState16 } from "react";
 import { useActionData as useActionData12, useNavigate as useNavigate2 } from "@remix-run/react";
 
 // app/components/create-account/enter-code.tsx
@@ -4873,8 +4946,8 @@ async function action7({ request }) {
   }
 }
 function CreateAccount() {
-  let navigate = useNavigate2(), action12 = useActionData12(), [step, setStep] = useState13(1), [userID, setUserID] = useState13(-1), [name, setName] = useState13(""), [email, setEmail] = useState13(""), [phone, setPhone] = useState13(""), [password, setPassword] = useState13(""), [repeatPassword, setRepeatPassword] = useState13("");
-  return useEffect7(() => {
+  let navigate = useNavigate2(), action12 = useActionData12(), [step, setStep] = useState16(1), [userID, setUserID] = useState16(-1), [name, setName] = useState16(""), [email, setEmail] = useState16(""), [phone, setPhone] = useState16(""), [password, setPassword] = useState16(""), [repeatPassword, setRepeatPassword] = useState16("");
+  return useEffect13(() => {
     switch (action12?.STATUS) {
       case "VALIDATED":
         setUserID(action12?.DATA.UserID), setStep(2);
@@ -4978,15 +5051,15 @@ __export(materias_name_exports, {
   links: () => links4,
   loader: () => loader6
 });
-import { useState as useState15, useEffect as useEffect8 } from "react";
+import { useState as useState18, useEffect as useEffect14 } from "react";
 import { useActionData as useActionData13, useLoaderData as useLoaderData6 } from "@remix-run/react";
 
 // app/components/document.tsx
-import { useState as useState14 } from "react";
-import { Link as Link8, useOutletContext as useOutletContext3 } from "@remix-run/react";
+import { useState as useState17 } from "react";
+import { Link as Link8, useOutletContext as useOutletContext6 } from "@remix-run/react";
 import { Fragment as Fragment8, jsxDEV as jsxDEV31 } from "react/jsx-dev-runtime";
 function Document3({ document, setSelectedDocument, setShowFormDeletedMessage }) {
-  let { Name, URL } = document, [showModalDocument, setShowModalDocument] = useState14(!1), context = useOutletContext3();
+  let { Name, URL } = document, [showModalDocument, setShowModalDocument] = useState17(!1), context = useOutletContext6();
   return /* @__PURE__ */ jsxDEV31(Fragment8, { children: [
     showModalDocument && /* @__PURE__ */ jsxDEV31(
       ModalDocument,
@@ -5027,7 +5100,7 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV31("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV31(Link8, { to: `http://localhost:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
+        /* @__PURE__ */ jsxDEV31(Link8, { to: `http://ufsofts.com:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
           "img",
           {
             src: "/img/download.svg",
@@ -5121,8 +5194,8 @@ async function action8({ request }) {
   }
 }
 function MateriasName() {
-  let loader13 = useLoaderData6(), actionResult = useActionData13(), [showFormDeletedMessage, setShowFormDeletedMessage] = useState15(!1), [showDeletedMessage, setShowDeletedMessage] = useState15(!1), [selectedDocument, setSelectedDocument] = useState15({}), { Name, Documents, CreatedDate, UpdatedDate } = loader13, [documents, setDocuments] = useState15([]);
-  useEffect8(() => {
+  let loader13 = useLoaderData6(), actionResult = useActionData13(), [showFormDeletedMessage, setShowFormDeletedMessage] = useState18(!1), [showDeletedMessage, setShowDeletedMessage] = useState18(!1), [selectedDocument, setSelectedDocument] = useState18({}), { Name, Documents, CreatedDate, UpdatedDate } = loader13, [documents, setDocuments] = useState18([]);
+  useEffect14(() => {
     switch (actionResult?.status) {
       case "DELETED":
         setShowFormDeletedMessage(!1), setShowDeletedMessage(!0);
@@ -5130,7 +5203,7 @@ function MateriasName() {
       default:
         break;
     }
-  }, [actionResult]), useEffect8(() => {
+  }, [actionResult]), useEffect14(() => {
     setDocuments(loader13?.Documents);
   }, [loader13]);
   let searchDocument = (event) => {
@@ -5367,15 +5440,15 @@ __export(clientes_URL_exports, {
   links: () => links5,
   loader: () => loader7
 });
-import { useEffect as useEffect9, useState as useState17 } from "react";
+import { useEffect as useEffect16, useState as useState21 } from "react";
 import { useActionData as useActionData14, useLoaderData as useLoaderData7 } from "@remix-run/react";
 
 // app/components/selectDocument.tsx
-import { useState as useState16 } from "react";
-import { Link as Link9, useOutletContext as useOutletContext4 } from "@remix-run/react";
+import { useState as useState19 } from "react";
+import { Link as Link9, useOutletContext as useOutletContext7 } from "@remix-run/react";
 import { jsxDEV as jsxDEV33 } from "react/jsx-dev-runtime";
 function SelectDocument({ document, setShowFormDeletedMessage, setSelectedDocument }) {
-  let { Name, URL } = document, [showModalDocument, setShowModalDocument] = useState16(!1), context = useOutletContext4();
+  let { Name, URL } = document, [showModalDocument, setShowModalDocument] = useState19(!1), context = useOutletContext7();
   return /* @__PURE__ */ jsxDEV33("div", { className: "subject-document", children: [
     showModalDocument && /* @__PURE__ */ jsxDEV33(
       ModalDocument,
@@ -5405,7 +5478,7 @@ function SelectDocument({ document, setShowFormDeletedMessage, setSelectedDocume
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV33("p", { className: "actions", children: [
-            /* @__PURE__ */ jsxDEV33(Link9, { to: `http://localhost:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
+            /* @__PURE__ */ jsxDEV33(Link9, { to: `http://ufsofts.com:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
               "img",
               {
                 src: "/img/download.svg",
@@ -5557,54 +5630,63 @@ function SelectSubject({ subject, showSubject, setShowSubject, setShowFormDelete
 
 // app/components/formDocument.tsx
 import { Form as Form11, useNavigation as useNavigation11 } from "@remix-run/react";
+import { useEffect as useEffect15, useState as useState20 } from "react";
 import { Fragment as Fragment9, jsxDEV as jsxDEV35 } from "react/jsx-dev-runtime";
 function FormDocument({ method, errors, subjects, ClientID, UserID, setShowModalDocument }) {
-  let navigation = useNavigation11();
-  return /* @__PURE__ */ jsxDEV35("div", { className: "modal", children: /* @__PURE__ */ jsxDEV35(Form11, { className: "form", method, encType: "multipart/form-data", children: [
+  let navigation = useNavigation11(), [beVisible, setBevisible] = useState20(!1);
+  return useEffect15(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []), /* @__PURE__ */ jsxDEV35("div", { className: "modal", children: /* @__PURE__ */ jsxDEV35(Form11, { className: "form", method, encType: "multipart/form-data", children: [
     /* @__PURE__ */ jsxDEV35(
       CloseButton,
       {
-        setVisibleForm: setShowModalDocument
+        hideModal: () => {
+          setBevisible(!1), setTimeout(() => {
+            setShowModalDocument(!1);
+          }, 300);
+        }
       },
       void 0,
       !1,
       {
         fileName: "app/components/formDocument.tsx",
-        lineNumber: 13,
+        lineNumber: 27,
         columnNumber: 9
       },
       this
     ),
     /* @__PURE__ */ jsxDEV35("h1", { className: "heading", children: "Agregar nuevo documento" }, void 0, !1, {
       fileName: "app/components/formDocument.tsx",
-      lineNumber: 17,
+      lineNumber: 31,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV35("h2", { className: "subheading", children: "Agrega toda la informaci\xF3n sobre el documento para agregarlo al expediente" }, void 0, !1, {
       fileName: "app/components/formDocument.tsx",
-      lineNumber: 18,
+      lineNumber: 32,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV35("br", {}, void 0, !1, {
       fileName: "app/components/formDocument.tsx",
-      lineNumber: 18,
+      lineNumber: 32,
       columnNumber: 115
     }, this),
     /* @__PURE__ */ jsxDEV35("div", { className: "inputs", children: [
       /* @__PURE__ */ jsxDEV35("div", { className: "input", children: [
         /* @__PURE__ */ jsxDEV35("input", { name: "Client", type: "hidden", value: ClientID }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 22,
+          lineNumber: 36,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV35("input", { name: "User", type: "hidden", value: UserID }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 23,
+          lineNumber: 37,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV35("label", { htmlFor: "title", children: "Titulo" }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 25,
+          lineNumber: 39,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV35(
@@ -5619,25 +5701,25 @@ function FormDocument({ method, errors, subjects, ClientID, UserID, setShowModal
           !1,
           {
             fileName: "app/components/formDocument.tsx",
-            lineNumber: 26,
+            lineNumber: 40,
             columnNumber: 13
           },
           this
         ),
         errors?.name ? /* @__PURE__ */ jsxDEV35("p", { className: "error", children: errors.name }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 32,
+          lineNumber: 46,
           columnNumber: 30
         }, this) : null
       ] }, void 0, !0, {
         fileName: "app/components/formDocument.tsx",
-        lineNumber: 21,
+        lineNumber: 35,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV35("div", { className: "input", children: [
         /* @__PURE__ */ jsxDEV35("label", { htmlFor: "subject", children: "Materia" }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 36,
+          lineNumber: 50,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV35(
@@ -5648,19 +5730,19 @@ function FormDocument({ method, errors, subjects, ClientID, UserID, setShowModal
             children: subjects.length > 0 ? /* @__PURE__ */ jsxDEV35(Fragment9, { children: [
               /* @__PURE__ */ jsxDEV35("option", { value: -1, children: "-- Seleccione una materia --" }, void 0, !1, {
                 fileName: "app/components/formDocument.tsx",
-                lineNumber: 44,
+                lineNumber: 58,
                 columnNumber: 17
               }, this),
               subjects.map(
                 (item) => /* @__PURE__ */ jsxDEV35("option", { value: item.SubjectID, children: item.Name }, item.SubjectID, !1, {
                   fileName: "app/components/formDocument.tsx",
-                  lineNumber: 46,
+                  lineNumber: 60,
                   columnNumber: 19
                 }, this)
               )
             ] }, void 0, !0, {
               fileName: "app/components/formDocument.tsx",
-              lineNumber: 43,
+              lineNumber: 57,
               columnNumber: 17
             }, this) : ""
           },
@@ -5668,25 +5750,25 @@ function FormDocument({ method, errors, subjects, ClientID, UserID, setShowModal
           !1,
           {
             fileName: "app/components/formDocument.tsx",
-            lineNumber: 37,
+            lineNumber: 51,
             columnNumber: 13
           },
           this
         ),
         errors?.subject ? /* @__PURE__ */ jsxDEV35("p", { className: "error", children: errors.subject }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 53,
+          lineNumber: 67,
           columnNumber: 33
         }, this) : null
       ] }, void 0, !0, {
         fileName: "app/components/formDocument.tsx",
-        lineNumber: 35,
+        lineNumber: 49,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV35("div", { className: "input", children: [
         /* @__PURE__ */ jsxDEV35("label", { htmlFor: "file", children: "Archivo" }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 57,
+          lineNumber: 71,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV35(
@@ -5700,49 +5782,49 @@ function FormDocument({ method, errors, subjects, ClientID, UserID, setShowModal
           !1,
           {
             fileName: "app/components/formDocument.tsx",
-            lineNumber: 58,
+            lineNumber: 72,
             columnNumber: 13
           },
           this
         ),
         errors?.file ? /* @__PURE__ */ jsxDEV35("p", { className: "error", children: errors.file }, void 0, !1, {
           fileName: "app/components/formDocument.tsx",
-          lineNumber: 63,
+          lineNumber: 77,
           columnNumber: 30
         }, this) : null
       ] }, void 0, !0, {
         fileName: "app/components/formDocument.tsx",
-        lineNumber: 56,
+        lineNumber: 70,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/formDocument.tsx",
-      lineNumber: 20,
+      lineNumber: 34,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV35("div", { className: "loading", children: [
       /* @__PURE__ */ jsxDEV35("input", { className: "button", type: "submit", value: "Guardar" }, void 0, !1, {
         fileName: "app/components/formDocument.tsx",
-        lineNumber: 68,
+        lineNumber: 82,
         columnNumber: 11
       }, this),
       navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV35(Spinner, {}, void 0, !1, {
         fileName: "app/components/formDocument.tsx",
-        lineNumber: 70,
+        lineNumber: 84,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/formDocument.tsx",
-      lineNumber: 67,
+      lineNumber: 81,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/formDocument.tsx",
-    lineNumber: 12,
+    lineNumber: 26,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/formDocument.tsx",
-    lineNumber: 11,
+    lineNumber: 25,
     columnNumber: 5
   }, this);
 }
@@ -5804,7 +5886,7 @@ async function action9({ request }) {
   }
 }
 function ClientesClientID() {
-  let { client, subjects, currentUser } = useLoaderData7(), actionResult = useActionData14(), { ClientID, Name, Identity, Email, Phone, Address, Documents } = client[0], [showSubject, setShowSubject] = useState17(!1), [showInsertedMessage, setShowInsertedMessage] = useState17(!1), [showDeletedMessage, setShowDeletedMessage] = useState17(!1), [showFormDocument, setShowFormDocument] = useState17(!1), [showFormDeletedMessage, setShowFormDeletedMessage] = useState17(!1), [selectedDocument, setSelectedDocument] = useState17({}), subjectsNamed = {};
+  let { client, subjects, currentUser } = useLoaderData7(), actionResult = useActionData14(), { ClientID, Name, Identity, Email, Phone, Address, Documents } = client[0], [showSubject, setShowSubject] = useState21(!1), [showGeneralInformation, setShowGeneralInformation] = useState21(!1), [showInsertedMessage, setShowInsertedMessage] = useState21(!1), [showDeletedMessage, setShowDeletedMessage] = useState21(!1), [showFormDocument, setShowFormDocument] = useState21(!1), [showFormDeletedMessage, setShowFormDeletedMessage] = useState21(!1), [selectedDocument, setSelectedDocument] = useState21({}), subjectsNamed = {};
   subjects.forEach((subject) => {
     subjectsNamed[subject.SubjectID] = subject.Name;
   });
@@ -5818,7 +5900,7 @@ function ClientesClientID() {
       Name: subjectsNamed[document?.Subject],
       Documents: [document]
     });
-  }), useEffect9(() => {
+  }), useEffect16(() => {
     switch (actionResult?.state) {
       case "INSERTED":
         setShowFormDocument(!1), setShowInsertedMessage(!0);
@@ -5844,7 +5926,7 @@ function ClientesClientID() {
       !1,
       {
         fileName: "app/routes/clientes.$URL.tsx",
-        lineNumber: 168,
+        lineNumber: 169,
         columnNumber: 7
       },
       this
@@ -5867,7 +5949,7 @@ function ClientesClientID() {
       !1,
       {
         fileName: "app/routes/clientes.$URL.tsx",
-        lineNumber: 179,
+        lineNumber: 180,
         columnNumber: 7
       },
       this
@@ -5887,7 +5969,7 @@ function ClientesClientID() {
       !1,
       {
         fileName: "app/routes/clientes.$URL.tsx",
-        lineNumber: 196,
+        lineNumber: 197,
         columnNumber: 7
       },
       this
@@ -5907,123 +5989,125 @@ function ClientesClientID() {
       !1,
       {
         fileName: "app/routes/clientes.$URL.tsx",
-        lineNumber: 210,
+        lineNumber: 211,
         columnNumber: 7
       },
       this
     ),
     /* @__PURE__ */ jsxDEV36("h1", { className: "heading", children: "Informaci\xF3n del cliente" }, void 0, !1, {
       fileName: "app/routes/clientes.$URL.tsx",
-      lineNumber: 223,
+      lineNumber: 224,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV36("h2", { className: "subheading", children: "Informaci\xF3n general y expediente completo del cliente" }, void 0, !1, {
       fileName: "app/routes/clientes.$URL.tsx",
-      lineNumber: 224,
+      lineNumber: 225,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV36("main", { className: "grid-1-2", children: [
-      /* @__PURE__ */ jsxDEV36("section", { className: "content", children: [
+      /* @__PURE__ */ jsxDEV36("section", { className: "content", onClick: () => {
+        setShowGeneralInformation(!showGeneralInformation);
+      }, children: [
         /* @__PURE__ */ jsxDEV36("h3", { children: "Informaci\xF3n general" }, void 0, !1, {
           fileName: "app/routes/clientes.$URL.tsx",
-          lineNumber: 228,
+          lineNumber: 229,
           columnNumber: 11
         }, this),
-        /* @__PURE__ */ jsxDEV36("div", { className: "data", children: [
+        /* @__PURE__ */ jsxDEV36("div", { className: `data ${showGeneralInformation ? "active" : ""}`, children: [
           /* @__PURE__ */ jsxDEV36("div", { className: "item", children: [
             /* @__PURE__ */ jsxDEV36("p", { children: "Nombre:" }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 231,
+              lineNumber: 232,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ jsxDEV36("b", { children: Name }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 232,
+              lineNumber: 233,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/clientes.$URL.tsx",
-            lineNumber: 230,
+            lineNumber: 231,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV36("div", { className: "item", children: [
             /* @__PURE__ */ jsxDEV36("p", { children: "Identidad:" }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 235,
+              lineNumber: 236,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ jsxDEV36("b", { children: Identity }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 236,
+              lineNumber: 237,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/clientes.$URL.tsx",
-            lineNumber: 234,
+            lineNumber: 235,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV36("div", { className: "item", children: [
             /* @__PURE__ */ jsxDEV36("p", { children: "Correo Electr\xF3nico:" }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 239,
+              lineNumber: 240,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ jsxDEV36("b", { children: Email }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 240,
+              lineNumber: 241,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/clientes.$URL.tsx",
-            lineNumber: 238,
+            lineNumber: 239,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV36("div", { className: "item", children: [
             /* @__PURE__ */ jsxDEV36("p", { children: "Telef\xF3no:" }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 243,
+              lineNumber: 244,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ jsxDEV36("b", { children: Phone }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 244,
+              lineNumber: 245,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/clientes.$URL.tsx",
-            lineNumber: 242,
+            lineNumber: 243,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV36("div", { className: "item", children: [
             /* @__PURE__ */ jsxDEV36("p", { children: "Direcci\xF3n:" }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 247,
+              lineNumber: 248,
               columnNumber: 17
             }, this),
             /* @__PURE__ */ jsxDEV36("b", { children: Address }, void 0, !1, {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 248,
+              lineNumber: 249,
               columnNumber: 17
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/clientes.$URL.tsx",
-            lineNumber: 246,
+            lineNumber: 247,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/clientes.$URL.tsx",
-          lineNumber: 229,
+          lineNumber: 230,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/clientes.$URL.tsx",
-        lineNumber: 227,
+        lineNumber: 228,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV36("section", { className: "record", children: [
         /* @__PURE__ */ jsxDEV36("h3", { className: "record-title", children: "Expediente" }, void 0, !1, {
           fileName: "app/routes/clientes.$URL.tsx",
-          lineNumber: 254,
+          lineNumber: 255,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV36("div", { className: "actions", children: /* @__PURE__ */ jsxDEV36(
@@ -6037,12 +6121,12 @@ function ClientesClientID() {
             children: [
               /* @__PURE__ */ jsxDEV36("img", { src: "/img/add.svg", alt: "add" }, void 0, !1, {
                 fileName: "app/routes/clientes.$URL.tsx",
-                lineNumber: 262,
+                lineNumber: 263,
                 columnNumber: 15
               }, this),
               /* @__PURE__ */ jsxDEV36("p", { children: "Agregar documento" }, void 0, !1, {
                 fileName: "app/routes/clientes.$URL.tsx",
-                lineNumber: 263,
+                lineNumber: 264,
                 columnNumber: 15
               }, this)
             ]
@@ -6051,18 +6135,18 @@ function ClientesClientID() {
           !0,
           {
             fileName: "app/routes/clientes.$URL.tsx",
-            lineNumber: 257,
+            lineNumber: 258,
             columnNumber: 13
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/clientes.$URL.tsx",
-          lineNumber: 256,
+          lineNumber: 257,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV36("div", { className: "list-scroll", children: record.length === 0 ? /* @__PURE__ */ jsxDEV36("p", { className: "no-found", children: "Aun no hay documentos disponibles..." }, void 0, !1, {
           fileName: "app/routes/clientes.$URL.tsx",
-          lineNumber: 270,
+          lineNumber: 271,
           columnNumber: 13
         }, this) : record.map(
           (subject) => /* @__PURE__ */ jsxDEV36(
@@ -6078,29 +6162,29 @@ function ClientesClientID() {
             !1,
             {
               fileName: "app/routes/clientes.$URL.tsx",
-              lineNumber: 275,
+              lineNumber: 276,
               columnNumber: 13
             },
             this
           )
         ) }, void 0, !1, {
           fileName: "app/routes/clientes.$URL.tsx",
-          lineNumber: 267,
+          lineNumber: 268,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/clientes.$URL.tsx",
-        lineNumber: 253,
+        lineNumber: 254,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/clientes.$URL.tsx",
-      lineNumber: 226,
+      lineNumber: 227,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/clientes.$URL.tsx",
-    lineNumber: 166,
+    lineNumber: 167,
     columnNumber: 5
   }, this);
 }
@@ -6112,7 +6196,7 @@ __export(usuarios_URL_exports, {
   links: () => links6,
   loader: () => loader8
 });
-import { useState as useState18 } from "react";
+import { useState as useState22 } from "react";
 import { useLoaderData as useLoaderData8 } from "@remix-run/react";
 
 // app/components/select-item.tsx
@@ -6297,7 +6381,7 @@ async function loader8({ params }) {
   };
 }
 function UsuariosURL() {
-  let [showClients, setShowClients] = useState18(), [showDocuments, setShowDocuments] = useState18(), loader13 = useLoaderData8(), { Name, Email, Phone, State, AccessLevel, Clients, Documents } = loader13?.User;
+  let [showClients, setShowClients] = useState22(), [showDocuments, setShowDocuments] = useState22(), loader13 = useLoaderData8(), { Name, Email, Phone, State, AccessLevel, Clients, Documents } = loader13?.User;
   return /* @__PURE__ */ jsxDEV39("div", { className: "container", children: [
     /* @__PURE__ */ jsxDEV39("h1", { className: "heading", children: "Informaci\xF3n del usuario" }, void 0, !1, {
       fileName: "app/routes/usuarios.$URL.tsx",
@@ -6498,15 +6582,15 @@ __export(citas_index_exports, {
   links: () => links7,
   loader: () => loader9
 });
-import { useEffect as useEffect10, useState as useState20 } from "react";
+import { useEffect as useEffect18, useState as useState24 } from "react";
 import { useActionData as useActionData15, useLoaderData as useLoaderData9 } from "@remix-run/react";
 
 // app/services/date.server.ts
 async function getAllDates() {
-  return await (await fetch("http://localhost:8000/api/dates")).json();
+  return await (await fetch("http://ufsofts.com:8000/api/dates")).json();
 }
 async function addDate(date) {
-  return await (await fetch("http://localhost:8000/api/dates", {
+  return await (await fetch("http://ufsofts.com:8000/api/dates", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -6515,7 +6599,7 @@ async function addDate(date) {
   })).json();
 }
 async function updateDate(date) {
-  return await (await fetch("http://localhost:8000/api/dates", {
+  return await (await fetch("http://ufsofts.com:8000/api/dates", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -6524,51 +6608,59 @@ async function updateDate(date) {
   })).json();
 }
 async function deleteDate(DateID) {
-  return await (await fetch(`http://localhost:8000/api/dates/${DateID}`, {
+  return await (await fetch(`http://ufsofts.com:8000/api/dates/${DateID}`, {
     method: "DELETE"
   })).json();
 }
 
 // app/components/formDate.tsx
-import { useState as useState19 } from "react";
+import { useEffect as useEffect17, useState as useState23 } from "react";
 import { Form as Form12, useNavigation as useNavigation12 } from "@remix-run/react";
 import { jsxDEV as jsxDEV40 } from "react/jsx-dev-runtime";
 function FormDate({ currentUser = null, date = {}, clients = [], users = [], errors = {}, setShowFormDate }) {
-  let dateID = date?.DateID, [issue, setIssue] = useState19(""), [datetime, setDatetime] = useState19(/* @__PURE__ */ new Date()), navigation = useNavigation12();
-  return /* @__PURE__ */ jsxDEV40("div", { className: "modal", children: /* @__PURE__ */ jsxDEV40(Form12, { action: "", method: "post", className: "form", children: [
+  let dateID = date?.DateID, [issue, setIssue] = useState23(""), [datetime, setDatetime] = useState23(/* @__PURE__ */ new Date()), navigation = useNavigation12(), [beVisible, setBevisible] = useState23(!1);
+  return useEffect17(() => {
+    setTimeout(() => {
+      setBevisible(!0);
+    }, 100);
+  }, []), /* @__PURE__ */ jsxDEV40("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV40(Form12, { action: "", method: "post", className: "form", children: [
     /* @__PURE__ */ jsxDEV40(
       CloseButton,
       {
-        setVisibleForm: setShowFormDate
+        hideModal: () => {
+          setBevisible(!1), setTimeout(() => {
+            setShowFormDate(!1);
+          }, 300);
+        }
       },
       void 0,
       !1,
       {
         fileName: "app/components/formDate.tsx",
-        lineNumber: 18,
+        lineNumber: 33,
         columnNumber: 9
       },
       this
     ),
     /* @__PURE__ */ jsxDEV40("h1", { className: "heading", children: "Agregar nueva cita" }, void 0, !1, {
       fileName: "app/components/formDate.tsx",
-      lineNumber: 22,
+      lineNumber: 37,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV40("p", { className: "subheading", children: "Agregue todos los datos para agendar una nueva cita" }, void 0, !1, {
       fileName: "app/components/formDate.tsx",
-      lineNumber: 23,
+      lineNumber: 38,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV40("br", {}, void 0, !1, {
       fileName: "app/components/formDate.tsx",
-      lineNumber: 24,
+      lineNumber: 39,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV40("div", { className: "inputs", children: [
       /* @__PURE__ */ jsxDEV40("input", { type: "hidden", value: dateID, name: "DateID" }, void 0, !1, {
         fileName: "app/components/formDate.tsx",
-        lineNumber: 27,
+        lineNumber: 42,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV40(
@@ -6586,14 +6678,14 @@ function FormDate({ currentUser = null, date = {}, clients = [], users = [], err
         !1,
         {
           fileName: "app/components/formDate.tsx",
-          lineNumber: 29,
+          lineNumber: 44,
           columnNumber: 11
         },
         this
       ),
       currentUser !== null ? /* @__PURE__ */ jsxDEV40("input", { type: "hidden", name: "user", value: currentUser.UserID }, void 0, !1, {
         fileName: "app/components/formDate.tsx",
-        lineNumber: 41,
+        lineNumber: 56,
         columnNumber: 15
       }, this) : /* @__PURE__ */ jsxDEV40(
         Dropdownlist,
@@ -6607,7 +6699,7 @@ function FormDate({ currentUser = null, date = {}, clients = [], users = [], err
         !1,
         {
           fileName: "app/components/formDate.tsx",
-          lineNumber: 43,
+          lineNumber: 58,
           columnNumber: 15
         },
         this
@@ -6624,7 +6716,7 @@ function FormDate({ currentUser = null, date = {}, clients = [], users = [], err
         !1,
         {
           fileName: "app/components/formDate.tsx",
-          lineNumber: 51,
+          lineNumber: 66,
           columnNumber: 11
         },
         this
@@ -6643,39 +6735,39 @@ function FormDate({ currentUser = null, date = {}, clients = [], users = [], err
         !1,
         {
           fileName: "app/components/formDate.tsx",
-          lineNumber: 58,
+          lineNumber: 73,
           columnNumber: 11
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/components/formDate.tsx",
-      lineNumber: 26,
+      lineNumber: 41,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV40("div", { className: "loading", children: [
       /* @__PURE__ */ jsxDEV40("input", { type: "submit", className: "button", value: "Guardar" }, void 0, !1, {
         fileName: "app/components/formDate.tsx",
-        lineNumber: 69,
+        lineNumber: 84,
         columnNumber: 11
       }, this),
       navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV40(Spinner, {}, void 0, !1, {
         fileName: "app/components/formDate.tsx",
-        lineNumber: 71,
+        lineNumber: 86,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/formDate.tsx",
-      lineNumber: 68,
+      lineNumber: 83,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/formDate.tsx",
-    lineNumber: 17,
+    lineNumber: 32,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/formDate.tsx",
-    lineNumber: 16,
+    lineNumber: 31,
     columnNumber: 5
   }, this);
 }
@@ -6683,12 +6775,13 @@ function FormDate({ currentUser = null, date = {}, clients = [], users = [], err
 // app/components/date.tsx
 import { Form as Form13 } from "@remix-run/react";
 import { jsxDEV as jsxDEV41 } from "react/jsx-dev-runtime";
-function Date2({ date, selectedDate, setSelectedDate }) {
+function Date2({ index, date, selectedDate, setSelectedDate }) {
   let { DateID, Issue, DateTime, User: User2, Client: Client2, State } = date;
   return /* @__PURE__ */ jsxDEV41(
     "div",
     {
       className: `date ${selectedDate.DateID === DateID ? "active" : ""}`,
+      id: index,
       onClick: () => {
         setSelectedDate(date?.DateID === selectedDate?.DateID ? {} : date);
       },
@@ -6697,130 +6790,130 @@ function Date2({ date, selectedDate, setSelectedDate }) {
           /* @__PURE__ */ jsxDEV41("div", { className: "date-issue", children: [
             /* @__PURE__ */ jsxDEV41("span", { children: "Asunto" }, void 0, !1, {
               fileName: "app/components/date.tsx",
-              lineNumber: 13,
+              lineNumber: 14,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV41("p", { children: Issue }, void 0, !1, {
               fileName: "app/components/date.tsx",
-              lineNumber: 14,
+              lineNumber: 15,
               columnNumber: 11
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/date.tsx",
-            lineNumber: 12,
+            lineNumber: 13,
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV41("div", { className: "information", children: [
             /* @__PURE__ */ jsxDEV41("div", { className: "information-item", children: [
               /* @__PURE__ */ jsxDEV41("span", { children: "Encargado" }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 19,
+                lineNumber: 20,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV41("p", { children: User2?.Name }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 20,
+                lineNumber: 21,
                 columnNumber: 13
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/date.tsx",
-              lineNumber: 18,
+              lineNumber: 19,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV41("div", { className: "information-item", children: [
               /* @__PURE__ */ jsxDEV41("span", { children: "Cliente" }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 24,
+                lineNumber: 25,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV41("p", { children: Client2?.Name }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 25,
+                lineNumber: 26,
                 columnNumber: 13
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/date.tsx",
-              lineNumber: 23,
+              lineNumber: 24,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV41("div", { className: "information-item", children: [
               /* @__PURE__ */ jsxDEV41("span", { children: "Fecha" }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 29,
+                lineNumber: 30,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV41("p", { children: formattedDate(DateTime).split(",")[0] }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 30,
+                lineNumber: 31,
                 columnNumber: 13
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/date.tsx",
-              lineNumber: 28,
+              lineNumber: 29,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV41("div", { className: "information-item", children: [
               /* @__PURE__ */ jsxDEV41("span", { children: "Hora" }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 34,
+                lineNumber: 35,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV41("p", { children: formattedDate(DateTime).split(",")[1] }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 35,
+                lineNumber: 36,
                 columnNumber: 13
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/date.tsx",
-              lineNumber: 33,
+              lineNumber: 34,
               columnNumber: 11
             }, this),
             /* @__PURE__ */ jsxDEV41("div", { className: "information-item", children: [
               /* @__PURE__ */ jsxDEV41("span", { children: "Estado actual" }, void 0, !1, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 39,
+                lineNumber: 40,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV41("div", { className: "state", children: [
                 /* @__PURE__ */ jsxDEV41("div", { className: `point ${State === "P" ? "" : "active"}` }, void 0, !1, {
                   fileName: "app/components/date.tsx",
-                  lineNumber: 41,
+                  lineNumber: 42,
                   columnNumber: 15
                 }, this),
                 /* @__PURE__ */ jsxDEV41("p", { children: State === "P" ? "Pendiente" : "Realizada" }, void 0, !1, {
                   fileName: "app/components/date.tsx",
-                  lineNumber: 42,
+                  lineNumber: 43,
                   columnNumber: 15
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/components/date.tsx",
-                lineNumber: 40,
+                lineNumber: 41,
                 columnNumber: 13
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/date.tsx",
-              lineNumber: 38,
+              lineNumber: 39,
               columnNumber: 11
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/date.tsx",
-            lineNumber: 17,
+            lineNumber: 18,
             columnNumber: 9
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/date.tsx",
-          lineNumber: 11,
+          lineNumber: 12,
           columnNumber: 7
         }, this),
         /* @__PURE__ */ jsxDEV41(Form13, { method: "PUT", children: [
           /* @__PURE__ */ jsxDEV41("input", { type: "hidden", name: "DateID", value: DateID }, void 0, !1, {
             fileName: "app/components/date.tsx",
-            lineNumber: 49,
+            lineNumber: 50,
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV41("input", { type: "hidden", name: "State", value: State }, void 0, !1, {
             fileName: "app/components/date.tsx",
-            lineNumber: 50,
+            lineNumber: 51,
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV41(
@@ -6834,14 +6927,14 @@ function Date2({ date, selectedDate, setSelectedDate }) {
             !1,
             {
               fileName: "app/components/date.tsx",
-              lineNumber: 52,
+              lineNumber: 53,
               columnNumber: 9
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/components/date.tsx",
-          lineNumber: 48,
+          lineNumber: 49,
           columnNumber: 7
         }, this)
       ]
@@ -6858,7 +6951,7 @@ function Date2({ date, selectedDate, setSelectedDate }) {
 }
 
 // app/styles/citas.css
-var citas_default = "/build/_assets/citas-OMHUZKXH.css";
+var citas_default = "/build/_assets/citas-XUGSZVXA.css";
 
 // app/routes/citas._index.tsx
 import { Fragment as Fragment11, jsxDEV as jsxDEV42 } from "react/jsx-dev-runtime";
@@ -6919,8 +7012,8 @@ async function action10({ request }) {
   }
 }
 function Citas() {
-  let action12 = useActionData15(), loader13 = useLoaderData9(), [showInsertedMessage, setShowInsertedMessage] = useState20(!1), [showUpdatedMessage, setShowUpdatedMessage] = useState20(!1), [showFormDate, setShowFormDate] = useState20(!1), [showDeleteMessage, setShowDeleteMessage] = useState20(!1), [showDeletedMessage, setShowDeletedMessage] = useState20(!1), [showErrorDeleteMessage, setShowErrorDeleteMessage] = useState20(!1), [dateType, setDateType] = useState20(""), [dateTime, setDateTime] = useState20(getCurrentDate()), [issue, setIssue] = useState20(""), [selectedDate, setSelectedDate] = useState20({}), [dates, setDates] = useState20([]);
-  useEffect10(() => {
+  let action12 = useActionData15(), loader13 = useLoaderData9(), [showInsertedMessage, setShowInsertedMessage] = useState24(!1), [showUpdatedMessage, setShowUpdatedMessage] = useState24(!1), [showFormDate, setShowFormDate] = useState24(!1), [showDeleteMessage, setShowDeleteMessage] = useState24(!1), [showDeletedMessage, setShowDeletedMessage] = useState24(!1), [showErrorDeleteMessage, setShowErrorDeleteMessage] = useState24(!1), [dateType, setDateType] = useState24(""), [dateTime, setDateTime] = useState24(getCurrentDate()), [issue, setIssue] = useState24(""), [selectedDate, setSelectedDate] = useState24({}), [dates, setDates] = useState24([]);
+  useEffect18(() => {
     switch (action12?.STATUS) {
       case "INSERTED":
         setShowFormDate(!1), setShowInsertedMessage(!0);
@@ -6932,9 +7025,9 @@ function Citas() {
         setShowDeleteMessage(!1), setShowDeletedMessage(!0);
         break;
     }
-  }, [action12]), useEffect10(() => {
+  }, [action12]), useEffect18(() => {
     setDates(loader13?.dates);
-  }, [loader13]), useEffect10(() => {
+  }, [loader13]), useEffect18(() => {
     dateType.length > 0 ? setDates(loader13?.dates.filter((date) => date.State === dateType && date.DateTime.split("T")[0] === dateTime && date.Issue.toLowerCase().includes(issue))) : setDates(loader13?.dates.filter((date) => date.DateTime.split("T")[0] === dateTime));
   }, [dateType, dateTime, issue, loader13?.dates]);
   function getCurrentDate() {
@@ -6957,7 +7050,7 @@ function Citas() {
       !1,
       {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 188,
+        lineNumber: 189,
         columnNumber: 7
       },
       this
@@ -6977,7 +7070,7 @@ function Citas() {
       !1,
       {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 198,
+        lineNumber: 199,
         columnNumber: 7
       },
       this
@@ -7000,7 +7093,7 @@ function Citas() {
       !1,
       {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 210,
+        lineNumber: 211,
         columnNumber: 7
       },
       this
@@ -7020,7 +7113,7 @@ function Citas() {
       !1,
       {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 227,
+        lineNumber: 228,
         columnNumber: 7
       },
       this
@@ -7040,7 +7133,7 @@ function Citas() {
       !1,
       {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 239,
+        lineNumber: 240,
         columnNumber: 7
       },
       this
@@ -7048,19 +7141,19 @@ function Citas() {
     /* @__PURE__ */ jsxDEV42("div", { className: "container", children: [
       /* @__PURE__ */ jsxDEV42("h1", { className: "heading", children: "Citas" }, void 0, !1, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 251,
+        lineNumber: 252,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV42("p", { className: "subheading", children: "Aqu\xED veras todas las citas" }, void 0, !1, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 252,
+        lineNumber: 253,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV42("div", { className: "top-options", children: [
         /* @__PURE__ */ jsxDEV42("div", { className: "search", children: [
           /* @__PURE__ */ jsxDEV42("img", { src: "/img/search.svg", alt: "search" }, void 0, !1, {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 256,
+            lineNumber: 257,
             columnNumber: 13
           }, this),
           /* @__PURE__ */ jsxDEV42(
@@ -7077,14 +7170,14 @@ function Citas() {
             !1,
             {
               fileName: "app/routes/citas._index.tsx",
-              lineNumber: 257,
+              lineNumber: 258,
               columnNumber: 13
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/routes/citas._index.tsx",
-          lineNumber: 255,
+          lineNumber: 256,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV42("div", { className: "input", children: /* @__PURE__ */ jsxDEV42("select", { name: "state", id: "state", onChange: (evt) => {
@@ -7092,42 +7185,42 @@ function Citas() {
         }, children: [
           /* @__PURE__ */ jsxDEV42("option", { value: "", children: "-- Todas las citas --" }, void 0, !1, {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 270,
+            lineNumber: 271,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV42("option", { value: "P", children: "Pendiente" }, void 0, !1, {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 271,
+            lineNumber: 272,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ jsxDEV42("option", { value: "R", children: "Realizada" }, void 0, !1, {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 272,
+            lineNumber: 273,
             columnNumber: 15
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/citas._index.tsx",
-          lineNumber: 266,
+          lineNumber: 267,
           columnNumber: 13
         }, this) }, void 0, !1, {
           fileName: "app/routes/citas._index.tsx",
-          lineNumber: 265,
+          lineNumber: 266,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV42("div", { className: "input", children: /* @__PURE__ */ jsxDEV42("input", { type: "date", value: dateTime.toString(), onChange: (evt) => {
           setDateTime(evt.target.value);
         } }, void 0, !1, {
           fileName: "app/routes/citas._index.tsx",
-          lineNumber: 277,
+          lineNumber: 278,
           columnNumber: 13
         }, this) }, void 0, !1, {
           fileName: "app/routes/citas._index.tsx",
-          lineNumber: 276,
+          lineNumber: 277,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 254,
+        lineNumber: 255,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV42("div", { className: "actions", children: [
@@ -7142,12 +7235,12 @@ function Citas() {
             children: [
               /* @__PURE__ */ jsxDEV42("img", { src: "/img/add.svg", alt: "add" }, void 0, !1, {
                 fileName: "app/routes/citas._index.tsx",
-                lineNumber: 290,
+                lineNumber: 291,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV42("p", { children: "Agregar" }, void 0, !1, {
                 fileName: "app/routes/citas._index.tsx",
-                lineNumber: 291,
+                lineNumber: 292,
                 columnNumber: 13
               }, this)
             ]
@@ -7156,7 +7249,7 @@ function Citas() {
           !0,
           {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 285,
+            lineNumber: 286,
             columnNumber: 11
           },
           this
@@ -7173,12 +7266,12 @@ function Citas() {
             children: [
               /* @__PURE__ */ jsxDEV42("img", { src: "/img/x.svg", alt: "add" }, void 0, !1, {
                 fileName: "app/routes/citas._index.tsx",
-                lineNumber: 300,
+                lineNumber: 301,
                 columnNumber: 13
               }, this),
               /* @__PURE__ */ jsxDEV42("p", { children: "Eliminar" }, void 0, !1, {
                 fileName: "app/routes/citas._index.tsx",
-                lineNumber: 301,
+                lineNumber: 302,
                 columnNumber: 13
               }, this)
             ]
@@ -7187,20 +7280,21 @@ function Citas() {
           !0,
           {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 294,
+            lineNumber: 295,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 284,
+        lineNumber: 285,
         columnNumber: 9
       }, this),
-      dates.length > 0 ? /* @__PURE__ */ jsxDEV42("section", { className: "dates", children: dates.map(
+      dates.length > 0 ? /* @__PURE__ */ jsxDEV42("div", { className: "list-scroll", children: /* @__PURE__ */ jsxDEV42("section", { className: "dates", children: dates.map(
         (date, index) => /* @__PURE__ */ jsxDEV42(
           Date2,
           {
+            index,
             date,
             selectedDate,
             setSelectedDate
@@ -7209,32 +7303,36 @@ function Citas() {
           !1,
           {
             fileName: "app/routes/citas._index.tsx",
-            lineNumber: 310,
-            columnNumber: 11
+            lineNumber: 312,
+            columnNumber: 13
           },
           this
         )
       ) }, void 0, !1, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 307,
+        lineNumber: 309,
+        columnNumber: 15
+      }, this) }, void 0, !1, {
+        fileName: "app/routes/citas._index.tsx",
+        lineNumber: 308,
         columnNumber: 9
       }, this) : loader13?.dates.length > 0 ? /* @__PURE__ */ jsxDEV42("p", { className: "no-found", children: "No se encontraron citas" }, void 0, !1, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 322,
+        lineNumber: 326,
         columnNumber: 9
       }, this) : /* @__PURE__ */ jsxDEV42("p", { className: "no-found", children: "Aun no hay citas registradas" }, void 0, !1, {
         fileName: "app/routes/citas._index.tsx",
-        lineNumber: 324,
+        lineNumber: 328,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/citas._index.tsx",
-      lineNumber: 250,
+      lineNumber: 251,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/citas._index.tsx",
-    lineNumber: 186,
+    lineNumber: 187,
     columnNumber: 5
   }, this);
 }
@@ -7391,8 +7489,8 @@ __export(index_exports, {
   loader: () => loader11,
   meta: () => meta2
 });
-import { useEffect as useEffect11 } from "react";
-import { Link as Link11, useNavigate as useNavigate3 } from "@remix-run/react";
+import { useEffect as useEffect19 } from "react";
+import { Link as Link12, useNavigate as useNavigate3 } from "@remix-run/react";
 
 // app/styles/inicio.css
 var inicio_default = "/build/_assets/inicio-4CC5REJO.css";
@@ -7418,7 +7516,7 @@ async function loader11({ request }) {
 }
 function Index() {
   let navigate = useNavigate3();
-  return useEffect11(() => {
+  return useEffect19(() => {
     localStorage.getItem("TOKEN") || navigate("/login");
   }, []), /* @__PURE__ */ jsxDEV45("div", { className: "container home", children: [
     /* @__PURE__ */ jsxDEV45(Logo, {}, void 0, !1, {
@@ -7427,7 +7525,7 @@ function Index() {
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV45("div", { className: "panels", children: [
-      /* @__PURE__ */ jsxDEV45(Link11, { to: "/clientes", className: "panel", children: [
+      /* @__PURE__ */ jsxDEV45(Link12, { to: "/clientes", className: "panel", children: [
         /* @__PURE__ */ jsxDEV45("img", { src: "/img/users-group.svg", alt: "user-group" }, void 0, !1, {
           fileName: "app/routes/_index.tsx",
           lineNumber: 48,
@@ -7448,7 +7546,7 @@ function Index() {
         lineNumber: 47,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ jsxDEV45(Link11, { to: "/citas", className: "panel", children: [
+      /* @__PURE__ */ jsxDEV45(Link12, { to: "/citas", className: "panel", children: [
         /* @__PURE__ */ jsxDEV45("img", { src: "/img/calendar-event.svg", alt: "calendar" }, void 0, !1, {
           fileName: "app/routes/_index.tsx",
           lineNumber: 54,
@@ -7469,7 +7567,7 @@ function Index() {
         lineNumber: 53,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ jsxDEV45(Link11, { to: "/materias", className: "panel", children: [
+      /* @__PURE__ */ jsxDEV45(Link12, { to: "/materias", className: "panel", children: [
         /* @__PURE__ */ jsxDEV45("img", { src: "/img/category.svg", alt: "category" }, void 0, !1, {
           fileName: "app/routes/_index.tsx",
           lineNumber: 60,
@@ -7490,7 +7588,7 @@ function Index() {
         lineNumber: 59,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ jsxDEV45(Link11, { to: "/documentacioninterna", className: "panel", children: [
+      /* @__PURE__ */ jsxDEV45(Link12, { to: "/documentacioninterna", className: "panel", children: [
         /* @__PURE__ */ jsxDEV45("img", { src: "/img/file-description.svg", alt: "category-2" }, void 0, !1, {
           fileName: "app/routes/_index.tsx",
           lineNumber: 66,
@@ -7511,7 +7609,7 @@ function Index() {
         lineNumber: 65,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ jsxDEV45(Link11, { to: "/nosotros", className: "panel", children: [
+      /* @__PURE__ */ jsxDEV45(Link12, { to: "/nosotros", className: "panel", children: [
         /* @__PURE__ */ jsxDEV45("img", { src: "/img/info-octagon.svg", alt: "info" }, void 0, !1, {
           fileName: "app/routes/_index.tsx",
           lineNumber: 72,
@@ -7551,8 +7649,8 @@ __export(login_exports, {
   default: () => Login,
   loader: () => loader12
 });
-import { useState as useState21 } from "react";
-import { Form as Form14, Link as Link12, useLoaderData as useLoaderData10, useNavigation as useNavigation13 } from "@remix-run/react";
+import { useState as useState25 } from "react";
+import { Form as Form14, Link as Link13, useLoaderData as useLoaderData10, useNavigation as useNavigation13 } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import { jsxDEV as jsxDEV46 } from "react/jsx-dev-runtime";
 async function loader12({ request }) {
@@ -7571,7 +7669,7 @@ async function action11({ request, context }) {
   });
 }
 function Login() {
-  let navigation = useNavigation13(), loader13 = useLoaderData10(), [email, setEmail] = useState21(""), [password, setPassword] = useState21("");
+  let navigation = useNavigation13(), loader13 = useLoaderData10(), [email, setEmail] = useState25(""), [password, setPassword] = useState25("");
   return /* @__PURE__ */ jsxDEV46("main", { className: "login-modal", children: /* @__PURE__ */ jsxDEV46(Form14, { className: "form", method: "POST", children: [
     /* @__PURE__ */ jsxDEV46("h1", { className: "heading", children: "Iniciar sesi\xF3n" }, void 0, !1, {
       fileName: "app/routes/login.tsx",
@@ -7629,12 +7727,12 @@ function Login() {
         this
       ),
       /* @__PURE__ */ jsxDEV46("div", { className: "account-options", children: [
-        /* @__PURE__ */ jsxDEV46(Link12, { to: "/create-account", className: "option", children: "\xBFNo tienes una cuenta? Crea una" }, void 0, !1, {
+        /* @__PURE__ */ jsxDEV46(Link13, { to: "/create-account", className: "option", children: "\xBFNo tienes una cuenta? Crea una" }, void 0, !1, {
           fileName: "app/routes/login.tsx",
           lineNumber: 68,
           columnNumber: 13
         }, this),
-        /* @__PURE__ */ jsxDEV46(Link12, { to: "/forgot-password", className: "option", children: "\xBFOlvidaste tu contrase\xF1a? Recuperala" }, void 0, !1, {
+        /* @__PURE__ */ jsxDEV46(Link13, { to: "/forgot-password", className: "option", children: "\xBFOlvidaste tu contrase\xF1a? Recuperala" }, void 0, !1, {
           fileName: "app/routes/login.tsx",
           lineNumber: 69,
           columnNumber: 13
@@ -7682,7 +7780,7 @@ function Login() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-5JJLNVB7.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-RZELNMHB.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-RU72LQUF.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-ONYQMLTM.js", imports: ["/build/_shared/chunk-SSCGWDOF.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-M7EULVOG.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-CKXDGP4O.js", imports: ["/build/_shared/chunk-SSCGWDOF.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-NCR7M4CC.js", imports: ["/build/_shared/chunk-SSCGWDOF.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-BBCUJSOL.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-SLIWXWB5.js", imports: ["/build/_shared/chunk-SSCGWDOF.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-74XENLAS.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-64C6VHP4.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "4cb0a074", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1706575221446 }, url: "/build/manifest-4CB0A074.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-MENZNXXS.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-RZELNMHB.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-SY77QFED.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-WJZP7AVY.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-Q273B5MY.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-3ZYYLEP2.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-SZVMQQLB.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3LRWCHWO.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-2RUZ46QG.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-EKGVAMQ3.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "bcd79dd3", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1708130330318 }, url: "/build/manifest-BCD79DD3.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public\\build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

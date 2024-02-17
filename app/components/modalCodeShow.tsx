@@ -6,6 +6,20 @@ export default function ModalCodeShow ({ setStep, accessLevelSelected }: any){
   const navigation = useNavigation();
 
   const [code, setCode] = useState('000000');
+  const [beVisible, setBevisible] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setStep(0);
+    }, 300)
+  }
 
   function generateRandomCode(length: number) {
     const character = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -23,7 +37,7 @@ export default function ModalCodeShow ({ setStep, accessLevelSelected }: any){
   }, []);
 
   return (
-    <div className='modal'>
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <div className='message'>
         <img
           src="/img/x.svg"
@@ -31,7 +45,7 @@ export default function ModalCodeShow ({ setStep, accessLevelSelected }: any){
           alt="close"
           onClick={
             ()=> {
-              setStep(0)
+              hideModal()
             }
           }
         />

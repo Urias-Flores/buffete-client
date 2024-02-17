@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useActionData, useLoaderData} from "@remix-run/react";
+import {Link, useActionData, useLoaderData} from "@remix-run/react";
 
 import {addDate, getAllDates, updateDate, deleteDate } from "../services/date.server";
 
@@ -157,6 +157,7 @@ export default function Citas (){
 
   useEffect(() => {
     setDates( loader?.dates );
+    
   }, [loader])
 
   useEffect(() => {
@@ -304,18 +305,21 @@ export default function Citas (){
 
         { dates.length > 0
           ?
-            <section className='dates'>
-              {
-                dates.map( (date, index) =>
-                  <ComponentDate
-                    key={index}
-                    date={date}
-                    selectedDate={ selectedDate }
-                    setSelectedDate={ setSelectedDate }
-                  />
-                )
-              }
-            </section>
+            <div className="list-scroll">
+              <section className='dates'>
+                {
+                  dates.map( (date, index) =>
+                    <ComponentDate
+                      key={index}
+                      index={index}
+                      date={date}
+                      selectedDate={ selectedDate }
+                      setSelectedDate={ setSelectedDate }
+                    />
+                  )
+                }
+              </section>
+            </div>
           :
             loader?.dates.length > 0
               ?

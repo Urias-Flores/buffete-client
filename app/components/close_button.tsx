@@ -1,4 +1,4 @@
-export default function CloseButton ({ setVisibleForm }: any){
+export default function CloseButton ({ hideModal }: any){
   return (
     <img
       src="/img/x.svg"
@@ -6,7 +6,7 @@ export default function CloseButton ({ setVisibleForm }: any){
       alt="close"
       onClick={
         ()=> {
-          setVisibleForm(false)
+          hideModal()
         }
       }
     />

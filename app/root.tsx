@@ -11,9 +11,10 @@ import {
   Outlet,
   Scripts,
   isRouteErrorResponse,
-  useRouteError, useLoaderData, useLocation
+  useRouteError, useLoaderData, useLocation, useOutletContext
 } from "@remix-run/react";
 import {authenticator} from "./auth/auth.server";
+import { useState } from "react";
 
 export function meta(){
   return (
@@ -93,11 +94,13 @@ export async function action({ request }: any){
 
 export default function App() {
   const loader: any = useLoaderData();
+  const [showMenu, setShowMenu] = useState(false);
   return (
     <Document user={loader?.USER}>
         <Outlet context={
           {
-            URL_API: loader?.ENV.URL_API
+            URL_API: loader?.ENV.URL_API,
+            menuState: [showMenu, setShowMenu]
           }
         }/>
     </Document>
@@ -106,6 +109,7 @@ export default function App() {
 
 function Document({children, user}: any){
   const { pathname } = useLocation();
+
   return(
     < html lang = "es" >
       <head>
@@ -119,7 +123,9 @@ function Document({children, user}: any){
         || pathname === '/create-account'
         || pathname === '/forgot-password'
         ? <></>
-        : <Navigation user={user}/>
+        : <Navigation 
+            user={user}
+          />
       }
         {children}
         <Scripts/>

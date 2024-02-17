@@ -116,6 +116,7 @@ export default function ClientesClientID (){
   const { ClientID, Name, Identity, Email, Phone, Address, Documents } = client[0]
 
   const [ showSubject, setShowSubject ] = useState(false);
+  const [showGeneralInformation, setShowGeneralInformation] = useState(false);
 
   const [ showInsertedMessage, setShowInsertedMessage ] = useState(false);
   const [ showDeletedMessage, setShowDeletedMessage ] = useState(false);
@@ -224,9 +225,9 @@ export default function ClientesClientID (){
       <h2 className="subheading">Información general y expediente completo del cliente</h2>
 
       <main className="grid-1-2">
-        <section className="content">
+        <section className="content" onClick={ () => { setShowGeneralInformation(!showGeneralInformation) } }>
           <h3>Información general</h3>
-          <div className="data">
+          <div className={`data ${ showGeneralInformation ? 'active' : '' }`}>
               <div className="item">
                 <p>Nombre:</p>
                 <b>{ Name }</b>

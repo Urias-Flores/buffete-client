@@ -2,16 +2,30 @@ import {Form, useNavigation} from "@remix-run/react";
 
 import Spinner from "./spinner";
 import CloseButton from "./close_button";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, useEffect, useState } from "react";
 
 export default function FormDocument ({ method, errors, subjects, ClientID, UserID, setShowModalDocument }: any){
   const navigation = useNavigation()
+  const [beVisible, setBevisible] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setShowModalDocument(false);
+    }, 300)
+  }
 
   return (
     <div className="modal">
       <Form className="form" method={method} encType="multipart/form-data">
         <CloseButton
-          setVisibleForm={setShowModalDocument}
+          hideModal={hideModal}
         />
 
         <h1 className="heading">Agregar nuevo documento</h1>

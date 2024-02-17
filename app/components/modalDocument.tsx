@@ -1,11 +1,27 @@
+import CloseButton from "./close_button";
 import {Document, Page, pdfjs} from "react-pdf";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useOutletContext} from "@remix-run/react";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function ModalDocument ({ URL, setShowModalDocument, isInternalDocument = false }: any){
     const [numPages, setNumPages] = useState(0);
     const [pageNumber, setPageNumber] = useState(1);
+    const [beVisible, setBevisible] = useState(false);
+
+    useEffect( () => {
+      setTimeout(() => {
+        setBevisible(true);
+      }, 100)
+    }, [])
+
+    const hideModal = () => {
+      setBevisible(false);
+      setTimeout(() => {
+        setShowModalDocument(false);
+      }, 300)
+    }
+
 
     const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
         setNumPages(numPages);
@@ -26,20 +42,15 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
     const context: any = useOutletContext();
 
     return (
-      <div className='modal'>
+      <div className={`modal ${ beVisible ? 'active' : '' }`}>
         <div className='document'>
-          <img
-            src="/img/x.svg"
-            className="button-close"
-            alt="close"
-            onClick={
-              ()=> {
-                setShowModalDocument(false)
-              }
-            }
+          
+          <CloseButton 
+            hideModal="hideModal"
           />
+
           <Document
-            file={`http://localhost:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
+            file={`http://ufsofts.com:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

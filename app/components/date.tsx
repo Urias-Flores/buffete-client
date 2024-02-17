@@ -1,11 +1,12 @@
 import { Form } from '@remix-run/react';
 import {formattedDate} from "../utils/helpers";
 
-export default function Date ({ date, selectedDate, setSelectedDate }: any){
+export default function Date ({ index, date, selectedDate, setSelectedDate }: any){
   const { DateID, Issue, DateTime, User, Client, State } = date
   return (
     <div
       className={`date ${selectedDate.DateID === DateID ? 'active' : ''}`}
+      id={index}
       onClick={ () => { setSelectedDate( date?.DateID === selectedDate?.DateID ? {} : date) } }
     >
       <div>

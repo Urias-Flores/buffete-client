@@ -228,7 +228,7 @@ export default function Usuarios (){
         <ModalMessage
           features={
             {
-              text: `¿Esta seguro que desea ${ userSelected.State === 1 ? 'Inactivar' : 'Activar' } el usuario seleccionado?`,
+              text: `¿Esta seguro que desea ${ userSelected.State === 1 ? 'inactivar' : 'activar' } el usuario seleccionado?`,
               isOkCancel: true,
               indexIcon: 2,
               data: {
@@ -238,6 +238,7 @@ export default function Usuarios (){
               }
             }
           }
+          visibleMessage={showMessageEnableUser}
           setVisibleMessage={ setShowMessageEnableUser }
         />
       }

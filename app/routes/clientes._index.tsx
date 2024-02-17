@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {useActionData, useLoaderData} from "@remix-run/react";
+import {useContext, useEffect, useState} from "react";
+import {useActionData, useLoaderData, useOutletContext} from "@remix-run/react";
 
 //Components
 import FormClient from "../components/formClient.jsx"

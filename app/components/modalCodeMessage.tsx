@@ -1,24 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Dropdownlist from "./dropdownlist";
 import { accessLevel } from "../utils/helpers";
 
 export default function ModalCodeMessage ({ currentUser, setStep, accessLevelSelected, setAccessLevelSelected }: any){
   const [error, setError] = useState('')
+  const [beVisible, setBevisible] = useState(false);
 
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setStep(0);
+    }, 300)
+  }
+
+  const nextModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setStep(2);
+    }, 300)
+  }
 
   const validateAccessLevelSelected = () => {
     if( accessLevelSelected === -1) {
       setError('Debe seleccionar el nivel de acceso del usuario');
     } else if( accessLevelSelected === 'A' || accessLevelSelected === 'R' || accessLevelSelected === 'N' ) {
-      setStep(2)
+      nextModal()
     } else {
       setError('El nivel de acceso seleccionado no es valido')
     }
   }
 
   return (
-    <div className='modal'>
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <div className='message'>
         <img
           src="/img/x.svg"
@@ -26,7 +46,7 @@ export default function ModalCodeMessage ({ currentUser, setStep, accessLevelSel
           alt="close"
           onClick={
             ()=> {
-              setStep(0)
+              hideModal()
             }
           }
         />

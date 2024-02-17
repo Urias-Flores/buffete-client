@@ -1,9 +1,12 @@
 import { Form } from "@remix-run/react";
 import CloseButton from "./close_button";
+import { useEffect, useState } from "react";
 
 export default function ModalMessage ({ features, setVisibleMessage }: any){
 
   const { text, indexIcon, isOkCancel, data } = features
+  const [ beVisible, setBevisible ] = useState(false);
+
 
   const icon: any = {
     0 : "alert-triangle.svg",
@@ -11,11 +14,24 @@ export default function ModalMessage ({ features, setVisibleMessage }: any){
     2 : "progress-check.svg",
   }
 
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setVisibleMessage(false);
+    }, 300)
+  }
+
   return (
-    <div className="modal">
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <div className="message">
         <CloseButton
-          setVisibleForm={ setVisibleMessage }
+          hideModal={ hideModal }
         />
 
         <div className="message-information">
@@ -36,7 +52,7 @@ export default function ModalMessage ({ features, setVisibleMessage }: any){
                 <input
                   className="button"
                   type="button"
-                  onClick={ () => { setVisibleMessage(false) } }
+                  onClick={ () => { hideModal() } }
                   value="Cancelar"
                 />
               </>
@@ -44,7 +60,7 @@ export default function ModalMessage ({ features, setVisibleMessage }: any){
               <input
                 className="button"
                 type="button"
-                onClick={ () => { setVisibleMessage(false) } }
+                onClick={ () => { hideModal() } }
                 value="Aceptar"
               />
             }

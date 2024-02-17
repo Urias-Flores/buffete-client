@@ -1,20 +1,29 @@
+import CloseButton from "./close_button";
 import {Form, useNavigation} from "@remix-run/react";
+import { useEffect, useState } from "react";
 
 export default function FormInternalDocument ({ method, errors = {}, setShowModalInternalDocument }: any){
     const navigation = useNavigation();
+    const [beVisible, setBevisible] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setShowModalInternalDocument(false);
+    }, 300)
+  }
 
     return (
-      <div className="modal">
+      <div className={`modal ${beVisible ? 'active' : ''}`}>
         <Form className="form" method={ method } encType="multipart/form-data">
-          <img
-            src="/img/x.svg"
-            className="button-close"
-            alt="x"
-            onClick={
-              ()=> {
-                setShowModalInternalDocument(false)
-              }
-            }
+          <CloseButton
+            hideModal={hideModal}
           />
 
           <h1 className="heading">Agregar nuevo documento</h1>

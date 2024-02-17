@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, useNavigation } from "@remix-run/react";
 
 import Spinner from './spinner';
@@ -15,15 +15,29 @@ export default function FormClient ({ method, errors, client = {}, setVisibleFor
   const [phone, setPhone] = useState(client?.Phone || '');
   const [email, setEmail] = useState(client?.Email || '');
   const [address, setAddress] = useState(client?.Address || '');
+  const [beVisible, setBevisible] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setVisibleFormClient(false);
+    }, 300)
+  }
 
   return (
-    <div className="modal">
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <Form
         className="form"
         method={method}
       >
         <CloseButton
-          setVisibleForm={setVisibleFormClient}
+          hideModal={hideModal}
         />
 
         <h1 className="heading">{Object.keys(client).length === 0 ? 'Nuevo cliente' : 'Modificar cliente' }</h1>

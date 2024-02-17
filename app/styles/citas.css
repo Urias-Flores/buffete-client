@@ -3,7 +3,6 @@
     gap: 1rem;
     grid-template-columns: repeat(4, 1fr);
     overflow-y: scroll;
-    height: 60vh;
     padding-right: 1rem;
 }
 
@@ -64,4 +63,22 @@
 
 .information-item p{
     font-weight: normal;
+}
+
+.arrow{
+    height: 0;
+    visibility: hidden;
+}
+
+
+@media (max-width: 420px) {
+    .dates{
+        display: flex;
+        overflow-y: hidden;
+        flex-grow: 1;
+    }
+
+    .date{
+        margin-bottom: 1rem;
+    }
 }

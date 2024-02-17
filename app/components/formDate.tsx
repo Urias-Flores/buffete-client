@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Form, useNavigation} from "@remix-run/react";
 
 import CloseButton from "./close_button";
@@ -12,11 +12,26 @@ export default function FormDate ({ currentUser = null, date = {}, clients = [],
   const [datetime, setDatetime] = useState(new Date());
 
   const navigation = useNavigation()
+  const [beVisible, setBevisible] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setShowFormDate(false);
+    }, 300)
+  }
+  
   return (
-    <div className='modal'>
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <Form action="" method='post' className='form'>
         <CloseButton
-          setVisibleForm={setShowFormDate}
+          hideModal={hideModal}
         />
 
         <h1 className='heading'>Agregar nueva cita</h1>

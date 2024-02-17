@@ -1,15 +1,15 @@
 export async function getSubjects(){
-  const response = await fetch(`http://localhost:8000/api/subjects`)
+  const response = await fetch(`http://ufsofts.com:8000/api/subjects`)
   return await response.json()
 }
 
 export async function getSubjectByID(SubjectID: string){
-  const response = await fetch(`http://localhost:8000/api/subjects/${SubjectID}`)
+  const response = await fetch(`http://ufsofts.com:8000/api/subjects/${SubjectID}`)
   return await response.json();
 }
 
 export async function addSubject( subject: any ){
-  const response = await fetch(`http://localhost:8000/api/subjects`, {
+  const response = await fetch(`http://ufsofts.com:8000/api/subjects`, {
     method: 'POST',
     headers: {
       "Content-Type" : "application/json"
@@ -20,7 +20,7 @@ export async function addSubject( subject: any ){
 }
 
 export async function updateSubject( subject: any ){
-  const response = await fetch(`http://localhost:8000/api/subjects`, {
+  const response = await fetch(`http://ufsofts.com:8000/api/subjects`, {
     method: 'PUT',
     headers: {
       "Content-Type" : "application/json"
@@ -31,7 +31,7 @@ export async function updateSubject( subject: any ){
 }
 
 export async function deleteSubject( SubjectID: string ) {
-  const response = await fetch(`http://localhost:8000/api/subjects/${SubjectID}`, {
+  const response = await fetch(`http://ufsofts.com:8000/api/subjects/${SubjectID}`, {
     method: 'DELETE'
   });
   return await response.json();

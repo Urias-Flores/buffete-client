@@ -1,4 +1,5 @@
-import { useState } from "react";
+import CloseButton from "./close_button";
+import { useEffect, useState } from "react";
 import { Form, useNavigation } from "@remix-run/react";
 
 export default function FormSubject ({ subject, method, errors = {}, setShowModalCategory }: any){
@@ -6,24 +7,31 @@ export default function FormSubject ({ subject, method, errors = {}, setShowModa
   const isSubject = Object.keys(subject).length > 0;
   const [name, setName] = useState(subject?.Name || '');
   const navigation = useNavigation();
+  const [beVisible, setBevisible] = useState(false);
+
+  useEffect( () => {
+    setTimeout(() => {
+      setBevisible(true);
+    }, 100)
+  }, [])
+
+  const hideModal = () => {
+    setBevisible(false);
+    setTimeout(() => {
+      setShowModalCategory(false);
+    }, 300)
+  }
 
   return (
-    <div className="modal">
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <Form
         className="form"
         method={method}
         action={'/materias'}
       >
-        <img
-          src="/img/x.svg"
-          className="button-close"
-          alt="x"
-          onClick={
-            ()=> {
-              setShowModalCategory(false)
-            }
-          }
-        />
+        <CloseButton 
+          hideModal={hideModal}
+        /> 
 
         <h1 className="heading">
           { !isSubject ? 'Agregar nueva materia' : 'Modificar materia' }
