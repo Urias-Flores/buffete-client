@@ -1,10 +1,10 @@
 export async function login( username: string, password: string ){
   const body = {
-    Email_Name: username,
+    Email_Name: username.toLowerCase(),
     Password: password
   }
 
-  const response = await fetch(`https://ufsofts.com:8000/api/auth`, {
+  const response = await fetch(`http://localhost:8000/api/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

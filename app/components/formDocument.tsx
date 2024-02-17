@@ -22,7 +22,7 @@ export default function FormDocument ({ method, errors, subjects, ClientID, User
   }
 
   return (
-    <div className="modal">
+    <div className={`modal ${beVisible ? 'active' : ''}`}>
       <Form className="form" method={method} encType="multipart/form-data">
         <CloseButton
           hideModal={hideModal}

@@ -46,11 +46,11 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
         <div className='document'>
           
           <CloseButton 
-            hideModal="hideModal"
+            hideModal={hideModal}
           />
 
           <Document
-            file={`https://ufsofts.com:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
+            file={`http://localhost:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

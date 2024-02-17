@@ -1,3 +1,4 @@
+import CloseButton from "./close_button";
 import { useState, useEffect } from "react";
 import { Form, useNavigation } from '@remix-run/react'
 import Spinner from "./spinner";
@@ -39,15 +40,8 @@ export default function ModalCodeShow ({ setStep, accessLevelSelected }: any){
   return (
     <div className={`modal ${beVisible ? 'active' : ''}`}>
       <div className='message'>
-        <img
-          src="/img/x.svg"
-          className="button-close"
-          alt="close"
-          onClick={
-            ()=> {
-              hideModal()
-            }
-          }
+        <CloseButton
+          hideModal={hideModal}
         />
 
         <div className='message-information'>

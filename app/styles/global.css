@@ -45,7 +45,7 @@ header{
 }
 
 .heading{
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
 }
@@ -55,37 +55,33 @@ header{
     margin: .3rem 0;
 }
 
-@media(max-width: 768px) {
+@media only screen and (max-width: 767px) {
+    .home{
+        margin: 1rem auto 0 auto;
+    }
+
+    .container{
+        width: 85%;
+    }
+
+    .heading{
+        text-align: left;
+        font-size: 1.5rem;
+    }
+
+    .subheading{
+        text-align: left;
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
     .home{
         margin: 2rem auto 0 auto;
     }
 
     .container{
         width: 90%;
-    }
-
-    .heading{
-        font-size: 2.8rem;
-    }
-
-    .subheading{
-        font-size: 1.8rem;
-    }
-
-    .heading, .subheading{
-        text-align: center;
-    }
-}
-
-@media(max-width: 420px) {
-    .heading{
-        text-align: left;
-        font-size: 1.9rem;
-    }
-
-    .subheading{
-        text-align: left;
-        font-size: 1.2rem;
     }
 }
 /* ====================== General ======================== */
@@ -126,9 +122,28 @@ header{
     font-weight: lighter;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .brand{
+        width: 90%;
         margin: 0 auto;
+    }
+
+    .group-text{
+        font-size: 1.6rem;
+    }
+
+    .names-text{
+        font-size: 2.7rem;
+    }
+
+    .subtitle-text{
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .brand{
+        width: 21rem;
     }
 }
 /* ======================== Logo ========================= */
@@ -149,7 +164,7 @@ header{
 
 .nav{
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -220,7 +235,69 @@ header{
     border-bottom: 4px solid white;
 }
 
-@media (max-width: 768px){
+@media only screen and (max-width: 767px) {
+    .logo-menu{
+        width: 100%;
+        height: 3rem;
+    }
+
+    .logo{
+        width: 2.2rem;
+    }
+
+    .nav{
+        gap: 1.5rem;
+        height: 0;
+        visibility: hidden;
+        transition: height 500ms ease;
+    }
+
+    .nav.active{
+        width: 100%;
+        height: calc(100vh - 4rem);
+        visibility: visible;
+    }
+
+    .nav, .bar{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .link {
+        padding: .4rem 0;
+    }
+
+    .current-user{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user{
+        position: relative;
+        width: 2.7rem;
+    }
+    
+    .dropdownlist{
+        position: inherit;
+        margin-top: 2rem;
+        padding: .8rem;
+        width: 110%;
+    }
+
+    .dropdownlist .username{
+        font-size: 1.3rem;
+    }
+
+    .menu-icon{
+        color: white;
+        width: 2.4rem;
+        cursor: pointer;
+        visibility: visible;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
     .logo-menu{
         width: 100%;
         height: 4rem;
@@ -259,9 +336,7 @@ header{
         font-size: 1.8rem;
         font-weight: 600;
     }
-}
 
-@media(max-width: 420px) {
     .current-user{
         display: flex;
         flex-direction: column;
@@ -313,6 +388,28 @@ header{
 .error-page .information{
     font-size: 1.5rem;
 }
+
+@media only screen and (max-width: 767px) {
+    .error-page{
+        width: 85%;
+    }
+
+    .error-page .title{
+        font-size: 1.5rem;
+    }
+
+    .error-page .image{
+        width: 4rem;
+    }
+
+    .error-page .information{
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
 /* ================== Error component ===================== */
 
 
@@ -351,23 +448,43 @@ header{
     outline: none;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px) {
+    .top-options{
+        flex-direction: column;
+        margin-top: .5rem;
+    }
+
+    .search{
+        width: calc(100% - 1rem);
+        padding: .2rem .5rem;
+    }
+
+    .search img{
+        width: 1.3rem;
+    }
+
+    .search input{
+        font-size: 1.1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
     .top-options{
         flex-direction: column;
         margin-top: 1rem;
     }
 
     .search{
-        width: calc(100% - .6rem) ;
-        padding: .5rem .3rem;
+        width: calc(100% - 1rem) ;
+        padding: .3rem .5rem;
     }
 
     .search img{
-        width: 2rem;
+        width: 1.5rem;
     }
 
     .search input{
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 }
 /* =================== Search Field ====================== */
@@ -419,21 +536,19 @@ header{
     text-align: center;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .actions{
-        margin: 1rem 0;
+        margin: .6rem 0;
     }
 
     .button{
-        padding: .4rem;
-        width: 6rem;
-        flex-grow: 1;
+        padding: .3rem;
         justify-content: center;
         gap: 0;
     }
 
     .button p{
-        font-size: 1rem;
+        font-size: 0;
         text-align: center;
         width: 0;
         overflow: hidden;
@@ -441,7 +556,28 @@ header{
     }
 
     .button img{
-        width: 2rem;
+        width: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .actions{
+        margin: 1rem 0;
+    }
+
+    .button{
+        padding: .3rem;
+        flex-grow: 1;
+        justify-content: center;
+    }
+
+    .button p{
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .button img{
+        width: 1.5rem;
     }
 }
 /* ===================== Buttons ========================= */
@@ -501,28 +637,37 @@ header{
     background-color: rgb(255, 255, 255, .2);
 }
 
-@media (max-width: 767px) {
-    .form {
-        padding: 1.5rem;
-    }
-
-    .form, .message{
-        width: calc(85% - 1rem);
-    }
-}
-
-
-
 .button-close{
     position: absolute;
     inset: 0;
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 1.9rem;
+    height: 1.9rem;
     background: none;
     border: none;
     font-size: 1.5rem;
     font-weight: 400;
     cursor: pointer;
+    padding: .3rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .form {
+        padding: 2rem;
+    }
+
+    .form, .message{
+        width: calc(90% - 4rem);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .form {
+        padding: 2rem;
+    }
+
+    .form, .message{
+        width: calc(70% - 4rem);
+    }
 }
 /* ====================== Modals ========================= */
 
@@ -590,9 +735,45 @@ input[type='datetime-local']{
     background-color: rgb(255, 255, 255, .1);
 }
 
-@media (max-width: 768px){
+@media only screen and (max-width: 767px) {
     .inputs{
-        gap: .8rem;
+        gap: .5rem;
+        width: 100%;
+    }
+    
+    .input{
+        gap: .3rem;
+    }
+
+    .input label{
+        font-size: .9rem;
+    }
+    
+    .input input{
+        font-size: .8rem;
+        font-weight: normal;
+        padding: .4rem;
+        border: none;
+        border-radius: .4rem;
+        backdrop-filter: blur(10px);
+        background-color: rgb(255, 255, 255, .1);
+        outline: none;
+    }
+
+    .input select{
+        font-size: .8rem;
+        padding: .3rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .inputs{
+        gap: .5rem;
+        width: 100%;
+    }
+    
+    .input{
+        gap: .3rem;
     }
 }
 /* ====================== Inputs ========================= */
@@ -610,7 +791,17 @@ input[type='datetime-local']{
 .loading{
     display: flex;
     gap: .7rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .error{
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
 }
 /* ====================== Forms ========================= */
 
@@ -641,10 +832,18 @@ input[type='datetime-local']{
     width: 6rem;
 }
 
-@media (max-width: 768px){
-    .buttons{
-        flex-grow: 1;
+@media only screen and (max-width: 767px) {
+    .message-information p{
+        font-size: 0.9rem;
     }
+    
+    .message .message-information img{
+        width: 4rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
 }
 /* ===================== Messages ========================= */
 
@@ -709,10 +908,14 @@ input[type='datetime-local']{
     gap: 1rem;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .grid-1-2{
         grid-template-columns: 1fr;
     }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
 }
 /* ====================== Layout ========================= */
 
@@ -743,8 +946,18 @@ input[type='datetime-local']{
     margin-bottom: .3rem;
 }
 
-@media (max-width: 420px){
-    .data{
+@media only screen and (max-width: 767px) {
+    .content{
+        padding: .5rem 1rem;
+        margin-top: .5rem;
+    }
+
+    .content h3{
+        font-size: 1rem;
+    }
+
+    .content .data{
+        margin: 0;
         height: 0;
         opacity: 0;
         overflow: hidden;
@@ -752,10 +965,14 @@ input[type='datetime-local']{
     }
 
     .data.active{
-        height: fit-content;
+        height: 100%;
         overflow: visible;
         opacity: 1;
     }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
 }
 /* ======================= Panel ========================== */
 
@@ -778,7 +995,7 @@ input[type='datetime-local']{
 .react-pdf__Page__textContent,
 .react-pdf__Page__annotations
 {
-    max-width: 29rem;
+    max-width: 100%;
     max-height: 38rem;
 }
 
@@ -799,9 +1016,9 @@ input[type='datetime-local']{
     cursor: pointer;
 }
 
-@media (max-width: 420px) {
+@media only screen and (max-width: 767px) {
     .document{
-        width: 78%;
+        width: 65%;
     }
 
     .react-pdf__Page,
@@ -809,10 +1026,22 @@ input[type='datetime-local']{
     .react-pdf__Page__textContent,
     .react-pdf__Page__annotations
     {
-        max-width: 100%;
-        max-height: 31rem;
+        max-height: 23rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .document{
+        width: 60%;
     }
 
+    .react-pdf__Page,
+    .react-pdf__Page__canvas,
+    .react-pdf__Page__textContent,
+    .react-pdf__Page__annotations
+    {
+        max-height: 38rem;
+    }
 }
 /* =================== Document Modal ===================== */
 
@@ -829,6 +1058,7 @@ input[type='datetime-local']{
 
 .list-scroll::-webkit-scrollbar {
     width: 10px;
+    margin-left: 1rem;
 }
 
 .list-scroll::-webkit-scrollbar-thumb, .clients::-webkit-scrollbar-track {
@@ -894,7 +1124,43 @@ input[type='datetime-local']{
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px) {
+    .list-scroll{
+        padding: 0;
+        flex-grow: 1;
+    }
+
+    .item-list{
+        padding: .3rem .4rem;
+        margin-right: .5rem;
+    }
+
+    .item-main{
+        gap: .4rem;
+    }
+
+    .item-main img{
+        width: 1.8rem;
+    }
+
+    .item-information h4{
+        font-size: 0.8rem;
+    }
+
+    .item-information p{
+        font-size: .7rem;
+    }
+
+    .item-information p{
+        max-width: 10rem;
+    }
+
+    .item-list .check{
+        width: 1.4rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
     .list-scroll{
         padding: 0;
         flex-grow: 1;
@@ -933,10 +1199,16 @@ input[type='datetime-local']{
     font-weight: 400;
 }
 
-@media(max-width: 420px){
+@media only screen and (max-width: 767px) {
     .account-options{
         flex-direction: column;
         gap: .6rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .account-options .option:nth-child(2){
+        text-align: right;
     }
 }
 /* ========================= Login ======================== */
@@ -974,6 +1246,14 @@ input[type='datetime-local']{
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
 }
+
+@media only screen and (max-width: 767px) {
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
 /* ========================= Steps ======================== */
 
 /* ===================== Code Messages ==================== */
@@ -981,13 +1261,11 @@ input[type='datetime-local']{
     margin-top: 1.5rem;
 }
 
-.subheading + .code {
-    margin: 0;
-}
-
 .code{
-    margin: 1rem 0;
-    display: flex;
+    margin: .5rem 0;
+    display: grid;
+    width: fit-content;
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
 }
 
@@ -1007,18 +1285,21 @@ input[type='datetime-local']{
     background-color: rgb(255, 255, 255, 0.2);
 }
 
-@media (max-width: 420px) {
+@media only screen and (max-width: 767px) {
     .code{
         gap: .5rem;
     }
 
     .code-letter{
-        width: 2.7rem;
-        height: 2.7rem;
+        font-size: .9rem;
+        width: 2.2rem;
+        height: 2.2rem;
     }
 }
 /* ===================== Code Messages ==================== */
 
+
+/* ========================= Others ======================= */
 .no-found{
     display: flex;
     justify-content: center;
@@ -1047,3 +1328,11 @@ input[type='datetime-local']{
 .point.active{
     background-color: green;
 }
+
+@media only screen and (max-width: 767px) {
+    .point{
+        width: .5rem;
+        height: .5rem;
+    }
+}
+/* ========================= Others ======================= */

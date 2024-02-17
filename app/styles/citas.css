@@ -2,7 +2,7 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(4, 1fr);
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 1rem;
 }
 
@@ -10,7 +10,7 @@
     width: 10px;
 }
 
-.dates::-webkit-scrollbar-thumb {
+.dates::-webkit-scrollbar-thumb, .dates::-webkit-scrollbar-track {
     border-radius: .3rem;
     backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, 0.2);
@@ -70,8 +70,7 @@
     visibility: hidden;
 }
 
-
-@media (max-width: 420px) {
+@media only screen and (max-width: 767px) {
     .dates{
         display: flex;
         overflow-y: hidden;
@@ -79,6 +78,19 @@
     }
 
     .date{
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .dates{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        flex-grow: 1;
+    }
+
+    .date{
+
         margin-bottom: 1rem;
     }
 }

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-
 import Dropdownlist from "./dropdownlist";
+import CloseButton from "./close_button";
+import { useEffect, useState } from "react";
 import { accessLevel } from "../utils/helpers";
 
 export default function ModalCodeMessage ({ currentUser, setStep, accessLevelSelected, setAccessLevelSelected }: any){
@@ -40,15 +40,8 @@ export default function ModalCodeMessage ({ currentUser, setStep, accessLevelSel
   return (
     <div className={`modal ${beVisible ? 'active' : ''}`}>
       <div className='message'>
-        <img
-          src="/img/x.svg"
-          className="button-close"
-          alt="close"
-          onClick={
-            ()=> {
-              hideModal()
-            }
-          }
+        <CloseButton
+          hideModal={hideModal}
         />
 
         <div className='message-information'>

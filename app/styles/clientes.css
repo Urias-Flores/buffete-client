@@ -15,7 +15,6 @@
 .record-subject{
     display: flex;
     flex-direction: column;
-    margin-right: 1rem;
 }
 
 .record-subject img{

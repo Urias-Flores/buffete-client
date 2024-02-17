@@ -372,7 +372,7 @@ function Navigation({ user }) {
 var normalize_default = "/build/_assets/normalize-H7PQAZ5S.css";
 
 // app/styles/global.css
-var global_default = "/build/_assets/global-SXRFSQHQ.css";
+var global_default = "/build/_assets/global-K6T54HPW.css";
 
 // node_modules/react-pdf/dist/esm/Page/TextLayer.css
 var TextLayer_default = "/build/_assets/TextLayer-7XZ4NHUX.css";
@@ -413,15 +413,16 @@ var sessionStorage = createCookieSessionStorage({
 
 // app/services/auth.server.ts
 async function login(username, password) {
-  return await (await fetch("http://ufsofts.com:8000/api/auth", {
+  let body = {
+    Email_Name: username.toLowerCase(),
+    Password: password
+  };
+  return await (await fetch("http://localhost:8000/api/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      Email_Name: username,
-      Password: password
-    })
+    body: JSON.stringify(body)
   })).json();
 }
 
@@ -666,16 +667,16 @@ import { useActionData, useLoaderData as useLoaderData2 } from "@remix-run/react
 
 // app/services/internaldocuments.server.ts
 async function getInternalDocuments() {
-  return await (await fetch("http://ufsofts.com:8000/api/internal-documents")).json();
+  return await (await fetch("http://localhost:8000/api/internal-documents")).json();
 }
 async function addInternalDocument(internalDocumentFormData) {
-  return await (await fetch("http://ufsofts.com:8000/api/internal-documents", {
+  return await (await fetch("http://localhost:8000/api/internal-documents", {
     method: "POST",
     body: internalDocumentFormData
   })).json();
 }
 async function deleteInternalDocument(InternalDocumentID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/internal-documents/${InternalDocumentID}`, {
+  return await (await fetch(`http://localhost:8000/api/internal-documents/${InternalDocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -874,7 +875,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6(
       CloseButton,
       {
-        hideModal: "hideModal"
+        hideModal
       },
       void 0,
       !1,
@@ -888,7 +889,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6(
       Document2,
       {
-        file: `http://ufsofts.com:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
+        file: `http://localhost:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
         onLoadError: console.error,
         onLoadSuccess: onDocumentLoadSuccess,
         className: "file",
@@ -988,7 +989,7 @@ function InternalDocument({ InternalDocument: InternalDocument2, setSelectedDocu
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV7("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV7(Link2, { to: `http://ufsofts.com:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
+        /* @__PURE__ */ jsxDEV7(Link2, { to: `http://localhost:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
           "img",
           {
             src: "/img/download.svg",
@@ -1772,13 +1773,13 @@ function Client({ client, clientSelected, setClientSelected }) {
 
 // app/services/client.server.ts
 async function getClients() {
-  return await (await fetch("http://ufsofts.com:8000/api/clients")).json();
+  return await (await fetch("http://localhost:8000/api/clients")).json();
 }
 async function getClientByID(clientID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/clients/${clientID}`)).json();
+  return await (await fetch(`http://localhost:8000/api/clients/${clientID}`)).json();
 }
 async function addClient(client) {
-  return await (await fetch("http://ufsofts.com:8000/api/clients", {
+  return await (await fetch("http://localhost:8000/api/clients", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -1787,7 +1788,7 @@ async function addClient(client) {
   })).json();
 }
 async function updateClient(client) {
-  return await (await fetch("http://ufsofts.com:8000/api/clients", {
+  return await (await fetch("http://localhost:8000/api/clients", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -1796,26 +1797,26 @@ async function updateClient(client) {
   })).json();
 }
 async function deleteClient(ClientID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/clients/${ClientID}`, {
+  return await (await fetch(`http://localhost:8000/api/clients/${ClientID}`, {
     method: "DELETE"
   })).json();
 }
 
 // app/services/document.server.ts
 async function addDocument(documentFormData) {
-  return await (await fetch("http://ufsofts.com:8000/api/documents", {
+  return await (await fetch("http://localhost:8000/api/documents", {
     method: "POST",
     body: documentFormData
   })).json();
 }
 async function deleteDocument(DocumentID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/documents/${DocumentID}`, {
+  return await (await fetch(`http://localhost:8000/api/documents/${DocumentID}`, {
     method: "DELETE"
   })).json();
 }
 
 // app/styles/clientes.css
-var clientes_default = "/build/_assets/clientes-TVFHFLFJ.css";
+var clientes_default = "/build/_assets/clientes-RS7ICRX4.css";
 
 // app/routes/clientes._index.tsx
 import { jsxDEV as jsxDEV14 } from "react/jsx-dev-runtime";
@@ -2270,13 +2271,13 @@ import { Form as Form5, useActionData as useActionData6, useNavigate } from "@re
 
 // app/services/user.server.ts
 async function getUsers() {
-  return await (await fetch("http://ufsofts.com:8000/api/users")).json();
+  return await (await fetch("http://localhost:8000/api/users")).json();
 }
 async function getUsersByID(UserID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/users/${UserID}`)).json();
+  return await (await fetch(`http://localhost:8000/api/users/${UserID}`)).json();
 }
 async function createPreviousUser(code, accessLevel2) {
-  return await (await fetch("http://ufsofts.com:8000/api/users", {
+  return await (await fetch("http://localhost:8000/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -2293,7 +2294,7 @@ async function createPreviousUser(code, accessLevel2) {
   })).json();
 }
 async function updateUser(user) {
-  return await (await fetch("http://ufsofts.com:8000/api/users", {
+  return await (await fetch("http://localhost:8000/api/users", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -2302,7 +2303,7 @@ async function updateUser(user) {
   })).json();
 }
 async function deleteUser(userID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/users/${userID}`, {
+  return await (await fetch(`http://localhost:8000/api/users/${userID}`, {
     method: "DELETE"
   })).json();
 }
@@ -3146,13 +3147,13 @@ function Subject({ subject, subjectSelected, setSubjectSelected }) {
 
 // app/services/subject.server.ts
 async function getSubjects() {
-  return await (await fetch("http://ufsofts.com:8000/api/subjects")).json();
+  return await (await fetch("http://localhost:8000/api/subjects")).json();
 }
 async function getSubjectByID(SubjectID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/subjects/${SubjectID}`)).json();
+  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`)).json();
 }
 async function addSubject(subject) {
-  return await (await fetch("http://ufsofts.com:8000/api/subjects", {
+  return await (await fetch("http://localhost:8000/api/subjects", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -3161,7 +3162,7 @@ async function addSubject(subject) {
   })).json();
 }
 async function updateSubject(subject) {
-  return await (await fetch("http://ufsofts.com:8000/api/subjects", {
+  return await (await fetch("http://localhost:8000/api/subjects", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -3170,7 +3171,7 @@ async function updateSubject(subject) {
   })).json();
 }
 async function deleteSubject(SubjectID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/subjects/${SubjectID}`, {
+  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`, {
     method: "DELETE"
   })).json();
 }
@@ -3698,9 +3699,6 @@ function User({ user, userSelected, setUserSelected }) {
   }, this);
 }
 
-// app/components/modalCodeMessage.tsx
-import { useEffect as useEffect10, useState as useState13 } from "react";
-
 // app/components/dropdownlist.tsx
 import { Fragment as Fragment7, jsxDEV as jsxDEV23 } from "react/jsx-dev-runtime";
 function Dropdownlist({ title, name, items = [], error, setItemSelected }) {
@@ -3769,6 +3767,7 @@ function Dropdownlist({ title, name, items = [], error, setItemSelected }) {
 }
 
 // app/components/modalCodeMessage.tsx
+import { useEffect as useEffect10, useState as useState13 } from "react";
 import { jsxDEV as jsxDEV24 } from "react/jsx-dev-runtime";
 function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccessLevelSelected }) {
   let [error, setError] = useState13(""), [beVisible, setBevisible] = useState13(!1);
@@ -3790,14 +3789,9 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
   };
   return /* @__PURE__ */ jsxDEV24("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV24("div", { className: "message", children: [
     /* @__PURE__ */ jsxDEV24(
-      "img",
+      CloseButton,
       {
-        src: "/img/x.svg",
-        className: "button-close",
-        alt: "close",
-        onClick: () => {
-          hideModal();
-        }
+        hideModal
       },
       void 0,
       !1,
@@ -3811,7 +3805,7 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
     /* @__PURE__ */ jsxDEV24("div", { className: "message-information", children: [
       /* @__PURE__ */ jsxDEV24("p", { className: "just-text", children: "Para la creaci\xF3n de un nuevo usuario debera proporcionarle el c\xF3digo de creaci\xF3n al usuario en cuesti\xF3n con el cual podr\xE1 llenar el formulario de registro." }, void 0, !1, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 55,
+        lineNumber: 48,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV24("div", { className: "inputs", children: /* @__PURE__ */ jsxDEV24(
@@ -3827,18 +3821,18 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
         !1,
         {
           fileName: "app/components/modalCodeMessage.tsx",
-          lineNumber: 61,
+          lineNumber: 54,
           columnNumber: 13
         },
         this
       ) }, void 0, !1, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 60,
+        lineNumber: 53,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV24("p", { className: "error", children: error }, void 0, !1, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 70,
+        lineNumber: 63,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV24("div", { className: "buttons", children: [
@@ -3856,7 +3850,7 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
           !1,
           {
             fileName: "app/components/modalCodeMessage.tsx",
-            lineNumber: 73,
+            lineNumber: 66,
             columnNumber: 13
           },
           this
@@ -3875,19 +3869,19 @@ function ModalCodeMessage({ currentUser, setStep, accessLevelSelected, setAccess
           !1,
           {
             fileName: "app/components/modalCodeMessage.tsx",
-            lineNumber: 80,
+            lineNumber: 73,
             columnNumber: 13
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/components/modalCodeMessage.tsx",
-        lineNumber: 72,
+        lineNumber: 65,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalCodeMessage.tsx",
-      lineNumber: 54,
+      lineNumber: 47,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
@@ -3929,20 +3923,15 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
     setCode(generateRandomCode2(6));
   }, []), /* @__PURE__ */ jsxDEV25("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV25("div", { className: "message", children: [
     /* @__PURE__ */ jsxDEV25(
-      "img",
+      CloseButton,
       {
-        src: "/img/x.svg",
-        className: "button-close",
-        alt: "close",
-        onClick: () => {
-          hideModal();
-        }
+        hideModal
       },
       void 0,
       !1,
       {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 42,
+        lineNumber: 43,
         columnNumber: 9
       },
       this
@@ -3950,64 +3939,64 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
     /* @__PURE__ */ jsxDEV25("div", { className: "message-information", children: [
       /* @__PURE__ */ jsxDEV25("p", { className: "just-text", children: "Recuerda no compartir el c\xF3digo generado con nadie diferente al usuario que requiere crear la cuenta." }, void 0, !1, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 54,
+        lineNumber: 48,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV25("p", { children: "El c\xF3digo generado es el siguiente:" }, void 0, !1, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 59,
+        lineNumber: 53,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV25("div", { className: "code", children: [
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[0] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 62,
+          lineNumber: 56,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[1] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 63,
+          lineNumber: 57,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[2] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 64,
+          lineNumber: 58,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[3] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 65,
+          lineNumber: 59,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[4] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 66,
+          lineNumber: 60,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("p", { className: "code-letter", children: code[5] }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 67,
+          lineNumber: 61,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 61,
+        lineNumber: 55,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV25(Form7, { method: "POST", children: [
         /* @__PURE__ */ jsxDEV25("input", { type: "hidden", name: "action", value: "CREATE-USER" }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 71,
+          lineNumber: 65,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("input", { type: "hidden", name: "Token", value: code }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 72,
+          lineNumber: 66,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("input", { type: "hidden", name: "AccessLevel", value: accessLevelSelected }, void 0, !1, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 73,
+          lineNumber: 67,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV25("div", { className: "loading", children: [
@@ -4022,38 +4011,38 @@ function ModalCodeShow({ setStep, accessLevelSelected }) {
             !1,
             {
               fileName: "app/components/modalCodeShow.tsx",
-              lineNumber: 76,
+              lineNumber: 70,
               columnNumber: 15
             },
             this
           ),
           navigation?.state !== "idle" && /* @__PURE__ */ jsxDEV25(Spinner, {}, void 0, !1, {
             fileName: "app/components/modalCodeShow.tsx",
-            lineNumber: 82,
+            lineNumber: 76,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/modalCodeShow.tsx",
-          lineNumber: 75,
+          lineNumber: 69,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/modalCodeShow.tsx",
-        lineNumber: 70,
+        lineNumber: 64,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalCodeShow.tsx",
-      lineNumber: 53,
+      lineNumber: 47,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/modalCodeShow.tsx",
-    lineNumber: 41,
+    lineNumber: 42,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/modalCodeShow.tsx",
-    lineNumber: 40,
+    lineNumber: 41,
     columnNumber: 5
   }, this);
 }
@@ -5100,7 +5089,7 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV31("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV31(Link8, { to: `http://ufsofts.com:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
+        /* @__PURE__ */ jsxDEV31(Link8, { to: `http://localhost:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
           "img",
           {
             src: "/img/download.svg",
@@ -5155,7 +5144,7 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
 }
 
 // app/styles/materias.css
-var materias_default = "/build/_assets/materias-VVKHX22A.css";
+var materias_default = "/build/_assets/materias-5LCOCYYQ.css";
 
 // app/routes/materias.$name.tsx
 import { jsxDEV as jsxDEV32 } from "react/jsx-dev-runtime";
@@ -5478,7 +5467,7 @@ function SelectDocument({ document, setShowFormDeletedMessage, setSelectedDocume
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV33("p", { className: "actions", children: [
-            /* @__PURE__ */ jsxDEV33(Link9, { to: `http://ufsofts.com:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
+            /* @__PURE__ */ jsxDEV33(Link9, { to: `http://localhost:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
               "img",
               {
                 src: "/img/download.svg",
@@ -5638,7 +5627,7 @@ function FormDocument({ method, errors, subjects, ClientID, UserID, setShowModal
     setTimeout(() => {
       setBevisible(!0);
     }, 100);
-  }, []), /* @__PURE__ */ jsxDEV35("div", { className: "modal", children: /* @__PURE__ */ jsxDEV35(Form11, { className: "form", method, encType: "multipart/form-data", children: [
+  }, []), /* @__PURE__ */ jsxDEV35("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV35(Form11, { className: "form", method, encType: "multipart/form-data", children: [
     /* @__PURE__ */ jsxDEV35(
       CloseButton,
       {
@@ -6587,10 +6576,10 @@ import { useActionData as useActionData15, useLoaderData as useLoaderData9 } fro
 
 // app/services/date.server.ts
 async function getAllDates() {
-  return await (await fetch("http://ufsofts.com:8000/api/dates")).json();
+  return await (await fetch("http://localhost:8000/api/dates")).json();
 }
 async function addDate(date) {
-  return await (await fetch("http://ufsofts.com:8000/api/dates", {
+  return await (await fetch("http://localhost:8000/api/dates", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -6599,7 +6588,7 @@ async function addDate(date) {
   })).json();
 }
 async function updateDate(date) {
-  return await (await fetch("http://ufsofts.com:8000/api/dates", {
+  return await (await fetch("http://localhost:8000/api/dates", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -6608,7 +6597,7 @@ async function updateDate(date) {
   })).json();
 }
 async function deleteDate(DateID) {
-  return await (await fetch(`http://ufsofts.com:8000/api/dates/${DateID}`, {
+  return await (await fetch(`http://localhost:8000/api/dates/${DateID}`, {
     method: "DELETE"
   })).json();
 }
@@ -6951,7 +6940,7 @@ function Date2({ index, date, selectedDate, setSelectedDate }) {
 }
 
 // app/styles/citas.css
-var citas_default = "/build/_assets/citas-XUGSZVXA.css";
+var citas_default = "/build/_assets/citas-V6Z3EZT2.css";
 
 // app/routes/citas._index.tsx
 import { Fragment as Fragment11, jsxDEV as jsxDEV42 } from "react/jsx-dev-runtime";
@@ -7493,7 +7482,7 @@ import { useEffect as useEffect19 } from "react";
 import { Link as Link12, useNavigate as useNavigate3 } from "@remix-run/react";
 
 // app/styles/inicio.css
-var inicio_default = "/build/_assets/inicio-4CC5REJO.css";
+var inicio_default = "/build/_assets/inicio-RE6UFGC7.css";
 
 // app/routes/_index.tsx
 import { jsxDEV as jsxDEV45 } from "react/jsx-dev-runtime";
@@ -7780,7 +7769,7 @@ function Login() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-MENZNXXS.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-RZELNMHB.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-SY77QFED.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-WJZP7AVY.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-Q273B5MY.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-3ZYYLEP2.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-SZVMQQLB.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3LRWCHWO.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-2RUZ46QG.js", imports: ["/build/_shared/chunk-744EQNWY.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-HIJLEMAH.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-EKGVAMQ3.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "bcd79dd3", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1708130330318 }, url: "/build/manifest-BCD79DD3.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-X77OTEBO.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-TT5ZAC2V.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-6VBQFDX5.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-BYZV5AHE.js", imports: ["/build/_shared/chunk-Z76MYD73.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-2XKZTHQH.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-DCAI5DR2.js", imports: ["/build/_shared/chunk-Z76MYD73.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-FHBXIV5O.js", imports: ["/build/_shared/chunk-Z76MYD73.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3F2WHN6R.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-FDJNRKV2.js", imports: ["/build/_shared/chunk-Z76MYD73.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-PA7XZ7XG.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "5b5e9cee", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1708201866941 }, url: "/build/manifest-5B5E9CEE.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public\\build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

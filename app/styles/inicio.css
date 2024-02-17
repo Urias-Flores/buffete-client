@@ -11,15 +11,15 @@
 }
 
 .panels{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     margin-top: 4.5rem;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .panel{
     border-radius: .7rem;
     text-decoration: none;
-    width: 180px;
     padding: 1.2rem;
 }
 
@@ -45,17 +45,22 @@
     font-style: italic;
 }
 
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px) {
     .panels{
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
-        margin: 2rem auto 1rem auto;
-        flex-grow: 1;
+        margin: 1rem 0;
         overflow-y: auto;
     }
 
     .panel{
-        margin: 0 auto;
-        width: 80%;
+        margin: 0 .5rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .panels{
+        grid-template-columns: repeat(2, 1fr);
+        margin: 2rem 0;
     }
 }
