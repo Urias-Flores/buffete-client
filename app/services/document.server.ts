@@ -1,5 +1,5 @@
 export async function addDocument( documentFormData: any ){
-  const response = await fetch(`http://localhost:8000/api/documents`, {
+  const response = await fetch(`https://ufsofts.com:8000/api/documents`, {
     method: 'POST',
     body: documentFormData
   })
@@ -7,7 +7,7 @@ export async function addDocument( documentFormData: any ){
 }
 
 export async function deleteDocument(DocumentID: string){
-  const response = await fetch(`http://localhost:8000/api/documents/${DocumentID}`, {
+  const response = await fetch(`https://ufsofts.com:8000/api/documents/${DocumentID}`, {
     method: 'DELETE',
   })
   return await response.json();
