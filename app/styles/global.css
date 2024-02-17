@@ -1128,6 +1128,7 @@ input[type='datetime-local']{
     .list-scroll{
         padding: 0;
         flex-grow: 1;
+        margin-bottom: 4rem;
     }
 
     .item-list{
