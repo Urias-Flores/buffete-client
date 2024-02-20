@@ -1,10 +1,9 @@
 import { useState } from "react";
 import {Form, Link, useLocation, useOutlet, useOutletContext} from "@remix-run/react";
 
-export default function Navigation ({ user }: any){
+export default function Navigation ({ user, showMenu, setShowMenu }: any){
   const { pathname } = useLocation();
   const [showList, setShowList] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <header>

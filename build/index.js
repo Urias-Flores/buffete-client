@@ -134,8 +134,8 @@ __export(root_exports, {
 import { useState } from "react";
 import { Form, Link, useLocation } from "@remix-run/react";
 import { jsxDEV as jsxDEV2 } from "react/jsx-dev-runtime";
-function Navigation({ user }) {
-  let { pathname } = useLocation(), [showList, setShowList] = useState(!1), [showMenu, setShowMenu] = useState(!1);
+function Navigation({ user, showMenu, setShowMenu }) {
+  let { pathname } = useLocation(), [showList, setShowList] = useState(!1);
   return /* @__PURE__ */ jsxDEV2("header", { children: /* @__PURE__ */ jsxDEV2("div", { className: "bar", children: [
     /* @__PURE__ */ jsxDEV2("div", { className: "logo-menu", children: [
       /* @__PURE__ */ jsxDEV2(Link, { to: "/", children: /* @__PURE__ */ jsxDEV2(
@@ -149,13 +149,13 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 14,
+          lineNumber: 13,
           columnNumber: 11
         },
         this
       ) }, void 0, !1, {
         fileName: "app/components/navigation.tsx",
-        lineNumber: 13,
+        lineNumber: 12,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV2(
@@ -172,14 +172,14 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 21,
+          lineNumber: 20,
           columnNumber: 11
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/components/navigation.tsx",
-      lineNumber: 12,
+      lineNumber: 11,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ jsxDEV2("nav", { className: `nav ${showMenu ? "active" : ""}`, children: [
@@ -197,7 +197,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 34,
+          lineNumber: 33,
           columnNumber: 11
         },
         this
@@ -216,7 +216,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 44,
+          lineNumber: 43,
           columnNumber: 11
         },
         this
@@ -235,7 +235,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 56,
+          lineNumber: 55,
           columnNumber: 13
         },
         this
@@ -254,7 +254,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 69,
+          lineNumber: 68,
           columnNumber: 11
         },
         this
@@ -273,7 +273,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 79,
+          lineNumber: 78,
           columnNumber: 11
         },
         this
@@ -292,7 +292,7 @@ function Navigation({ user }) {
         !1,
         {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 89,
+          lineNumber: 88,
           columnNumber: 11
         },
         this
@@ -302,68 +302,68 @@ function Navigation({ user }) {
           setShowList(!showList);
         } }, void 0, !1, {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 100,
+          lineNumber: 99,
           columnNumber: 13
         }, this),
         showList && /* @__PURE__ */ jsxDEV2("div", { className: "dropdownlist", children: [
           /* @__PURE__ */ jsxDEV2("div", { className: "info", children: [
             /* @__PURE__ */ jsxDEV2("p", { className: "username", children: user?.Name }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 104,
+              lineNumber: 103,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ jsxDEV2("p", { className: "email", children: user?.Email }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 105,
+              lineNumber: 104,
               columnNumber: 19
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/navigation.tsx",
-            lineNumber: 103,
+            lineNumber: 102,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ jsxDEV2(Form, { className: "logout", method: "post", action: "/", children: /* @__PURE__ */ jsxDEV2("button", { className: "button", type: "submit", children: [
             /* @__PURE__ */ jsxDEV2("img", { src: "/img/logout.svg", alt: "logout" }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 110,
+              lineNumber: 109,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ jsxDEV2("p", { children: "Cerrar sesi\xF3n" }, void 0, !1, {
               fileName: "app/components/navigation.tsx",
-              lineNumber: 111,
+              lineNumber: 110,
               columnNumber: 21
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/navigation.tsx",
-            lineNumber: 109,
+            lineNumber: 108,
             columnNumber: 19
           }, this) }, void 0, !1, {
             fileName: "app/components/navigation.tsx",
-            lineNumber: 108,
+            lineNumber: 107,
             columnNumber: 17
           }, this)
         ] }, void 0, !0, {
           fileName: "app/components/navigation.tsx",
-          lineNumber: 102,
+          lineNumber: 101,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/navigation.tsx",
-        lineNumber: 99,
+        lineNumber: 98,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/navigation.tsx",
-      lineNumber: 33,
+      lineNumber: 32,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/navigation.tsx",
-    lineNumber: 11,
+    lineNumber: 10,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/navigation.tsx",
-    lineNumber: 10,
+    lineNumber: 9,
     columnNumber: 5
   }, this);
 }
@@ -372,7 +372,7 @@ function Navigation({ user }) {
 var normalize_default = "/build/_assets/normalize-H7PQAZ5S.css";
 
 // app/styles/global.css
-var global_default = "/build/_assets/global-K6T54HPW.css";
+var global_default = "/build/_assets/global-6VNF4LXT.css";
 
 // node_modules/react-pdf/dist/esm/Page/TextLayer.css
 var TextLayer_default = "/build/_assets/TextLayer-7XZ4NHUX.css";
@@ -417,7 +417,7 @@ async function login(username, password) {
     Email_Name: username.toLowerCase(),
     Password: password
   };
-  return await (await fetch("https://ufsofts.com:8000/api/auth", {
+  return await (await fetch("http://localhost:8000/api/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -536,44 +536,46 @@ function App() {
   }, this);
 }
 function Document({ children, user }) {
-  let { pathname } = useLocation2();
+  let { pathname } = useLocation2(), [showMenu, setShowMenu] = useState2(!1);
   return /* @__PURE__ */ jsxDEV3("html", { lang: "es", children: [
     /* @__PURE__ */ jsxDEV3("head", { children: [
       /* @__PURE__ */ jsxDEV3(Meta, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 116,
+        lineNumber: 117,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(Links, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 117,
+        lineNumber: 118,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3("title", {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 118,
+        lineNumber: 119,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 115,
+      lineNumber: 116,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ jsxDEV3("body", { children: [
+    /* @__PURE__ */ jsxDEV3("body", { className: showMenu ? "blocked" : "", children: [
       pathname === "/login" || pathname === "/create-account" || pathname === "/forgot-password" ? /* @__PURE__ */ jsxDEV3(Fragment, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 125,
+        lineNumber: 126,
         columnNumber: 9
       }, this) : /* @__PURE__ */ jsxDEV3(
         Navigation,
         {
-          user
+          user,
+          showMenu,
+          setShowMenu
         },
         void 0,
         !1,
         {
           fileName: "app/root.tsx",
-          lineNumber: 126,
+          lineNumber: 127,
           columnNumber: 9
         },
         this
@@ -581,22 +583,22 @@ function Document({ children, user }) {
       children,
       /* @__PURE__ */ jsxDEV3(Scripts, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 131,
+        lineNumber: 134,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(LiveReload, {}, void 0, !1, {
         fileName: "app/root.tsx",
-        lineNumber: 132,
+        lineNumber: 135,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 121,
+      lineNumber: 122,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 114,
+    lineNumber: 115,
     columnNumber: 5
   }, this);
 }
@@ -605,31 +607,31 @@ function ErrorBoundary() {
   return isRouteErrorResponse(error) ? /* @__PURE__ */ jsxDEV3(Document, { children: /* @__PURE__ */ jsxDEV3("div", { className: "container", children: [
     /* @__PURE__ */ jsxDEV3("h1", { className: "heading", children: "Error" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 145,
+      lineNumber: 148,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV3("p", { className: "subheading", children: "Error: 404 pagina no encontrado" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 146,
+      lineNumber: 149,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 144,
+    lineNumber: 147,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 143,
+    lineNumber: 146,
     columnNumber: 7
   }, this) : error instanceof Error ? /* @__PURE__ */ jsxDEV3(Document, { children: /* @__PURE__ */ jsxDEV3("div", { className: "error-page", children: [
     /* @__PURE__ */ jsxDEV3("h1", { className: "title", children: "Ups... Ha ocurrido un error" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 154,
+      lineNumber: 157,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV3("img", { className: "image", src: "/img/info-octagon.svg", alt: "error" }, void 0, !1, {
       fileName: "app/root.tsx",
-      lineNumber: 155,
+      lineNumber: 158,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ jsxDEV3("p", { className: "information", children: [
@@ -637,20 +639,20 @@ function ErrorBoundary() {
       error.message
     ] }, void 0, !0, {
       fileName: "app/root.tsx",
-      lineNumber: 156,
+      lineNumber: 159,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/root.tsx",
-    lineNumber: 153,
+    lineNumber: 156,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 152,
+    lineNumber: 155,
     columnNumber: 7
   }, this) : /* @__PURE__ */ jsxDEV3("h1", { children: "Unknown Error" }, void 0, !1, {
     fileName: "app/root.tsx",
-    lineNumber: 161,
+    lineNumber: 164,
     columnNumber: 12
   }, this);
 }
@@ -667,16 +669,16 @@ import { useActionData, useLoaderData as useLoaderData2 } from "@remix-run/react
 
 // app/services/internaldocuments.server.ts
 async function getInternalDocuments() {
-  return await (await fetch("https://ufsofts.com:8000/api/internal-documents")).json();
+  return await (await fetch("http://localhost:8000/api/internal-documents")).json();
 }
 async function addInternalDocument(internalDocumentFormData) {
-  return await (await fetch("https://ufsofts.com:8000/api/internal-documents", {
+  return await (await fetch("http://localhost:8000/api/internal-documents", {
     method: "POST",
     body: internalDocumentFormData
   })).json();
 }
 async function deleteInternalDocument(InternalDocumentID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/internal-documents/${InternalDocumentID}`, {
+  return await (await fetch(`http://localhost:8000/api/internal-documents/${InternalDocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -889,7 +891,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6(
       Document2,
       {
-        file: `https://ufsofts.com:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
+        file: `http://localhost:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
         onLoadError: console.error,
         onLoadSuccess: onDocumentLoadSuccess,
         className: "file",
@@ -989,7 +991,7 @@ function InternalDocument({ InternalDocument: InternalDocument2, setSelectedDocu
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV7("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV7(Link2, { to: `https://ufsofts.com:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
+        /* @__PURE__ */ jsxDEV7(Link2, { to: `http://localhost:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
           "img",
           {
             src: "/img/download.svg",
@@ -1773,13 +1775,13 @@ function Client({ client, clientSelected, setClientSelected }) {
 
 // app/services/client.server.ts
 async function getClients() {
-  return await (await fetch("https://ufsofts.com:8000/api/clients")).json();
+  return await (await fetch("http://localhost:8000/api/clients")).json();
 }
 async function getClientByID(clientID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/clients/${clientID}`)).json();
+  return await (await fetch(`http://localhost:8000/api/clients/${clientID}`)).json();
 }
 async function addClient(client) {
-  return await (await fetch("https://ufsofts.com:8000/api/clients", {
+  return await (await fetch("http://localhost:8000/api/clients", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -1788,7 +1790,7 @@ async function addClient(client) {
   })).json();
 }
 async function updateClient(client) {
-  return await (await fetch("https://ufsofts.com:8000/api/clients", {
+  return await (await fetch("http://localhost:8000/api/clients", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -1797,20 +1799,20 @@ async function updateClient(client) {
   })).json();
 }
 async function deleteClient(ClientID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/clients/${ClientID}`, {
+  return await (await fetch(`http://localhost:8000/api/clients/${ClientID}`, {
     method: "DELETE"
   })).json();
 }
 
 // app/services/document.server.ts
 async function addDocument(documentFormData) {
-  return await (await fetch("https://ufsofts.com:8000/api/documents", {
+  return await (await fetch("http://localhost:8000/api/documents", {
     method: "POST",
     body: documentFormData
   })).json();
 }
 async function deleteDocument(DocumentID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/documents/${DocumentID}`, {
+  return await (await fetch(`http://localhost:8000/api/documents/${DocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -2271,13 +2273,13 @@ import { Form as Form5, useActionData as useActionData6, useNavigate } from "@re
 
 // app/services/user.server.ts
 async function getUsers() {
-  return await (await fetch("https://ufsofts.com:8000/api/users")).json();
+  return await (await fetch("http://localhost:8000/api/users")).json();
 }
 async function getUsersByID(UserID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/users/${UserID}`)).json();
+  return await (await fetch(`http://localhost:8000/api/users/${UserID}`)).json();
 }
 async function createPreviousUser(code, accessLevel2) {
-  return await (await fetch("https://ufsofts.com:8000/api/users", {
+  return await (await fetch("http://localhost:8000/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -2294,7 +2296,7 @@ async function createPreviousUser(code, accessLevel2) {
   })).json();
 }
 async function updateUser(user) {
-  return await (await fetch("https://ufsofts.com:8000/api/users", {
+  return await (await fetch("http://localhost:8000/api/users", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -2303,7 +2305,7 @@ async function updateUser(user) {
   })).json();
 }
 async function deleteUser(userID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/users/${userID}`, {
+  return await (await fetch(`http://localhost:8000/api/users/${userID}`, {
     method: "DELETE"
   })).json();
 }
@@ -3147,13 +3149,13 @@ function Subject({ subject, subjectSelected, setSubjectSelected }) {
 
 // app/services/subject.server.ts
 async function getSubjects() {
-  return await (await fetch("https://ufsofts.com:8000/api/subjects")).json();
+  return await (await fetch("http://localhost:8000/api/subjects")).json();
 }
 async function getSubjectByID(SubjectID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/subjects/${SubjectID}`)).json();
+  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`)).json();
 }
 async function addSubject(subject) {
-  return await (await fetch("https://ufsofts.com:8000/api/subjects", {
+  return await (await fetch("http://localhost:8000/api/subjects", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -3162,7 +3164,7 @@ async function addSubject(subject) {
   })).json();
 }
 async function updateSubject(subject) {
-  return await (await fetch("https://ufsofts.com:8000/api/subjects", {
+  return await (await fetch("http://localhost:8000/api/subjects", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -3171,7 +3173,7 @@ async function updateSubject(subject) {
   })).json();
 }
 async function deleteSubject(SubjectID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/subjects/${SubjectID}`, {
+  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`, {
     method: "DELETE"
   })).json();
 }
@@ -5089,7 +5091,7 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV31("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV31(Link8, { to: `https://ufsofts.com:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
+        /* @__PURE__ */ jsxDEV31(Link8, { to: `http://localhost:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
           "img",
           {
             src: "/img/download.svg",
@@ -5467,7 +5469,7 @@ function SelectDocument({ document, setShowFormDeletedMessage, setSelectedDocume
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV33("p", { className: "actions", children: [
-            /* @__PURE__ */ jsxDEV33(Link9, { to: `https://ufsofts.com:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
+            /* @__PURE__ */ jsxDEV33(Link9, { to: `http://localhost:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
               "img",
               {
                 src: "/img/download.svg",
@@ -6576,10 +6578,10 @@ import { useActionData as useActionData15, useLoaderData as useLoaderData9 } fro
 
 // app/services/date.server.ts
 async function getAllDates() {
-  return await (await fetch("https://ufsofts.com:8000/api/dates")).json();
+  return await (await fetch("http://localhost:8000/api/dates")).json();
 }
 async function addDate(date) {
-  return await (await fetch("https://ufsofts.com:8000/api/dates", {
+  return await (await fetch("http://localhost:8000/api/dates", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -6588,7 +6590,7 @@ async function addDate(date) {
   })).json();
 }
 async function updateDate(date) {
-  return await (await fetch("https://ufsofts.com:8000/api/dates", {
+  return await (await fetch("http://localhost:8000/api/dates", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -6597,7 +6599,7 @@ async function updateDate(date) {
   })).json();
 }
 async function deleteDate(DateID) {
-  return await (await fetch(`https://ufsofts.com:8000/api/dates/${DateID}`, {
+  return await (await fetch(`http://localhost:8000/api/dates/${DateID}`, {
     method: "DELETE"
   })).json();
 }
@@ -7482,7 +7484,7 @@ import { useEffect as useEffect19 } from "react";
 import { Link as Link12, useNavigate as useNavigate3 } from "@remix-run/react";
 
 // app/styles/inicio.css
-var inicio_default = "/build/_assets/inicio-RE6UFGC7.css";
+var inicio_default = "/build/_assets/inicio-6XCT2VBV.css";
 
 // app/routes/_index.tsx
 import { jsxDEV as jsxDEV45 } from "react/jsx-dev-runtime";
@@ -7769,7 +7771,7 @@ function Login() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-X77OTEBO.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-TT5ZAC2V.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-6VBQFDX5.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-K7L3ZW4O.js", imports: ["/build/_shared/chunk-3PKZ7GGH.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-2XKZTHQH.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-IEP7VYQF.js", imports: ["/build/_shared/chunk-3PKZ7GGH.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-7NWYZDZD.js", imports: ["/build/_shared/chunk-3PKZ7GGH.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3F2WHN6R.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-I6W3TV2I.js", imports: ["/build/_shared/chunk-3PKZ7GGH.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-PA7XZ7XG.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "97a072bf", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1708202014325 }, url: "/build/manifest-97A072BF.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-GRU5PVPG.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-J7BA2YZA.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-6VBQFDX5.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-RVPMZBV6.js", imports: ["/build/_shared/chunk-SKHOU2SV.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-2XKZTHQH.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-24DJYSB5.js", imports: ["/build/_shared/chunk-SKHOU2SV.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-JKBTSU42.js", imports: ["/build/_shared/chunk-SKHOU2SV.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3F2WHN6R.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-3ZYTGRGY.js", imports: ["/build/_shared/chunk-SKHOU2SV.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-PA7XZ7XG.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "4a84a167", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1708207851037 }, url: "/build/manifest-4A84A167.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public\\build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
