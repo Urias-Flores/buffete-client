@@ -109,6 +109,7 @@ export default function App() {
 
 function Document({children, user}: any){
   const { pathname } = useLocation();
+  const [showMenu, setShowMenu] = useState(false);
 
   return(
     < html lang = "es" >
@@ -118,13 +119,15 @@ function Document({children, user}: any){
         <title></title>
       </head>
 
-      <body>
+      <body className={showMenu ? 'blocked' : ''}>
       { pathname === '/login'
         || pathname === '/create-account'
         || pathname === '/forgot-password'
         ? <></>
         : <Navigation 
             user={user}
+            showMenu={showMenu}
+            setShowMenu={setShowMenu}
           />
       }
         {children}

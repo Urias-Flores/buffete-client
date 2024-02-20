@@ -18,6 +18,10 @@ body {
     overflow-y: hidden;
 }
 
+body.bloked{
+    overflow-y: hidden;
+}
+
 header{
     z-index: 105;
     height: fit-content;
