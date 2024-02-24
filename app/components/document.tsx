@@ -28,7 +28,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
         </div>
 
         <div className='actions'>
-          <Link to={`http://localhost:8000/api/document/download/${URL}`}>
+          <Link to={`http://administracion.grupo-sosamorales.com:8000/api/document/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="square"

@@ -50,7 +50,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
           />
 
           <Document
-            file={`http://localhost:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
+            file={`http://administracion.grupo-sosamorales.com:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

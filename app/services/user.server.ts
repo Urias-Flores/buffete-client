@@ -1,10 +1,10 @@
 export async function getUsers(){
-  const response = await fetch(`http://localhost:8000/api/users`);
+  const response = await fetch(`http://administracion.grupo-sosamorales.com:8000/api/users`);
   return await response.json();
 }
 
 export async function getUsersByID( UserID: string ){
-  const response = await fetch(`http://localhost:8000/api/users/${UserID}`);
+  const response = await fetch(`http://administracion.grupo-sosamorales.com:8000/api/users/${UserID}`);
   return await response.json();
 }
 
@@ -18,7 +18,7 @@ export async function createPreviousUser(code: string, accessLevel: string){
     AccessLevel: accessLevel,
     State: 0
   }
-  const response = await fetch(`http://localhost:8000/api/users`, {
+  const response = await fetch(`http://administracion.grupo-sosamorales.com:8000/api/users`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export async function createPreviousUser(code: string, accessLevel: string){
 }
 
 export async function updateUser(user: any){
-  const response = await fetch(`http://localhost:8000/api/users`, {
+  const response = await fetch(`http://administracion.grupo-sosamorales.com:8000/api/users`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export async function updateUser(user: any){
 }
 
 export async function deleteUser(userID: string){
-  const response = await fetch(`http://localhost:8000/api/users/${userID}`, {
+  const response = await fetch(`http://administracion.grupo-sosamorales.com:8000/api/users/${userID}`, {
     method: "DELETE"
   });
   return await response.json();
