@@ -50,7 +50,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
           />
 
           <Document
-            file={`http://localhost:8000/api/${ isInternalDocument ? 'internal-documents' : 'documents' }/download/${URL}`}
+            file={ isInternalDocument ? `/home/buffete/buffete-server/internal-files/${URL}/` : `/home/buffete/buffete-server/${URL}/`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'
