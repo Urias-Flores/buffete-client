@@ -24,7 +24,7 @@ export default function SelectDocument  ({ document, setShowFormDeletedMessage, 
       >
         <p onClick={ () => { setShowModalDocument(true) } }>{ Name }</p>
         <p className='actions'>
-          <Link to={`/home/buffete/buffete-server/files/api/documents/download/${URL}`}>
+          <Link to={`https://grupo-sosamorales.com:8000/api/documents/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="trash"

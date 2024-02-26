@@ -39,8 +39,6 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
       }
     }
 
-    const context: any = useOutletContext();
-
     return (
       <div className={`modal ${ beVisible ? 'active' : '' }`}>
         <div className='document'>
@@ -50,7 +48,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
           />
 
           <Document
-            file={ isInternalDocument ? `/home/buffete/buffete-server/internal-files/${URL}/` : `/home/buffete/buffete-server/${URL}/`}
+            file={ `https://grupo-sosamorales.com:8000/api/${isInternalDocument ? `internal-documents/` : 'documents/'}/download${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

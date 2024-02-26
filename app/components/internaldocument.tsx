@@ -27,7 +27,7 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
         </div>
 
         <div className='actions'>
-          <Link to={`/home/buffete/buffete-server/internal-files/${URL}`}>
+          <Link to={`https://grupo-sosamorales.com:8000/api/internal-documents/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="download"
