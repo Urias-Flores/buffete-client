@@ -4,7 +4,7 @@ export async function login( username: string, password: string ){
     Password: password
   }
 
-  const response = await fetch(`http://localhost:8000/api/auth`, {
+  const response = await fetch(`https://administracion.grupo-sosamorales.com:7000/api/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
