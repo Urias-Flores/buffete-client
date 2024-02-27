@@ -1,6 +1,6 @@
-export async function sendRecoverAccountEmail(name: string, token: string, email: string){
-  const nodemailer = require('nodemailer');
+import * as nodemailer from 'nodemailer';
 
+export async function sendRecoverAccountEmail(name: string, token: string, email: string){
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
