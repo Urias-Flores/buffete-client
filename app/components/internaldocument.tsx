@@ -6,7 +6,7 @@ import ModalDocument from "./modalDocument";
 export default function InternalDocument ({ InternalDocument, setSelectedDocument, setShowFormDeletedMessage }: any){
   const { Name, URL } = InternalDocument
   const [showModalDocument, setShowModalDocument] = useState(false);
-  const context: any = useOutletContext();
+  const context : any = useOutletContext();
 
   return (
     <>
@@ -27,7 +27,7 @@ export default function InternalDocument ({ InternalDocument, setSelectedDocumen
         </div>
 
         <div className='actions'>
-          <Link to={`https://grupo-sosamorales.com:8000/api/internal-documents/download/${URL}`}>
+          <Link to={`${context.env.URL_API}/internal-documents/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="download"

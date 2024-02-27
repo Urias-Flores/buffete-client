@@ -417,7 +417,7 @@ async function login(username, password) {
     Email_Name: username.toLowerCase(),
     Password: password
   };
-  return await (await fetch("http://localhost:8000/api/auth", {
+  return await (await fetch(`${process.env.API_URL}/auth`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -510,7 +510,7 @@ var links = () => [
 async function loader({ request }) {
   return {
     USER: await authenticator.isAuthenticated(request),
-    ENV: {
+    env: {
       URL_API: process.env.API_URL
     }
   };
@@ -523,7 +523,7 @@ async function action({ request }) {
 function App() {
   let loader13 = useLoaderData(), [showMenu, setShowMenu] = useState2(!1);
   return /* @__PURE__ */ jsxDEV3(Document, { user: loader13?.USER, children: /* @__PURE__ */ jsxDEV3(Outlet, { context: {
-    URL_API: loader13?.ENV.URL_API,
+    env: loader13?.env,
     menuState: [showMenu, setShowMenu]
   } }, void 0, !1, {
     fileName: "app/root.tsx",
@@ -669,16 +669,16 @@ import { useActionData, useLoaderData as useLoaderData2 } from "@remix-run/react
 
 // app/services/internaldocuments.server.ts
 async function getInternalDocuments() {
-  return await (await fetch("http://localhost:8000/api/internal-documents")).json();
+  return await (await fetch(`${process.env.API_URL}/internal-documents`)).json();
 }
 async function addInternalDocument(internalDocumentFormData) {
-  return await (await fetch("http://localhost:8000/api/internal-documents", {
+  return await (await fetch(`${process.env.API_URL}/internal-documents`, {
     method: "POST",
     body: internalDocumentFormData
   })).json();
 }
 async function deleteInternalDocument(InternalDocumentID) {
-  return await (await fetch(`http://localhost:8000/api/internal-documents/${InternalDocumentID}`, {
+  return await (await fetch(`${process.env.API_URL}/internal-documents/${InternalDocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -856,7 +856,7 @@ import { useOutletContext as useOutletContext3 } from "@remix-run/react";
 import { jsxDEV as jsxDEV6 } from "react/jsx-dev-runtime";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
-  let [numPages, setNumPages] = useState4(0), [pageNumber, setPageNumber] = useState4(1), [beVisible, setBevisible] = useState4(!1);
+  let context = useOutletContext3(), [numPages, setNumPages] = useState4(0), [pageNumber, setPageNumber] = useState4(1), [beVisible, setBevisible] = useState4(!1);
   useEffect2(() => {
     setTimeout(() => {
       setBevisible(!0);
@@ -872,7 +872,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     pageNumber !== 1 && setPageNumber(pageNumber - 1);
   }, add = () => {
     pageNumber !== numPages && setPageNumber(pageNumber + 1);
-  }, context = useOutletContext3();
+  };
   return /* @__PURE__ */ jsxDEV6("div", { className: `modal ${beVisible ? "active" : ""}`, children: /* @__PURE__ */ jsxDEV6("div", { className: "document", children: [
     /* @__PURE__ */ jsxDEV6(
       CloseButton,
@@ -883,7 +883,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
       !1,
       {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 48,
+        lineNumber: 47,
         columnNumber: 11
       },
       this
@@ -891,13 +891,13 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6(
       Document2,
       {
-        file: `http://localhost:8000/api/${isInternalDocument ? "internal-documents" : "documents"}/download/${URL}`,
+        file: `${context.env.URL_API}/${isInternalDocument ? "internal-documents/" : "documents/"}download/${URL}`,
         onLoadError: console.error,
         onLoadSuccess: onDocumentLoadSuccess,
         className: "file",
         children: /* @__PURE__ */ jsxDEV6(Page, { pageNumber }, void 0, !1, {
           fileName: "app/components/modalDocument.tsx",
-          lineNumber: 58,
+          lineNumber: 57,
           columnNumber: 13
         }, this)
       },
@@ -905,7 +905,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
       !1,
       {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 52,
+        lineNumber: 51,
         columnNumber: 11
       },
       this
@@ -913,7 +913,7 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
     /* @__PURE__ */ jsxDEV6("div", { className: "changerpage", children: [
       /* @__PURE__ */ jsxDEV6("img", { src: "/img/arror-left.svg", alt: "left", onClick: reduce }, void 0, !1, {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 61,
+        lineNumber: 60,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ jsxDEV6("p", { children: [
@@ -922,26 +922,26 @@ function ModalDocument({ URL, setShowModalDocument, isInternalDocument = !1 }) {
         numPages
       ] }, void 0, !0, {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 62,
+        lineNumber: 61,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ jsxDEV6("img", { src: "/img/arrow-right.svg", alt: "right", onClick: add }, void 0, !1, {
         fileName: "app/components/modalDocument.tsx",
-        lineNumber: 63,
+        lineNumber: 62,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/modalDocument.tsx",
-      lineNumber: 60,
+      lineNumber: 59,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/modalDocument.tsx",
-    lineNumber: 46,
+    lineNumber: 45,
     columnNumber: 9
   }, this) }, void 0, !1, {
     fileName: "app/components/modalDocument.tsx",
-    lineNumber: 45,
+    lineNumber: 44,
     columnNumber: 7
   }, this);
 }
@@ -991,7 +991,7 @@ function InternalDocument({ InternalDocument: InternalDocument2, setSelectedDocu
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV7("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV7(Link2, { to: `http://localhost:8000/api/internaldocument/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
+        /* @__PURE__ */ jsxDEV7(Link2, { to: `${context.env.URL_API}/internal-documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV7(
           "img",
           {
             src: "/img/download.svg",
@@ -1775,13 +1775,13 @@ function Client({ client, clientSelected, setClientSelected }) {
 
 // app/services/client.server.ts
 async function getClients() {
-  return await (await fetch("http://localhost:8000/api/clients")).json();
+  return await (await fetch(`${process.env.API_URL}/clients`)).json();
 }
 async function getClientByID(clientID) {
-  return await (await fetch(`http://localhost:8000/api/clients/${clientID}`)).json();
+  return await (await fetch(`${process.env.API_URL}/clients/${clientID}`)).json();
 }
 async function addClient(client) {
-  return await (await fetch("http://localhost:8000/api/clients", {
+  return await (await fetch(`${process.env.API_URL}/clients`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -1790,7 +1790,7 @@ async function addClient(client) {
   })).json();
 }
 async function updateClient(client) {
-  return await (await fetch("http://localhost:8000/api/clients", {
+  return await (await fetch(`${process.env.API_URL}/clients`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -1799,20 +1799,20 @@ async function updateClient(client) {
   })).json();
 }
 async function deleteClient(ClientID) {
-  return await (await fetch(`http://localhost:8000/api/clients/${ClientID}`, {
+  return await (await fetch(`${process.env.API_URL}/clients/${ClientID}`, {
     method: "DELETE"
   })).json();
 }
 
 // app/services/document.server.ts
 async function addDocument(documentFormData) {
-  return await (await fetch("http://localhost:8000/api/documents", {
+  return await (await fetch(`${process.env.API_URL}/documents`, {
     method: "POST",
     body: documentFormData
   })).json();
 }
 async function deleteDocument(DocumentID) {
-  return await (await fetch(`http://localhost:8000/api/documents/${DocumentID}`, {
+  return await (await fetch(`${process.env.API_URL}/documents/${DocumentID}`, {
     method: "DELETE"
   })).json();
 }
@@ -2273,30 +2273,31 @@ import { Form as Form5, useActionData as useActionData6, useNavigate } from "@re
 
 // app/services/user.server.ts
 async function getUsers() {
-  return await (await fetch("http://localhost:8000/api/users")).json();
+  return await (await fetch(`${process.env.API_URL}/users`)).json();
 }
 async function getUsersByID(UserID) {
-  return await (await fetch(`http://localhost:8000/api/users/${UserID}`)).json();
+  return await (await fetch(`${process.env.API_URL}/users/${UserID}`)).json();
 }
 async function createPreviousUser(code, accessLevel2) {
-  return await (await fetch("http://localhost:8000/api/users", {
+  let user = {
+    Name: "",
+    Email: "",
+    Phone: "",
+    Password: code,
+    Token: code,
+    AccessLevel: accessLevel2,
+    State: 0
+  };
+  return await (await fetch(`${process.env.API_URL}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      Name: "",
-      Email: "",
-      Phone: "",
-      Password: code,
-      Token: code,
-      AccessLevel: accessLevel2,
-      State: 0
-    })
+    body: JSON.stringify(user)
   })).json();
 }
 async function updateUser(user) {
-  return await (await fetch("http://localhost:8000/api/users", {
+  return await (await fetch(`${process.env.API_URL}/users`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -2305,7 +2306,7 @@ async function updateUser(user) {
   })).json();
 }
 async function deleteUser(userID) {
-  return await (await fetch(`http://localhost:8000/api/users/${userID}`, {
+  return await (await fetch(`${process.env.API_URL}/users/${userID}`, {
     method: "DELETE"
   })).json();
 }
@@ -3149,13 +3150,13 @@ function Subject({ subject, subjectSelected, setSubjectSelected }) {
 
 // app/services/subject.server.ts
 async function getSubjects() {
-  return await (await fetch("http://localhost:8000/api/subjects")).json();
+  return await (await fetch(`${process.env.API_URL}/subjects`)).json();
 }
 async function getSubjectByID(SubjectID) {
-  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`)).json();
+  return await (await fetch(`${process.env.API_URL}/subjects/${SubjectID}`)).json();
 }
 async function addSubject(subject) {
-  return await (await fetch("http://localhost:8000/api/subjects", {
+  return await (await fetch(`${process.env.API_URL}/subjects`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -3164,7 +3165,7 @@ async function addSubject(subject) {
   })).json();
 }
 async function updateSubject(subject) {
-  return await (await fetch("http://localhost:8000/api/subjects", {
+  return await (await fetch(`${process.env.API_URL}/subjects`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -3173,7 +3174,7 @@ async function updateSubject(subject) {
   })).json();
 }
 async function deleteSubject(SubjectID) {
-  return await (await fetch(`http://localhost:8000/api/subjects/${SubjectID}`, {
+  return await (await fetch(`${process.env.API_URL}/subjects/${SubjectID}`, {
     method: "DELETE"
   })).json();
 }
@@ -5062,7 +5063,7 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
       !1,
       {
         fileName: "app/components/document.tsx",
-        lineNumber: 16,
+        lineNumber: 13,
         columnNumber: 9
       },
       this
@@ -5071,27 +5072,27 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
       /* @__PURE__ */ jsxDEV31("div", { className: "item-main", children: [
         /* @__PURE__ */ jsxDEV31("img", { src: "/img/file-description.svg", alt: "user" }, void 0, !1, {
           fileName: "app/components/document.tsx",
-          lineNumber: 24,
+          lineNumber: 21,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV31("div", { className: "item-information", onClick: () => {
           setShowModalDocument(!0);
         }, children: /* @__PURE__ */ jsxDEV31("h4", { children: Name }, void 0, !1, {
           fileName: "app/components/document.tsx",
-          lineNumber: 26,
+          lineNumber: 23,
           columnNumber: 13
         }, this) }, void 0, !1, {
           fileName: "app/components/document.tsx",
-          lineNumber: 25,
+          lineNumber: 22,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/document.tsx",
-        lineNumber: 23,
+        lineNumber: 20,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV31("div", { className: "actions", children: [
-        /* @__PURE__ */ jsxDEV31(Link8, { to: `http://localhost:8000/api/document/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
+        /* @__PURE__ */ jsxDEV31(Link8, { to: `${context.env.URL_API}/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV31(
           "img",
           {
             src: "/img/download.svg",
@@ -5101,13 +5102,13 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
           !1,
           {
             fileName: "app/components/document.tsx",
-            lineNumber: 32,
+            lineNumber: 29,
             columnNumber: 13
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/document.tsx",
-          lineNumber: 31,
+          lineNumber: 28,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV31(
@@ -5123,24 +5124,24 @@ function Document3({ document, setSelectedDocument, setShowFormDeletedMessage })
           !1,
           {
             fileName: "app/components/document.tsx",
-            lineNumber: 37,
+            lineNumber: 34,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/components/document.tsx",
-        lineNumber: 30,
+        lineNumber: 27,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/document.tsx",
-      lineNumber: 22,
+      lineNumber: 19,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/document.tsx",
-    lineNumber: 14,
+    lineNumber: 11,
     columnNumber: 5
   }, this);
 }
@@ -5469,7 +5470,7 @@ function SelectDocument({ document, setShowFormDeletedMessage, setSelectedDocume
             columnNumber: 9
           }, this),
           /* @__PURE__ */ jsxDEV33("p", { className: "actions", children: [
-            /* @__PURE__ */ jsxDEV33(Link9, { to: `http://localhost:8000/api/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
+            /* @__PURE__ */ jsxDEV33(Link9, { to: `${context.env.URL_API}/documents/download/${URL}`, children: /* @__PURE__ */ jsxDEV33(
               "img",
               {
                 src: "/img/download.svg",
@@ -6578,10 +6579,10 @@ import { useActionData as useActionData15, useLoaderData as useLoaderData9 } fro
 
 // app/services/date.server.ts
 async function getAllDates() {
-  return await (await fetch("http://localhost:8000/api/dates")).json();
+  return await (await fetch(`${process.env.API_URL}/dates`)).json();
 }
 async function addDate(date) {
-  return await (await fetch("http://localhost:8000/api/dates", {
+  return await (await fetch(`${process.env.API_URL}/dates`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -6590,7 +6591,7 @@ async function addDate(date) {
   })).json();
 }
 async function updateDate(date) {
-  return await (await fetch("http://localhost:8000/api/dates", {
+  return await (await fetch(`${process.env.API_URL}/dates`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -6599,7 +6600,7 @@ async function updateDate(date) {
   })).json();
 }
 async function deleteDate(DateID) {
-  return await (await fetch(`http://localhost:8000/api/dates/${DateID}`, {
+  return await (await fetch(`${process.env.API_URL}/dates/${DateID}`, {
     method: "DELETE"
   })).json();
 }
@@ -7771,7 +7772,7 @@ function Login() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-GRU5PVPG.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-J7BA2YZA.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-6VBQFDX5.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-MI2NKUEU.js", imports: ["/build/_shared/chunk-LISDCSP7.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-2XKZTHQH.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-BXP6WQR2.js", imports: ["/build/_shared/chunk-LISDCSP7.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-RIKJZVR4.js", imports: ["/build/_shared/chunk-LISDCSP7.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3F2WHN6R.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-JBEE6RNT.js", imports: ["/build/_shared/chunk-LISDCSP7.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-PA7XZ7XG.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "18cbbe4a", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1708760295733 }, url: "/build/manifest-18CBBE4A.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-QHANBB4V.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-U3RL2HL2.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-CDMYZBNR.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-OAKYAC3H.js", imports: void 0, hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !0 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-J7BA2YZA.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/citas._index": { id: "routes/citas._index", parentId: "root", path: "citas", index: !0, caseSensitive: void 0, module: "/build/routes/citas._index-6VBQFDX5.js", imports: ["/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes.$URL": { id: "routes/clientes.$URL", parentId: "root", path: "clientes/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/clientes.$URL-FUXL2AHV.js", imports: ["/build/_shared/chunk-3MEGHE54.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/clientes._index": { id: "routes/clientes._index", parentId: "root", path: "clientes", index: !0, caseSensitive: void 0, module: "/build/routes/clientes._index-2XKZTHQH.js", imports: ["/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/create-account": { id: "routes/create-account", parentId: "root", path: "create-account", index: void 0, caseSensitive: void 0, module: "/build/routes/create-account-S2644V5L.js", imports: ["/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/documentacioninterna": { id: "routes/documentacioninterna", parentId: "root", path: "documentacioninterna", index: void 0, caseSensitive: void 0, module: "/build/routes/documentacioninterna-23EDXNZK.js", imports: ["/build/_shared/chunk-3MEGHE54.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/forgot-password": { id: "routes/forgot-password", parentId: "root", path: "forgot-password", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-password-GWMCW5TM.js", imports: ["/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-YIP32EID.js", imports: ["/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-FFP3OEOV.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias.$name": { id: "routes/materias.$name", parentId: "root", path: "materias/:name", index: void 0, caseSensitive: void 0, module: "/build/routes/materias.$name-FNHENGSY.js", imports: ["/build/_shared/chunk-3MEGHE54.js", "/build/_shared/chunk-T56LUI4W.js", "/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/materias._index": { id: "routes/materias._index", parentId: "root", path: "materias", index: !0, caseSensitive: void 0, module: "/build/routes/materias._index-3F2WHN6R.js", imports: ["/build/_shared/chunk-RSIVJDSZ.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/nosotros": { id: "routes/nosotros", parentId: "root", path: "nosotros", index: void 0, caseSensitive: void 0, module: "/build/routes/nosotros-P52KMY4D.js", imports: ["/build/_shared/chunk-RTZHPADD.js", "/build/_shared/chunk-56TZOM4G.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios.$URL": { id: "routes/usuarios.$URL", parentId: "root", path: "usuarios/:URL", index: void 0, caseSensitive: void 0, module: "/build/routes/usuarios.$URL-GDKHS4GK.js", imports: ["/build/_shared/chunk-3MEGHE54.js", "/build/_shared/chunk-XSG5LB2M.js", "/build/_shared/chunk-5HAHJGGN.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-OUOOIR2A.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/usuarios._index": { id: "routes/usuarios._index", parentId: "root", path: "usuarios", index: !0, caseSensitive: void 0, module: "/build/routes/usuarios._index-PA7XZ7XG.js", imports: ["/build/_shared/chunk-LA3NFKUD.js", "/build/_shared/chunk-A2ZPQFUT.js", "/build/_shared/chunk-EKX5GQZ6.js", "/build/_shared/chunk-5EQGMEKX.js", "/build/_shared/chunk-56TZOM4G.js", "/build/_shared/chunk-OUOOIR2A.js", "/build/_shared/chunk-7LZIAPLR.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "7158ba00", hmr: { runtime: "/build/_shared\\chunk-CDMYZBNR.js", timestamp: 1709058470505 }, url: "/build/manifest-7158BA00.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public\\build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

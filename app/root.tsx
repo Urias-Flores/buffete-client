@@ -78,7 +78,7 @@ export async function loader({ request }: any){
       Name: 'Admin',
       Email: 'admin@gmail.com'
     }*/,
-    ENV: {
+    env: {
       URL_API: process.env.API_URL
     }
   }
@@ -99,7 +99,7 @@ export default function App() {
     <Document user={loader?.USER}>
         <Outlet context={
           {
-            URL_API: loader?.ENV.URL_API,
+            env: loader?.env,
             menuState: [showMenu, setShowMenu]
           }
         }/>

@@ -1,15 +1,15 @@
 export async function getClients(){
-  const response = await fetch(`https://grupo-sosamorales.com:8000/api/clients`);
+  const response = await fetch(`${process.env.API_URL}/clients`);
   return await response.json()
 }
 
 export async function getClientByID(clientID: string){
-  const response = await fetch(`https://grupo-sosamorales.com:8000/api/clients/${clientID}`);
+  const response = await fetch(`${process.env.API_URL}/clients/${clientID}`);
   return await response.json()
 }
 
 export async function  addClient( client: any ){
-  const response = await fetch(`https://grupo-sosamorales.com:8000/api/clients`, {
+  const response = await fetch(`${process.env.API_URL}/clients`, {
     method: 'POST',
     headers: {
       "Content-Type" : "application/json"
@@ -20,7 +20,7 @@ export async function  addClient( client: any ){
 }
 
 export async function  updateClient( client: any ){
-  const response = await fetch(`https://grupo-sosamorales.com:8000/api/clients`, {
+  const response = await fetch(`${process.env.API_URL}/clients`, {
     method: 'PUT',
     headers: {
       "Content-Type" : "application/json"
@@ -31,7 +31,7 @@ export async function  updateClient( client: any ){
 }
 
 export async function deleteClient( ClientID: string ){
-  const response = await fetch( `https://grupo-sosamorales.com:8000/api/clients/${ClientID}`, {
+  const response = await fetch( `${process.env.API_URL}/clients/${ClientID}`, {
     method: 'DELETE'
   })
   return await response.json()

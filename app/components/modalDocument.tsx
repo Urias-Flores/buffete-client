@@ -5,6 +5,7 @@ import {useOutletContext} from "@remix-run/react";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function ModalDocument ({ URL, setShowModalDocument, isInternalDocument = false }: any){
+    const context: any = useOutletContext();
     const [numPages, setNumPages] = useState(0);
     const [pageNumber, setPageNumber] = useState(1);
     const [beVisible, setBevisible] = useState(false);
@@ -48,7 +49,7 @@ export default function ModalDocument ({ URL, setShowModalDocument, isInternalDo
           />
 
           <Document
-            file={ `https://grupo-sosamorales.com:8000/api/${isInternalDocument ? `internal-documents/` : 'documents/'}download/${URL}`}
+            file={ `${context.env.URL_API}/${isInternalDocument ? `internal-documents/` : 'documents/'}download/${URL}`}
             onLoadError={console.error}
             onLoadSuccess={onDocumentLoadSuccess}
             className='file'

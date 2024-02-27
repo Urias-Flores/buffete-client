@@ -1,5 +1,5 @@
 export async function addDocument( documentFormData: any ){
-  const response = await fetch(`https://grupo-sosamorales.com:8000/api/documents`, {
+  const response = await fetch(`${process.env.API_URL}/documents`, {
     method: 'POST',
     body: documentFormData
   })
@@ -7,7 +7,7 @@ export async function addDocument( documentFormData: any ){
 }
 
 export async function deleteDocument(DocumentID: string){
-  const response = await fetch(`https://grupo-sosamorales.com:8000/api/documents/${DocumentID}`, {
+  const response = await fetch(`${process.env.API_URL}/documents/${DocumentID}`, {
     method: 'DELETE',
   })
   return await response.json();

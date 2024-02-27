@@ -2,13 +2,10 @@ import { useState } from 'react'
 import {Link, useOutletContext} from "@remix-run/react";
 import ModalDocument from "./modalDocument";
 
-
 export default function Document ({ document, setSelectedDocument, setShowFormDeletedMessage }: any){
   const { Name, URL } = document
   const [showModalDocument, setShowModalDocument] = useState(false);
   const context: any = useOutletContext();
-
-
 
   return (
     <>
@@ -28,7 +25,7 @@ export default function Document ({ document, setSelectedDocument, setShowFormDe
         </div>
 
         <div className='actions'>
-          <Link to={`https://grupo-sosamorales.com:8000/api/documents/download/${URL}`}>
+          <Link to={`${context.env.URL_API}/documents/download/${URL}`}>
             <img
               src='/img/download.svg'
               alt="square"
