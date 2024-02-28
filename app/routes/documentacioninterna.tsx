@@ -7,6 +7,7 @@ import ModalMessage from "../components/modalMessage";
 import InternalDocument from "../components/internaldocument";
 import FormInternalDocument from "../components/formInternalDocument";
 import {authenticator} from "../auth/auth.server";
+import Spinner from "~/components/spinner";
 
 export async function loader({ request }: any){
   await authenticator.isAuthenticated(request, {
@@ -187,14 +188,28 @@ export default function Documentacioninterna (){
 
       <div className='list-scroll'>
         {
-          internalDocuments.map( (internalDocument: any) =>
-            <InternalDocument
-              key={internalDocument?.InternalDocumentID}
-              InternalDocument={internalDocument}
-              setSelectedDocument={setSelectedDocument}
-              setShowFormDeletedMessage={setShowFormDeletedMessage}
-            />
-          )
+            internalDocuments.length > 0
+              ?
+                internalDocuments.map( (internalDocument: {InternalDocumentID: number}) =>
+                  <InternalDocument
+                    key={internalDocument?.InternalDocumentID}
+                    InternalDocument={internalDocument}
+                    setSelectedDocument={setSelectedDocument}
+                    setShowFormDeletedMessage={setShowFormDeletedMessage}
+                  />
+                )
+              :
+                loader?.length === 0
+                  ?
+                    <p className='no-found'>Aún no hay documentos internos registrados</p>
+                  :
+                    loader?.length > 0 && internalDocuments.length === 0
+                    ?
+                      <p className='no-found'>No se pudieron encontrar clientes</p>
+                    :
+                      <div className='center'>
+                        <Spinner/>
+                      </div>
         }
       </div>
     </div>
