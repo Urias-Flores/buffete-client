@@ -144,7 +144,7 @@ export function ErrorBoundary() {
   if (isRouteErrorResponse(error)) {
     return (
       <Document>
-        <div className="container">
+        <div className="error-page">
           <h1 className="heading">Error</h1>
           <p className="subheading">Error: 404 pagina no encontrado</p>
         </div>

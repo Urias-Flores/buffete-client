@@ -63,8 +63,13 @@ export async function action({request}: any){
     if(parseInt(subject) === -1){
       errors.subject = 'La selección de una materia es obligatoria'
     }
-    if(!file){
-      errors.file = 'debe seleccionar un documento'
+    //File validation
+    if(file.size === 0){
+      errors.file = 'Debe seleccionar un documento';
+    }
+
+    if(file.type !== 'application/pdf'){
+      errors.file = 'El archivo seleccionado debe ser del formato PDF';
     }
   }
 

@@ -38,7 +38,7 @@ export async function loader({params, request}: any){
   const { name } = params
 
   const subjects = await getSubjects();
-  const selectedSubject = subjects.filter( (subject: { Name: string; }) => subject.Name === name);
+  const selectedSubject = subjects.filter( (subject: { Name: string; }) => subject.Name.trim() === name);
 
   if(selectedSubject.length === 0) {
     throw new Error('Nombre de materia no valido');

@@ -39,8 +39,12 @@ export async function action({ request }: any){
     }
 
     //File validation
-    if(!file){
+    if(file.size === 0){
       errors.file = 'Debe seleccionar un documento';
+    }
+
+    if(file.type !== 'application/pdf'){
+      errors.file = 'El archivo seleccionado debe ser del formato PDF';
     }
   }
 

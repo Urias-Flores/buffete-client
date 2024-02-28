@@ -49,6 +49,7 @@ export default function FormInternalDocument ({ method, errors = {}, setShowModa
                 type="file"
                 name="File"
                 id="file"
+                accept="application/pdf"
               />
               { errors?.file ? <p className="error">{errors.file}</p> : null }
             </div>

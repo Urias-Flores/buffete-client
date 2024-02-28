@@ -73,6 +73,7 @@ export default function FormDocument ({ method, errors, subjects, ClientID, User
               type="file"
               name="File"
               id="file"
+              accept="application/pdf"
             />
             { errors?.file ? <p className="error">{errors.file}</p> : null }
           </div>
