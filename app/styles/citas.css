@@ -13,7 +13,7 @@
 .dates::-webkit-scrollbar-thumb, .dates::-webkit-scrollbar-track {
     border-radius: .3rem;
     backdrop-filter: blur(10px);
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 .date{
