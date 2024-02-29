@@ -10,6 +10,7 @@ import dateStyles from '../styles/citas.css';
 import {getClients} from "../services/client.server";
 import {getUsers} from "../services/user.server";
 import {authenticator} from "../auth/auth.server";
+import useLocalDate from "~/utils/localDate";
 
 export function links(){
   return [
@@ -122,6 +123,7 @@ export async function action({ request }: any){
 export default function Citas (){
   const action: any = useActionData();
   const loader: any = useLoaderData();
+  const localDate = useLocalDate();
 
   //Modals states
   const [showInsertedMessage, setShowInsertedMessage] = useState(false);
@@ -133,7 +135,7 @@ export default function Citas (){
 
   //Filter states
   const [dateType, setDateType] = useState('');
-  const [dateTime, setDateTime] = useState(getCurrentDate());
+  const [dateTime, setDateTime] = useState(useLocalDate);
   const [issue, setIssue] = useState('');
 
   const [selectedDate, setSelectedDate]: any = useState({});
@@ -157,7 +159,6 @@ export default function Citas (){
 
   useEffect(() => {
     setDates( loader?.dates );
-    
   }, [loader])
 
   useEffect(() => {
@@ -169,11 +170,6 @@ export default function Citas (){
       setDates( loader?.dates.filter( (date: { DateTime: string; }) => date.DateTime.split('T')[0] === dateTime ) )
     }
   }, [dateType, dateTime, issue, loader?.dates]);
-
-  function getCurrentDate() {
-    const currentDate = new Date();
-    return currentDate.toISOString().split('T')[0];
-  }
 
   function showEliminatedDate(){
     if(Object.keys( selectedDate ).length === 0 || !selectedDate?.DateID) {
