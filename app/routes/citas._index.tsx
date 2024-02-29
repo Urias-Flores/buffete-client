@@ -123,7 +123,7 @@ export async function action({ request }: any){
 export default function Citas (){
   const action: any = useActionData();
   const loader: any = useLoaderData();
-  const localDate = useLocalDate();
+  const localDate = useLocalDate()
 
   //Modals states
   const [showInsertedMessage, setShowInsertedMessage] = useState(false);
@@ -135,7 +135,7 @@ export default function Citas (){
 
   //Filter states
   const [dateType, setDateType] = useState('');
-  const [dateTime, setDateTime] = useState(useLocalDate);
+  const [dateTime, setDateTime] = useState(localDate);
   const [issue, setIssue] = useState('');
 
   const [selectedDate, setSelectedDate]: any = useState({});

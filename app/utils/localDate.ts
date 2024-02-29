@@ -6,7 +6,7 @@ function useLocalDate() {
   useEffect(() => {
     const currentDate = new Date();
     const adjustedDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
-    const formattedDate = adjustedDate.toISOString().slice(0, 10);
+    const formattedDate = adjustedDate.toISOString().split('T')[0];
     setLocalDate(formattedDate);
   }, []);
 
