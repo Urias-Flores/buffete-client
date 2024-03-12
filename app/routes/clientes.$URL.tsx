@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {useActionData, useLoaderData } from "@remix-run/react";
+import { useEffect, useState } from "react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 
 //Components
 import SelectSubject from "../components/selectSubject";
@@ -13,100 +13,97 @@ import { getClients } from "../services/client.server";
 import { authenticator } from "../auth/auth.server";
 
 //Styles
-import styles from "../styles/clientes.css"
+import styles from "../styles/clientes.css";
 
-export function links(){
+export function links() {
   return [
     {
-      rel: 'stylesheet',
-      href: styles
-    }
-  ]
+      rel: "stylesheet",
+      href: styles,
+    },
+  ];
 }
 
-
-export async function loader({params, request}: any){
+export async function loader({ params, request }: any) {
   const currentUser = await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
   });
 
-  const { URL } = params
+  const { URL } = params;
   const clients = await getClients();
-  const client = clients.filter( (value: { URL: any; }) => value.URL === URL);
-  if(client.length === 0) {
-    throw new Error('Cliente no encontrado');
+  const client = clients.filter((value: { URL: any }) => value.URL === URL);
+  if (client.length === 0) {
+    throw new Error("Cliente no encontrado");
   }
 
   const subjects = await getSubjects();
   return {
     client,
     subjects,
-    currentUser
-  }
+    currentUser,
+  };
 }
 
-export async function action({request}: any){
+export async function action({ request }: any) {
   const documentFormData = await request.formData();
-  const documentID = documentFormData.get('DocumentID')
-  const name = documentFormData.get('Name');
-  const subject = documentFormData.get('Subject');
-  const file = documentFormData.get('File');
+  const documentID = documentFormData.get("DocumentID");
+  const name = documentFormData.get("Name");
+  const subject = documentFormData.get("Subject");
+  const file = documentFormData.get("File");
 
-  const errors: any = {}
-  if(request.method === 'POST'){
-    if(name.length === 0){
-      errors.name = 'El titulo del documento es obligatorio';
+  const errors: any = {};
+  if (request.method === "POST") {
+    if (name.length === 0) {
+      errors.name = "El titulo del documento es obligatorio";
     }
-    if(name.length > 30){
-      errors.name = 'El titulo del documento no debe exceder las 30 letras'
+    if (name.length > 30) {
+      errors.name = "El titulo del documento no debe exceder las 30 letras";
     }
-    if(parseInt(subject) === -1){
-      errors.subject = 'La selección de una materia es obligatoria'
+    if (parseInt(subject) === -1) {
+      errors.subject = "La selección de una materia es obligatoria";
     }
     //File validation
-    if(file.size === 0){
-      errors.file = 'Debe seleccionar un documento';
+    if (file.size === 0) {
+      errors.file = "Debe seleccionar un documento";
     }
 
-    if(file.type !== 'application/pdf'){
-      errors.file = 'El archivo seleccionado debe ser del formato PDF';
+    if (file.type !== "application/pdf") {
+      errors.file = "El archivo seleccionado debe ser del formato PDF";
     }
   }
 
-  if(Object.keys(errors).length > 0){
+  if (Object.keys(errors).length > 0) {
     return {
-      state: 'ERROR',
+      state: "ERROR",
       data: null,
-      errors: errors
-    }
+      errors: errors,
+    };
   }
 
-  switch ( request.method ){
-    case 'POST': {
+  switch (request.method) {
+    case "POST": {
       try {
         const returnedDocument = await addDocument(documentFormData);
         return {
-          state: 'INSERTED',
+          state: "INSERTED",
           data: returnedDocument,
-          errors: {}
-        }
-      } catch ( error ){
+          errors: {},
+        };
+      } catch (error) {
         return {
-          state: 'ERROR',
+          state: "ERROR",
           data: null,
-          errors: {}
-        }
+          errors: {},
+        };
       }
-
-
     }
-    case 'DELETE': {
-      const returnedState = await deleteDocument( documentID )
+    case "DELETE": {
+      const returnedState = await deleteDocument(documentID);
       return {
-        state: 'DELETED',
+        state: "DELETED",
         data: returnedState,
-        errors: {}
-      }
+        errors: {},
+      };
     }
     default: {
       throw new Error("Unexpected action");
@@ -114,145 +111,146 @@ export async function action({request}: any){
   }
 }
 
-export default function ClientesClientID (){
-
+export default function ClientesClientID() {
   const { client, subjects, currentUser }: any = useLoaderData();
   const actionResult: any = useActionData();
-  const { ClientID, Name, Identity, Email, Phone, Address, Documents } = client[0]
+  const { ClientID, Name, Identity, Email, Phone, Address, Documents } =
+    client[0];
 
-  const [ showSubject, setShowSubject ] = useState(false);
+  const [showSubject, setShowSubject] = useState(false);
   const [showGeneralInformation, setShowGeneralInformation] = useState(false);
 
-  const [ showInsertedMessage, setShowInsertedMessage ] = useState(false);
-  const [ showDeletedMessage, setShowDeletedMessage ] = useState(false);
-  const [ showFormDocument, setShowFormDocument ] = useState(false);
-  const [ showFormDeletedMessage, setShowFormDeletedMessage ] = useState(false);
+  const [showInsertedMessage, setShowInsertedMessage] = useState(false);
+  const [showDeletedMessage, setShowDeletedMessage] = useState(false);
+  const [showFormDocument, setShowFormDocument] = useState(false);
+  const [showFormDeletedMessage, setShowFormDeletedMessage] = useState(false);
 
   const [selectedDocument, setSelectedDocument]: any = useState({});
 
-  const subjectsNamed: any = {}
-  subjects.forEach((subject: { SubjectID: string | number; Name: any; }) => {
-    subjectsNamed[subject.SubjectID] = subject.Name
-  })
+  const subjectsNamed: any = {};
+  subjects.forEach((subject: { SubjectID: string | number; Name: any }) => {
+    subjectsNamed[subject.SubjectID] = subject.Name;
+  });
 
-  let record: any = []
-  Documents.forEach( (document: { Subject: string | number; }) => {
-    let subjectExist = false
-    record.forEach( (item: { SubjectID: string | number; Documents: any[]; }) => {
-      if(document?.Subject === item.SubjectID){
-        item.Documents = [...item.Documents, document]
-        subjectExist = true
+  let record: any = [];
+  Documents.forEach((document: { Subject: string | number }) => {
+    let subjectExist = false;
+    record.forEach((item: { SubjectID: string | number; Documents: any[] }) => {
+      if (document?.Subject === item.SubjectID) {
+        item.Documents = [...item.Documents, document];
+        subjectExist = true;
       }
-    })
-    if(!subjectExist){
+    });
+    if (!subjectExist) {
       record.push({
         SubjectID: document?.Subject,
         Name: subjectsNamed[document?.Subject],
-        Documents: [document]
-      })
+        Documents: [document],
+      });
     }
-  })
+  });
 
   useEffect(() => {
-    switch (actionResult?.state){
-      case 'INSERTED':
-        setShowFormDocument(false)
-        setShowInsertedMessage(true)
+    switch (actionResult?.state) {
+      case "INSERTED":
+        setShowFormDocument(false);
+        setShowInsertedMessage(true);
         break;
-      case 'DELETED':
-        setShowFormDeletedMessage(false)
-        setShowDeletedMessage(true)
+      case "DELETED":
+        setShowFormDeletedMessage(false);
+        setShowDeletedMessage(true);
         break;
       default:
         break;
     }
-  }, [actionResult])
+  }, [actionResult]);
 
   return (
     <div className="container">
-      { showFormDocument &&
+      {showFormDocument && (
         <FormDocument
-          method={'POST'}
+          method={"POST"}
           errors={actionResult?.errors}
           subjects={subjects}
           ClientID={ClientID}
           UserID={currentUser?.UserID}
-          setShowModalDocument={ setShowFormDocument }
+          setShowModalDocument={setShowFormDocument}
         />
-      }
+      )}
 
-      { showFormDeletedMessage &&
+      {showFormDeletedMessage && (
         <ModalMessage
-          features={
-            {
-              text: "¿Esta seguro de la eliminación del documento?",
-              isOkCancel: true,
-              indexIcon: 1,
-              data: {
-                name: 'DocumentID',
-                value: selectedDocument?.DocumentID
-              }
-            }
-          }
-          setVisibleMessage={ setShowFormDeletedMessage }
+          features={{
+            text: "¿Esta seguro de la eliminación del documento?",
+            isOkCancel: true,
+            indexIcon: 1,
+            data: {
+              name: "DocumentID",
+              value: selectedDocument?.DocumentID,
+            },
+          }}
+          setVisibleMessage={setShowFormDeletedMessage}
         />
-      }
+      )}
 
-      { showInsertedMessage &&
+      {showInsertedMessage && (
         <ModalMessage
-          features={
-            {
-              text: "El documento ha sido agregado exitosamente",
-              isOkCancel: false,
-              indexIcon: 2,
-              data: null
-            }
-          }
-          setVisibleMessage={ setShowInsertedMessage }
+          features={{
+            text: "El documento ha sido agregado exitosamente",
+            isOkCancel: false,
+            indexIcon: 2,
+            data: null,
+          }}
+          setVisibleMessage={setShowInsertedMessage}
         />
-      }
+      )}
 
-      { showDeletedMessage &&
+      {showDeletedMessage && (
         <ModalMessage
-          features={
-            {
-              text: "El documento ha sido eliminado exitosamente",
-              isOkCancel: false,
-              indexIcon: 2,
-              data: null
-            }
-          }
-          setVisibleMessage={ setShowDeletedMessage }
+          features={{
+            text: "El documento ha sido eliminado exitosamente",
+            isOkCancel: false,
+            indexIcon: 2,
+            data: null,
+          }}
+          setVisibleMessage={setShowDeletedMessage}
         />
-      }
+      )}
 
       <h1 className="heading">Información del cliente</h1>
-      <h2 className="subheading">Información general y expediente completo del cliente</h2>
+      <h2 className="subheading">
+        Información general y expediente completo del cliente
+      </h2>
 
       <main className="grid-1-2">
-        <section className="content" onClick={ () => { setShowGeneralInformation(!showGeneralInformation) } }>
+        <section
+          className="content"
+          onClick={() => {
+            setShowGeneralInformation(!showGeneralInformation);
+          }}
+        >
           <h3>Información general</h3>
-          <div className={`data ${ showGeneralInformation ? 'active' : '' }`}>
-              <div className="item">
-                <p>Nombre:</p>
-                <b>{ Name }</b>
-              </div>
-              <div className="item">
-                <p>Identidad:</p>
-                <b>{ Identity }</b>
-              </div>
-              <div className="item">
-                <p>Correo Electrónico:</p>
-                <b>{ Email }</b>
-              </div>
-              <div className="item">
-                <p>Telefóno:</p>
-                <b>{ Phone }</b>
-              </div>
-              <div className="item">
-                <p>Dirección:</p>
-                <b>{ Address }</b>
-              </div>
+          <div className={`data ${showGeneralInformation ? "active" : ""}`}>
+            <div className="item">
+              <p>Nombre:</p>
+              <b>{Name}</b>
+            </div>
+            <div className="item">
+              <p>Identidad:</p>
+              <b>{Identity}</b>
+            </div>
+            <div className="item">
+              <p>Correo Electrónico:</p>
+              <b>{Email}</b>
+            </div>
+            <div className="item">
+              <p>Telefóno:</p>
+              <b>{Phone}</b>
+            </div>
+            <div className="item">
+              <p>Dirección:</p>
+              <b>{Address}</b>
+            </div>
           </div>
         </section>
 
@@ -262,35 +260,34 @@ export default function ClientesClientID (){
           <div className="actions">
             <button
               className="button"
-              onClick={()=>{ setShowFormDocument(true) }}
+              onClick={() => {
+                setShowFormDocument(true);
+              }}
               type="button"
             >
-              <img src="/img/add.svg" alt="add"/>
+              <img src="/img/add.svg" alt="add" />
               <p>Agregar documento</p>
             </button>
           </div>
 
           <div className="list-scroll">
-            { record.length === 0
-              ?
-                <p className="no-found">
-                  Aun no hay documentos disponibles...
-                </p>
-              :
-                record.map( (subject: { SubjectID: number; }) =>
-                  <SelectSubject
-                    key={subject.SubjectID}
-                    subject={subject}
-                    showSubject={showSubject}
-                    setShowSubject={setShowSubject}
-                    setShowFormDeletedMessage={setShowFormDeletedMessage}
-                    setSelectedDocument={setSelectedDocument}
-                  />
-                )
-            }
+            {record.length === 0 ? (
+              <p className="no-found">Aun no hay documentos disponibles...</p>
+            ) : (
+              record.map((subject: { SubjectID: number }) => (
+                <SelectSubject
+                  key={subject.SubjectID}
+                  subject={subject}
+                  showSubject={showSubject}
+                  setShowSubject={setShowSubject}
+                  setShowFormDeletedMessage={setShowFormDeletedMessage}
+                  setSelectedDocument={setSelectedDocument}
+                />
+              ))
+            )}
           </div>
         </section>
       </main>
     </div>
-  )
+  );
 }

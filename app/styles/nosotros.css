@@ -1,15 +1,15 @@
-.about-us{
-    margin-top: 3rem;
+.about-us {
+  margin-top: 3rem;
 }
 
-.information{
-    margin-top: 3rem;
-    padding: 1rem;
-    border-radius: .7rem;
-    backdrop-filter: blur(10px);
-    background-color: rgb(255, 255, 255, 0.2);
+.information {
+  margin-top: 3rem;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  backdrop-filter: blur(10px);
+  background-color: rgb(255, 255, 255, 0.2);
 }
 
-.information p{
-    margin-top: 1rem;
+.information p {
+  margin-top: 1rem;
 }

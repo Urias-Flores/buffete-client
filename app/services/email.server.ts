@@ -1,18 +1,22 @@
-import * as nodemailer from 'nodemailer';
+import * as nodemailer from "nodemailer";
 
-export async function sendRecoverAccountEmail(name: string, token: string, email: string){
+export async function sendRecoverAccountEmail(
+  name: string,
+  token: string,
+  email: string
+) {
   const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    service: "Gmail",
     auth: {
       user: process.env.EMAIL,
       pass: process.env.EMAIL_PASSWORD,
-    }
+    },
   });
 
   const mailOptions = {
     from: process.env.EMAIL,
     to: email,
-    subject: 'Recupera tu cuenta',
+    subject: "Recupera tu cuenta",
     html: `<!DOCTYPE html>
               <html lang="en">
                 <head>
@@ -76,7 +80,7 @@ export async function sendRecoverAccountEmail(name: string, token: string, email
                   </div>
                     <div class="contenedor">
                       <p>
-                        Hola, <strong>${ name }</strong> se ha solicitado el cambio de contraseña para tu cuenta 
+                        Hola, <strong>${name}</strong> se ha solicitado el cambio de contraseña para tu cuenta 
                         en Grupo sosa para poder restablecer se requiere únicamente del código de recuperación que se te otorgara
                         por medio de este correo.
                       </p>
@@ -84,7 +88,7 @@ export async function sendRecoverAccountEmail(name: string, token: string, email
                         Tu código de para la recuperación de tu cuenta es el siguiente:
                       </p>
                       <p class="contenedor-codigo">
-                        <div class="codigo">${ token.split('').join(' ') }</div>
+                        <div class="codigo">${token.split("").join(" ")}</div>
                       </p>
                       <p>
                         Te recomendamos no compartir este código con nadie. <br>
@@ -92,16 +96,16 @@ export async function sendRecoverAccountEmail(name: string, token: string, email
                       </p>
                     </div>
                 </body>n
-              </html>`
+              </html>`,
   };
 
-  console.log('Enviando correo...');
+  console.log("Enviando correo...");
 
   await transporter.sendMail(mailOptions, (error: any, info: any) => {
     if (error) {
-      console.log('Error al enviar el correo:', error);
+      console.log("Error al enviar el correo:", error);
     } else {
-      console.log('Correo enviado:', info.response);
+      console.log("Correo enviado:", info.response);
     }
   });
 }

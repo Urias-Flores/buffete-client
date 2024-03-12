@@ -1,78 +1,78 @@
-.record{
-    display: flex;
-    flex-direction: column;
+.record {
+  display: flex;
+  flex-direction: column;
 }
 
-.record-title{
-    margin: 2rem 0 0 0;
-    font-weight: bold;
+.record-title {
+  margin: 2rem 0 0 0;
+  font-weight: bold;
 }
 
-.record-title.users{
-    margin: 2rem 0 1rem 0;
+.record-title.users {
+  margin: 2rem 0 1rem 0;
 }
 
-.record-subject{
-    display: flex;
-    flex-direction: column;
+.record-subject {
+  display: flex;
+  flex-direction: column;
 }
 
-.record-subject img{
-    width: 2rem;
-    transition: rotate 300ms;
+.record-subject img {
+  width: 2rem;
+  transition: rotate 300ms;
 }
 
-.record-subject img.active{
-    width: 2rem;
-    rotate: -180deg;
+.record-subject img.active {
+  width: 2rem;
+  rotate: -180deg;
 }
 
-.subject-information{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.4rem;
-    border-radius: .7rem;
-    padding: .6rem;
-    backdrop-filter: blur(10px);
-    background-color: rgb(255, 255, 255, 0.2);
+.subject-information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.4rem;
+  border-radius: 0.7rem;
+  padding: 0.6rem;
+  backdrop-filter: blur(10px);
+  background-color: rgb(255, 255, 255, 0.2);
 }
 
-.subject-information p{
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin: 0;
-    cursor: pointer;
+.subject-information p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
 }
 
-.subject-documents{
-    height: 0;
-    overflow: hidden;
-    transition: height 500ms, overflow 1s;
+.subject-documents {
+  height: 0;
+  overflow: hidden;
+  transition: height 500ms, overflow 1s;
 }
 
-.subject-documents.active{
-    height: auto;
-    overflow: visible;
+.subject-documents.active {
+  height: auto;
+  overflow: visible;
 }
 
-.subject-document{
-    border-bottom: 1px solid white;
+.subject-document {
+  border-bottom: 1px solid white;
 }
 
-.subject-document p{
-    margin: 0;
+.subject-document p {
+  margin: 0;
 }
 
-.record-document{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.4rem;
-    padding: .6rem;
+.record-document {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 0.6rem;
 }
 
-.record-document p{
-    cursor: pointer;
-    font-weight: 400;
+.record-document p {
+  cursor: pointer;
+  font-weight: 400;
 }

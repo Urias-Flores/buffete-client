@@ -1,66 +1,76 @@
-.title{
-    margin: .3rem 0;
-    font-size: 3.4rem;
-    font-weight: 600;
+.title {
+  margin: 0.3rem 0;
+  font-size: 3.4rem;
+  font-weight: 600;
 }
 
-.subtitle{
-    margin: .3rem 0;
-    font-size: 1.55rem;
-    font-weight: 600;
+.subtitle {
+  margin: 0.3rem 0;
+  font-size: 1.55rem;
+  font-weight: 600;
 }
 
-.panels{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    margin-top: 4.5rem;
-    gap: 2rem;
+.panels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 4.5rem;
+  gap: 2rem;
 }
 
-.panel{
-    border-radius: .7rem;
-    text-decoration: none;
-    padding: 1.2rem;
+.panel {
+  border-radius: 0.7rem;
+  text-decoration: none;
+  padding: 1.2rem;
 }
 
-.panel:nth-child(1) { background-color: #d03fa3; }
-.panel:nth-child(2) { background-color: #ff436b; }
-.panel:nth-child(3) { background-color: #ff7f18; }
-.panel:nth-child(4) { background-color: #e0c000; }
-.panel:nth-child(5) { background-color: #71f716; }
-
-.panel img{
-    width: 4rem;
+.panel:nth-child(1) {
+  background-color: #d03fa3;
+}
+.panel:nth-child(2) {
+  background-color: #ff436b;
+}
+.panel:nth-child(3) {
+  background-color: #ff7f18;
+}
+.panel:nth-child(4) {
+  background-color: #e0c000;
+}
+.panel:nth-child(5) {
+  background-color: #71f716;
 }
 
-.panel h4{
-    margin: .8rem 0;
-    font-size: 1.3rem;
-    font-weight: 300;
+.panel img {
+  width: 4rem;
 }
 
-.panel p{
-    margin: 0;
-    font-size: 1.3rem;
-    font-style: italic;
+.panel h4 {
+  margin: 0.8rem 0;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.panel p {
+  margin: 0;
+  font-size: 1.3rem;
+  font-style: italic;
 }
 
 @media only screen and (max-width: 767px) {
-    .panels{
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin: 1rem 0 4rem 0;
-        overflow-y: auto;
-    }
+  .panels {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0 4rem 0;
+    overflow-y: auto;
+  }
 
-    .panel{
-        margin: 0 .5rem;
-    }
+  .panel {
+    margin: 0 0.5rem;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .panels{
-        grid-template-columns: repeat(2, 1fr);
-        margin: 2rem 0;
-    }
+  .panels {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 2rem 0;
+  }
 }

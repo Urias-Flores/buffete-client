@@ -1,9 +1,9 @@
-export function formattedDate(timestamp: any){
+export function formattedDate(timestamp: any) {
   const dateObj = new Date(timestamp);
 
   const options: any = {
     year: "numeric",
-    month: "long", 
+    month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
@@ -15,25 +15,26 @@ export function formattedDate(timestamp: any){
 
 export const accessLevel = [
   {
-    AccessLevelID: 'N',
-    Name: 'Dependiente'
+    AccessLevelID: "N",
+    Name: "Dependiente",
   },
   {
-    AccessLevelID: 'A',
-    Name: 'Administrador'
+    AccessLevelID: "A",
+    Name: "Administrador",
   },
   {
-    AccessLevelID: 'R',
-    Name: 'Raíz'
-  }
-]
+    AccessLevelID: "R",
+    Name: "Raíz",
+  },
+];
 
 export function generateRandomCode(length: number) {
-  const character = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let code = '';
+  const character = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let code = "";
 
   for (let i = 0; i < length; i++) {
-    const randomCharacter = character[Math.floor(Math.random() * character.length)];
+    const randomCharacter =
+      character[Math.floor(Math.random() * character.length)];
     code += randomCharacter;
   }
   return code;
