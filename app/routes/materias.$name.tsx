@@ -16,6 +16,16 @@ import stylesClient from "../styles/clientes.css";
 import { authenticator } from "../auth/auth.server";
 import { getSubjects } from "../services/subject.server";
 
+export const meta = () => {
+  return [
+    { title: "Materias | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
 export function links() {
   return [
     {

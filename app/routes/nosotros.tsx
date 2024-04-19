@@ -6,6 +6,16 @@ import Logo from "../components/logo";
 //Styles
 import Styles from "../styles/nosotros.css";
 
+export const meta = () => {
+  return [
+    { title: "Nosotros | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
 export function links() {
   return [
     {

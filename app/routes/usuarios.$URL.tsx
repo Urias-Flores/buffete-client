@@ -11,6 +11,16 @@ import { getUsers } from "../services/user.server";
 //Styles
 import styles from "../styles/clientes.css";
 
+export const meta = () => {
+  return [
+    { title: "Usuarios | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
 export function links() {
   return [
     {

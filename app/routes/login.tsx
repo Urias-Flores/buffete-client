@@ -1,13 +1,30 @@
-import { useState } from "react";
-import { Form, Link, useLoaderData, useNavigation } from "@remix-run/react";
-import { authenticator } from "../auth/auth.server";
+import { JSX , useState } from "react";
+import {Form, Link, Navigation, useLoaderData, useNavigation} from "@remix-run/react";
 
-import Input from "../components/input.jsx";
-import Spinner from "../components/spinner";
-import { getSession } from "../auth/session.server";
+//Auth
+import { authenticator } from '~/auth/auth.server';
+
+//Server
+import { getSession } from '~/auth/session.server';
+
+//Components
+import Input from "~/components/input";
+import Spinner from "~/components/spinner";
+
+//Other
 import { json } from "@remix-run/node";
 
-export async function loader({ request }: any) {
+export const meta = () => {
+  return [
+    { title: "Acceso | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
+export async function loader({ request }: { request: Request }) {
   await authenticator.isAuthenticated(request, {
     successRedirect: "/",
   });
@@ -17,7 +34,8 @@ export async function loader({ request }: any) {
   return json({ error });
 }
 
-export async function action({ request, context }: any) {
+export async function action({ request, context }: { request: Request, context: never } ) {
+  console.log(context);
   return await authenticator.authenticate("user-pass", request, {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -26,9 +44,9 @@ export async function action({ request, context }: any) {
   });
 }
 
-export default function Login() {
-  const navigation = useNavigation();
-  const loader: any = useLoaderData();
+export default function Login(): JSX.Element {
+  const navigation: Navigation = useNavigation();
+  const loader = useLoaderData();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

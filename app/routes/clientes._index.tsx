@@ -25,6 +25,15 @@ import { authenticator } from "../auth/auth.server";
 //Styles
 import styles from "../styles/clientes.css";
 
+export const meta = () => {
+  return [
+    { title: "Clientes | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
 export function links() {
   return [
     {
@@ -108,13 +117,18 @@ export async function action({ request }: any) {
     }
 
     //Email validation
-    const regex = /^[^s@]+@[^s@]+.[^s@]+$/;
+    if ( !email.includes('@') ){
+      errors.email = "El correo electrónico ingresado no es valido"
+    }
+    /*const regex = /^[^s@]+@[^s@]+.[^s@]+$/;
     if (regex.test(email)) {
       errors.email = "El correo electrónico ingresado no es valido";
     }
+    
     if (email.length === 0) {
       errors.email = "El correo electrónico es obligatorio";
     }
+    */
     if (request.method === "POST") {
       const coincidentEmail = clients.filter(
         (client: { Email: string }) =>

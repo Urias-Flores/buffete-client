@@ -13,6 +13,16 @@ import FormInternalDocument from "../components/formInternalDocument";
 import { authenticator } from "../auth/auth.server";
 import Spinner from "~/components/spinner";
 
+export const meta = () => {
+  return [
+    { title: "Documentacion Interna | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
 export async function loader({ request }: any) {
   await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",

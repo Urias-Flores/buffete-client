@@ -7,6 +7,16 @@ import EnterCode from "../components/create-account/enter-code";
 import EnterEmail from "../components/create-account/enter-email";
 import EnterPassword from "../components/create-account/enter-password";
 
+export const meta = () => {
+  return [
+    { title: "Crear cuenta | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
 export async function action({ request }: any) {
   const form = await request.formData();
 

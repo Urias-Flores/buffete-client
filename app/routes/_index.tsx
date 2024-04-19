@@ -1,15 +1,23 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "@remix-run/react";
 
-import Logo from "../components/logo";
-
-import styles from "../styles/inicio.css";
+//Server
 import { authenticator } from "../auth/auth.server";
+
+//Components
+import Logo from "~/components/logo";
+
+//Styles
+import styles from "~/styles/inicio.css";
+
 
 export const meta = () => {
   return [
-    { title: "Inicio" },
+    { title: "Inicio | Grupo Sosa Morales" },
     { name: "description", content: "Welcome to Remix!" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
   ];
 };
 
@@ -22,7 +30,7 @@ export function links() {
   ];
 }
 
-export async function loader({ request }: any) {
+export async function loader({ request }: { request: Request }) {
   return await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
   });

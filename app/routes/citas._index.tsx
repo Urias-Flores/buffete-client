@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link, useActionData, useLoaderData } from "@remix-run/react";
+import { JSX, useEffect, useState } from 'react';
+import { useActionData, useLoaderData } from "@remix-run/react";
 
+//server
+import { authenticator } from '~/auth/auth.server';
+import { getClients } from '~/services/client.server';
+import { getUsers } from '~/services/user.server';
 import {
   addDate,
   getAllDates,
@@ -8,13 +12,29 @@ import {
   deleteDate,
 } from "../services/date.server";
 
+//models
+import Response from "~/models/response";
+import DateEntity from "~/models/date";
+import UserEntity from "~/models/user";
+
+//components
 import FormDate from "../components/formDate";
 import ComponentDate from "../components/date";
 import ModalMessage from "../components/modalMessage";
-import dateStyles from "../styles/citas.css";
-import { getClients } from "../services/client.server";
-import { getUsers } from "../services/user.server";
-import { authenticator } from "../auth/auth.server";
+
+//styles
+import dateStyles from "~/styles/citas.css";
+import ClientEntity from "~/models/client";
+
+export const meta = () => {
+  return [
+    { title: "Citas | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
 
 export function links() {
   return [
@@ -25,18 +45,18 @@ export function links() {
   ];
 }
 
-export async function loader({ request }: any) {
-  const currentUser: any = await authenticator.isAuthenticated(request, {
+export async function loader({ request }: never): Promise<{ clients: ClientEntity[], users: UserEntity[], dates: DateEntity[], currentUser: UserEntity }> {
+  const currentUser: UserEntity = await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
-  });
+  }) as UserEntity;
 
   const clients = await getClients();
   const users = await getUsers();
-  let dates: any = await getAllDates();
+  let dates: DateEntity[] = await getAllDates();
 
   if (currentUser?.AccessLevel === "N") {
     dates = dates.filter(
-      (date: { User: { UserID: any } }) =>
+      (date: DateEntity): boolean =>
         date.User.UserID === currentUser.UserID
     );
   }
@@ -49,21 +69,27 @@ export async function loader({ request }: any) {
   };
 }
 
-export async function action({ request }: any) {
-  const currentUser: any = await authenticator.isAuthenticated(request, {
+export async function action({ request }: { request: Request } ) {
+  const currentUser: UserEntity = await authenticator.isAuthenticated(request, {
     failureRedirect: "/login",
-  });
+  }) as UserEntity;
 
-  const form = await request.formData();
-  const issue = form.get("issue");
-  const user = form.get("user");
-  const client = form.get("client");
-  const formDateTime = form.get("datetime");
-  const datetime = new Date(formDateTime);
+  const form: FormData = await request.formData();
+  const issue: string = form.get("issue") as string;
+  const user: string = form.get("user") as string;
+  const client: string = form.get("client") as string;
+  const formDateTime: string = form.get("datetime") as string;
+  const datetime: Date = new Date(formDateTime);
 
-  const errors: any = {};
+  const errors: {
+    issue: string;
+    user: string;
+    client: string;
+    datetime: string;
+  } = {};
+
   if (request.method === "POST") {
-    if (issue.length === 0) {
+    if (issue?.length === 0) {
       errors.issue = "Es necesario agregar un asunto a la cita";
     }
     if (currentUser.AccessLevel === "A" || currentUser.AccessLevel === "R") {
@@ -74,6 +100,9 @@ export async function action({ request }: any) {
     if (parseInt(client) === -1) {
       errors.client = "Debe seleccionar un cliente";
     }
+    if (datetime.toString() === 'Invalid Date') {
+      errors.datetime = 'La fecha seleccionada no es valida'
+    }
     if (datetime < new Date()) {
       errors.datetime =
         "La fecha seleccionada no puede ser menor que la fecha actual";
@@ -81,60 +110,61 @@ export async function action({ request }: any) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return { STATUS: "ERROR", ERRORS: errors };
+    return new Response({ STATUS: 'ERROR', DATA: {}, ERRORS: errors });
   }
 
-  switch (request.method) {
-    case "POST":
-      const insertedDate = {
-        Issue: issue,
-        User: user,
-        Client: client,
-        DateTime: datetime,
-        State: "P",
-      };
+  if (request.method === "POST") {
+    const insertedDate = {
+      Issue: issue,
+      User: user,
+      Client: client,
+      DateTime: datetime,
+      State: "P",
+    };
 
-      const resultDate = await addDate(insertedDate);
+    const resultDate = await addDate(insertedDate);
 
-      return {
-        STATUS: "INSERTED",
-        DATA: resultDate,
-      };
-    case "PUT":
-      const dateID = form.get("DateID");
-      const currentState = form.get("State");
+    return new Response({
+      STATUS: "INSERTED",
+      DATA: resultDate,
+      ERRORS: {}
+    });
+  } else if (request.method === "PUT") {
+    const dateID = form.get("DateID");
+    const currentState = form.get("State");
 
-      const updatedDate = {
-        DateID: dateID,
-        State: currentState === "P" ? "R" : "P",
-      };
+    const updatedDate = {
+      DateID: dateID,
+      State: currentState === "P" ? "R" : "P",
+    };
 
-      const updateResultDate = await updateDate(updatedDate);
+    const updateResultDate = await updateDate(updatedDate);
 
-      return {
-        STATUS: "UPDATED",
-        DATA: updateResultDate,
-      };
-    case "DELETE":
-      const DateID = form.get("DateID");
+    return new Response({
+      STATUS: "UPDATED",
+      DATA: updateResultDate,
+      ERRORS: {}
+    });
+  } else if (request.method === "DELETE") {
+    const DateID = form.get("DateID");
 
-      const deleteResult = await deleteDate(DateID);
-      return {
-        STATUS: "DELETED",
-        DATA: deleteResult,
-      };
-    default:
-      throw new Error("Invalid option");
+    const deleteResult = await deleteDate(DateID);
+    return new Response({
+      STATUS: "DELETED",
+      DATA: deleteResult,
+      ERRORS: {}
+    });
+  } else {
+    throw new Error("Invalid option");
   }
 }
 
-export default function Citas() {
-  const action: any = useActionData();
-  const loader: any = useLoaderData();
+export default function Citas(): JSX.Element {
+  const action: Response = useActionData() as Response;
+  const loader = useLoaderData();
 
   //Modals states
   const [showInsertedMessage, setShowInsertedMessage] = useState(false);
-  const [showUpdatedMessage, setShowUpdatedMessage] = useState(false);
   const [showFormDate, setShowFormDate] = useState(false);
   const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const [showDeletedMessage, setShowDeletedMessage] = useState(false);
@@ -145,7 +175,7 @@ export default function Citas() {
   const [dateTime, setDateTime] = useState(getCurrentDate());
   const [issue, setIssue] = useState("");
 
-  const [selectedDate, setSelectedDate]: any = useState({});
+  const [selectedDate, setSelectedDate] = useState({});
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
@@ -153,9 +183,6 @@ export default function Citas() {
       case "INSERTED":
         setShowFormDate(false);
         setShowInsertedMessage(true);
-        break;
-      case "UPDATED":
-        setShowUpdatedMessage(true);
         break;
       case "DELETED":
         setShowDeleteMessage(false);
@@ -172,11 +199,11 @@ export default function Citas() {
     if (dateType.length > 0) {
       setDates(
         loader?.dates.filter(
-          (date: { State: string; DateTime: string; Issue: string }) => {
+          (date: DateEntity) => {
             return (
               date.State === dateType &&
-              date.DateTime.split("T")[0] === dateTime &&
-              date.Issue.toLowerCase().includes(issue)
+              date.DateTime?.split("T")[0] === dateTime &&
+              date.Issue.toLowerCase().includes(issue.toLowerCase())
             );
           }
         )
@@ -184,24 +211,22 @@ export default function Citas() {
     } else {
       setDates(
         loader?.dates.filter(
-          (date: { DateTime: string }) =>
+          (date: DateEntity): boolean =>
             date.DateTime.split("T")[0] === dateTime
         )
       );
     }
   }, [dateType, dateTime, issue, loader?.dates]);
 
-  function getCurrentDate() {
-    const currentDate = new Date();
-    const adjustedDate = new Date(
+  function getCurrentDate(): string {
+    const currentDate: Date = new Date();
+    const adjustedDate: Date = new Date(
       currentDate.getTime() - currentDate.getTimezoneOffset() * 60000
     );
     return adjustedDate.toISOString().split("T")[0];
   }
 
-  console.log(getCurrentDate());
-
-  function showEliminatedDate() {
+  function showEliminatedDate(): void {
     if (Object.keys(selectedDate).length === 0 || !selectedDate?.DateID) {
       setShowErrorDeleteMessage(true);
     } else {

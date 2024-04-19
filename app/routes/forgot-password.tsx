@@ -9,6 +9,16 @@ import RestorePassword from "../components/forgot-password/restore-password";
 import { generateRandomCode } from "../utils/helpers";
 import { sendRecoverAccountEmail } from "../services/email.server";
 
+export const meta = () => {
+  return [
+    { title: "Recuperar cuenta | Grupo Sosa Morales" },
+    { name: "description", content: "Plataforma de archivos Grupo Sosa Morales" },
+    { charset: 'UTF-8' },
+    { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ];
+};
+
 export async function action({ request }: any) {
   const form = await request.formData();
   const step = parseInt(form.get("step"));
